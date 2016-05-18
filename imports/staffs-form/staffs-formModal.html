@@ -1,43 +1,6 @@
-<!--<div class="modal-dialog">
+<div style="background-color:red; border-width:2px; border-style:solid; border-color:white; border-radius:6px;width:50%">
 
-  <div class="modal-content" style="background:black;">
-    <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal">×</button>
-      <h4 class="modal-title">Staff Maintenence</h4>
-    </div>
-    <div class="modal-body">
-
-
-      <form [ngFormModel]="staffsFormModal" #f="ngForm" (submit)="addStaff(f.value)">
-
-        <div layout-gt-sm="row">
-
-
-
-          <label class="copy1">New Staff: </label>
-          <input ngControl="name" placeholder="Name" style="color:black;" />
-          <input ngControl="phone" placeholder="Phone"  style="color:black;"/>
-          <button type="submit" class="btn btn-primary btn-sm">Add Staff!</button>
-
-          
-        </div>
-
-
-      </form>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Close</button>
-    </div>
-  </div>
-
-
-</div>-->
-
-
-
-<div style="background-color:black; border-width:2px; border-style:solid; border-color:white; border-radius:6px;">
-
-  <div class="modal-content" style="background:black;">
+  <div class="modal-content" style="background:yellow;">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal">×</button>
       <h4 class="modal-title">Staff Maintenence</h4>
@@ -51,7 +14,6 @@
           <table style="width:100%; position:relative; background-color:transparent;">
             <tr>
               <td>{{staffModelItem._id}}
-                <!--<img *ng-if="thedata.image != null" ng-src="{{thedata.image}}" />-->
               </td>
             </tr>
 
@@ -69,35 +31,6 @@
 
     <form [ngFormModel]="staffsFormModal" #f="ngForm" (submit)="addStaff(f.value)">
 
-      <!--<div class="container">
-        <div class="row">
-          <div class="col-sm-12" style="background-color:blue;">
-            <div class="navbar-collapse collapse">
-              <ul class="nav navbar-nav">
-                <li>
-                  <div ng-init="home=true;" (click)="home=!home">Home</div>
-                </li>
-                <li>
-                  <div ng-init="about=false;" (click)="about=!about">About</div>
-                </li>
-                <div *ngIf="home" style="width:100px; height:100px; background:red;"></div>
-                <div *ngIf="about" style="width:100px; height:100px; background:green;"></div>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>-->
-      <!--<tabset style="min-height:140px;">
-        <tab heading="Details">
-          <div ng-include="'Angular/Modules/Admin/Directives/html/TabStaff1.html'"></div>
-          <div style="width:100px; height:100px; background:red;"></div>
-        </tab>
-        <tab heading="Roles">
-          <div ng-include="'Angular/Modules/Admin/Directives/html/TabStaff2.html'"></div>
-          <div style="width:100px; height:100px; background:green;"></div>
-        </tab>
-
-      </tabset>-->
       <p-tabView>
         <p-tabPanel header="Details">
           <staffs-tab1 [staffModelTab1]="staffModelItem"></staffs-tab1>
@@ -109,10 +42,6 @@
 
       </p-tabView>
 
-
-
-
-      <!--<ad-media-upload cid="-1" image-as-data="thedata.image" library-id="{{staffModelItem._id}}" width="{{thedata.width}}" height="{{thedata.height}}"></ad-media-upload>-->
 
       <div class="modal-footer">
 
@@ -126,7 +55,7 @@
     </form>
 
 
-<ad-media-upload (ImageChangedEvent)="ImageChangedEvent($event)"></ad-media-upload>
+    <ad-media-upload (ImageChangedEvent)="ImageChangedEvent($event)"></ad-media-upload>
 
 
   </div>

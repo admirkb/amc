@@ -10,7 +10,7 @@
             <table style="width:100%; position:relative; background-color:transparent;">
                 <tr>
                     <td>
-                        <img [src]="staffModel.imageAsData" />
+                        <img [(src)]="staffModel.imageAsData" />
 
                     </td>
                 </tr>
@@ -69,11 +69,13 @@
         <!--<div id="myModal{{theIndex}}" class="modal fade" role="dialog">
     <staffs-form [staffModelItem]="staffModel"></staffs-form>
 </div>-->
+        <div style="border-style:solid; border-width:2px; border-color:white; border-radius:4px; width:1%; background:green">
+            <div id="myStaffFormModal{{theIndex}}" class="modal fade" role="dialog" style="background:orange;width:60%;auto; margin-right: auto; ">
 
-        <div id="myStaffFormModal{{theIndex}}" class="modal fade" role="dialog">
-            <staffs-form-modal [staffModelItem]="staffModel"></staffs-form-modal>
+                <button>ASDfasdfasdf</button>
+                <!--<staffs-form-modal [staffModelItem]="staffModel"></staffs-form-modal>-->
+            </div>
         </div>
-
     </div>
 
 </div>
