@@ -1,0 +1,31 @@
+<div class="modal-dialog">
+
+  <div class="modal-content" style="background:black;">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">×</button>
+      <h4 class="modal-title">Bugs Maintenence</h4>
+    </div>
+    <div class="modal-body">
+
+
+      <form [ngFormModel]="bugsForm" #f="ngForm" (submit)="addBug(f.value)">
+
+        <div layout-gt-sm="row">
+
+          <label class="copy1">New Problem: </label>
+          <input ngControl="problem" placeholder="Problem" style="color:black;" />
+
+          <button type="submit" class="btn btn-primary btn-sm">Add Problem!</button>
+          
+        </div>
+
+
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Close</button>
+    </div>
+  </div>
+
+
+</div>

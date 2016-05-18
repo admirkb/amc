@@ -1,0 +1,15 @@
+<!--<staffs-form [hidden]="!user"></staffs-form>-->
+<staffs-form></staffs-form>
+<!--<div [hidden]="user">You need to login to create new parties!</div>-->
+
+
+<div class="container">
+    <div class="row">
+       
+                <staffs-item *ngFor="#staff of staffs; #i = index" [staffModel]="staff" [theIndex]="i"></staffs-item>
+
+    
+</div>
+
+
+</div>

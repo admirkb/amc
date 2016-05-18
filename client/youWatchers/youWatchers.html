@@ -1,0 +1,69 @@
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6" style="background-color:transparent;">
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li> <a [routerLink]="['/HomeView']">Home</a></li>
+                            <li  *ngIf="inAdmin"> <a [routerLink]="['/Staffs']">Staffs</a></li>
+                            <li><a [routerLink]="['/Locales']">Locales</a></li>
+                            <li> <a [routerLink]="['/Bugs']">Bugs</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6" style="background-color:transparent;">
+                    <div class="navbar-right navbar-text">
+                        <div [hidden]="user">
+                            <button class="btn btn-primary btn-xs" [routerLink]="['/Register']">Register</button>
+                            <button class="btn btn-primary btn-xs" [routerLink]="['/Login']">Login</button>
+
+                        </div>
+                        <div [hidden]="!user">
+                 <span>{{ user | displayName }}</span>
+                            <button class="btn btn-primary btn-xs" (click)="logout()">Logout</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+    </div>
+</div>
+
+<br/><br/><br/>
+<router-outlet></router-outlet>
+
+
+        <hr />
+        <footer>
+
+            <table style="width:100%; background-color:transparent;">
+
+                <tr>
+                    <td style="text-align:center">
+                        <p class="admir-h3" style="color:wheat">&copy; {{_today | date:'yyyy'}} - Admir Digital</p>
+                    </td>
+                </tr>
+            </table>
+
+        </footer>
+        
+        
+<!--<staffs-list></staffs-list>-->
+                            <!--<li> <a class="btn btn-primary btn-xs admirColor" [routerLink]="['/Bugs']">Bugs</a></li>-->
+                            
+                            

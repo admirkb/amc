@@ -1,0 +1,66 @@
+<!--<td [ngStyle]="{  'background': localeModel.editColor }">
+    {{localeModel.editColor}}{{localeModel.problem}}myDiv{{theIndex}}myDiv
+</td>-->
+<table>
+                        <tr *ngIf="theIndex == 0">
+                        <th style="text-align:left;">Name</th>
+                        <th style="text-align:left;">Lattitude</th>
+                        <th style="text-align:left;">Longitude</th>
+                        <th style="text-align:left;">DB Updated</th>
+                        <th></th>
+                    </tr>
+<tr class="copy2" [ngStyle]="{  'background': localeModel.editColor }" >
+    <td style="width:150px;">
+        <input *ngIf="localeModel.isEditable" style="width:150px;" [(ngModel)]="localeModel.name" [disabled]="localeModel.isDisabled == null ? false : localeModel.isDisabled"
+        />
+        <div class="adtooltip">
+            <div id="myDiv{{theIndex}}" *ngIf="!localeModel.isEditable"
+                style="width:150px;white-space:nowrap; overflow:hidden;">{{localeModel.name}}</div>
+        </div>
+    </td>
+
+
+    <td style="width:150px;">
+        <input *ngIf="localeModel.isEditable" style="width:150px;" [(ngModel)]="localeModel.lattitude" [disabled]="localeModel.isDisabled == null ? false : localeModel.isDisabled"
+        />
+        <div class="adtooltip">
+            <div *ngIf="!localeModel.isEditable" style="width:150px;white-space:nowrap; overflow:hidden;">{{localeModel.lattitude}}</div>
+        </div>
+    </td>
+
+    <td style="width:150px;">
+        <input *ngIf="localeModel.isEditable" style="width:150px;" [(ngModel)]="localeModel.longitude" [disabled]="localeModel.isDisabled == null ? false : localeModel.isDisabled"
+        />
+        <div class="adtooltip">
+            <div *ngIf="!localeModel.isEditable" style="width:150px;white-space:nowrap; overflow:hidden;">{{localeModel.longitude}}</div>
+        </div>
+    </td>
+    
+    <td style="width:130px;">
+        <div style="width:110px;white-space:nowrap;">{{localeModel.dbUpdated | date:'dd/MM/yyyy @ HH:mm'}}</div>
+    </td>
+
+
+    <td>
+        <button class="btn btn-primary btn-xs" [disabled]="localeModel.isDisabled == null ? false : localeModel.isDisabled" (click)="editLocale(localeModel)"
+            *ngIf="!localeModel.isEditable">Edit</button>
+        <button class="btn btn-primary btn-xs" [disabled]="localeModel.isDisabled == null ? false : localeModel.isDisabled" (click)="updateLocale(localeModel)"
+            *ngIf="localeModel.isEditable">Update</button>
+    </td>
+    <td>
+        <button class="btn btn-primary btn-xs" [disabled]="localeModel.isDisabled == null ? false : localeModel.isDisabled" (click)="deleteLocale(localeModel)"
+            *ngIf="!localeModel.isEditable">Delete</button>
+        <button class="btn btn-primary btn-xs" [disabled]="localeModel.isDisabled == null ? false : localeModel.isDisabled" (click)="cancelLocale(localeModel, key)"
+            *ngIf="localeModel.isEditable">Cancel</button>
+    </td>
+
+    <!--<td>
+        <button (click)="setLocale(localeModel)">Inside.submit(locale)</button>
+    </td>-->
+    
+    </tr>
+</table>
+
+ <!--[ngStyle]="{ 'color': 'white', 'font-size': '14px', 'font-weight': 'bold'}"-->
+
+

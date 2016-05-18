@@ -1,0 +1,28 @@
+<!--<bugs-form [hidden]="!user"></bugs-form>-->
+<!--<bugs-form></bugs-form>-->
+<!--<div [hidden]="user">You need to login to create new parties!</div>-->
+
+
+
+
+
+<table class="copy1">
+    <tr>
+        <td>
+            <div>
+                <table style="width:auto;white-space:nowrap">
+
+
+                    <tr>
+                        <td>
+                            <bugs-item *ngFor="#bug of bugs; #i = index" [bugModel]="bug" [theIndex]="i"></bugs-item>
+                        </td>
+                    </tr>
+
+
+                </table>
+
+            </div>
+        </td>
+    </tr>
+</table>

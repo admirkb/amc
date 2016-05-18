@@ -1,0 +1,66 @@
+
+<div class="container copy1" style="width:50%; background:black; border-style:solid; border-width:2px; border-color:white; border-radius:4px; text-align:center">
+
+
+
+    <div class="heading1">
+        <h3> Register a new account</h3>
+    </div>
+
+    <div>
+        <p>Use your email?</p>
+    </div>
+
+      <form [ngFormModel]="signupForm" #f="ngForm" (submit)="signup(f.value)" >
+
+          <label> Email </label>
+          <input  style="color:black;" type="text" ngControl="email" aria-label="email" />
+
+
+          <label> Password </label>
+          <input  style="color:black;" type="password" ngControl="password" aria-label="password" />
+
+        <div >
+          <button class="admirColor"   type="submit" aria-label="login">Sign Up!
+          </button>
+        </div>
+      </form>
+
+    <div>
+        <p> Want to use an existing account? </p>
+    </div>
+
+    <div>
+
+
+
+        <button class="admirColor" (click)="loginWithGoogle()">
+           <img src="media/google.png" width="40" height="40" />
+            <span style="float:right">Google</span>
+         </button>
+
+        <button class="admirColor" (click)="loginWithFacebook()">
+            <img src="media/facebook.png" width="40" height="40" />
+            <span style="float:right">Facebook</span>
+        </button>
+
+        <button class="admirColor" (click)="loginWithTwitter()">
+            <img src="media/twitter.png" width="40" height="40" />
+            <span style="float:right">Twitter</span>
+        </button>
+    </div>
+
+      <div [hidden]="error == ''">
+   
+          <p class="md-body-1">{{ error }}</p>
+  
+      </div>
+
+
+      <div layout="row" layout-align="center">
+        <a [routerLink]="['/Login']">Already a user?</a>
+      </div>
+
+
+</div>
+

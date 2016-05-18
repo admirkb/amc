@@ -1,0 +1,69 @@
+<!--<td [ngStyle]="{  'background': bugModel.editColor }">
+    {{bugModel.editColor}}{{bugModel.problem}}myDiv{{theIndex}}myDiv
+</td>-->
+<table>
+                        <tr *ngIf="theIndex == 0">
+                        <th style="text-align:left;">Problem</th>
+                        <th style="text-align:left;">Response</th>
+                        <th style="text-align:left;">Date Created</th>
+                        <th style="text-align:left;">Date Answered</th>
+                        <th></th>
+                    </tr>
+<tr class="copy2" [ngStyle]="{  'background': bugModel.editColor }" >
+    <td style="width:150px;">
+        <input *ngIf="bugModel.isEditable" style="width:150px;" [(ngModel)]="bugModel.problem" [disabled]="bugModel.isDisabled == null ? false : bugModel.isDisabled"
+        />
+        <div class="adtooltip">
+            <div id="myDiv{{theIndex}}" *ngIf="!bugModel.isEditable"
+                style="width:150px;white-space:nowrap; overflow:hidden;">{{bugModel.problem}}</div>
+        </div>
+    </td>
+
+
+    <td style="width:150px;">
+        <input *ngIf="bugModel.isEditable" style="width:150px;" [(ngModel)]="bugModel.response" [disabled]="bugModel.isDisabled == null ? false : bugModel.isDisabled"
+        />
+        <div class="adtooltip">
+            <div *ngIf="!bugModel.isEditable" style="width:150px;white-space:nowrap; overflow:hidden;">{{bugModel.response}}</div>
+        </div>
+    </td>
+
+
+    <td style="width:130px;">
+        <div style="width:110px;white-space:nowrap;">{{bugModel.dateCreated | date:'dd/MM/yyyy @ HH:mm'}}</div>
+    </td>
+    <td style="width:130px;">
+        <div style="width:110px;white-space:nowrap;">{{bugModel.dateResolved | date:'dd/MM/yyyy @ HH:mm'}}</div>
+    </td>
+
+    <td>
+        <button class="btn btn-primary btn-xs" [disabled]="bugModel.isDisabled == null ? false : bugModel.isDisabled" (click)="editBug(bugModel)"
+            *ngIf="!bugModel.isEditable">Edit</button>
+        <button class="btn btn-primary btn-xs" [disabled]="bugModel.isDisabled == null ? false : bugModel.isDisabled" (click)="updateBug(bugModel)"
+            *ngIf="bugModel.isEditable">Update</button>
+    </td>
+    <td>
+        <button class="btn btn-primary btn-xs" [disabled]="bugModel.isDisabled == null ? false : bugModel.isDisabled" (click)="deleteBug(bugModel)"
+            *ngIf="!bugModel.isEditable">Delete</button>
+        <button class="btn btn-primary btn-xs" [disabled]="bugModel.isDisabled == null ? false : bugModel.isDisabled" (click)="cancelBug(bugModel, key)"
+            *ngIf="bugModel.isEditable">Cancel</button>
+    </td>
+
+       <td>
+        <button id="myButton"  class="btn btn-primary btn-xs" data-toggle="modal" [attr.data-target]="'#myModal' + theIndex" (click)="doModal($event)" [disabled]="bugModel.isDisabled == null ? false : bugModel.isDisabled"
+            *ngIf="!bugModel.isEditable" >Run</button>
+
+    </td>
+    <!--<td>
+        <button (click)="setBug(bugModel)">Inside.submit(bug)</button>
+    </td>-->
+    
+    </tr>
+</table>
+
+<div id="myModal{{theIndex}}" class="modal fade" role="dialog" >
+          <bugs-form  [bugModelItem]="bugModel"></bugs-form>
+</div>
+
+
+

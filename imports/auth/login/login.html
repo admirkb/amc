@@ -1,0 +1,68 @@
+<div class="container copy1" style="width:50%; background:black; border-style:solid; border-width:2px; border-color:white; border-radius:4px; text-align:center">
+
+
+
+    <div class="heading1">
+        <h3>Sign in</h3>
+    </div>
+
+    <div >
+        <p> Want to use an existing account? </p>
+    </div>
+
+    <div>
+
+        <button class="admirColor" (click)="loginWithGoogle()">
+           <img src="media/google.png" width="40" height="40" />
+            <span style="float:right">Google</span>
+         </button>
+
+        <button class="admirColor" (click)="loginWithFacebook()">
+            <img src="media/facebook.png" width="40" height="40" />
+            <span style="float:right">Facebook</span>
+        </button>
+
+        <button class="admirColor" (click)="loginWithTwitter()">
+            <img src="media/twitter.png" width="40" height="40" />
+            <span style="float:right">Twitter</span>
+        </button>
+    </div>
+
+
+   
+            <div >
+                <p> Sign in with your email</p>
+            </div>
+
+            
+            
+ <form [ngFormModel]="loginForm" #f="ngForm" (submit)="login(f.value)" layout="column" layout-fill layout-padding layout-margin>
+
+          <label> Email </label>
+          <input style="color:black;" type="text" ngControl="email" aria-label="email" />
+
+
+          <label> Password </label>
+          <input  style="color:black;" type="password" ngControl="password" aria-label="password" />
+
+        <div >
+          <!--<button md-button [routerLink]="['/Recover']">Forgot password?</button>-->
+          <button class="admirColor" type="submit" aria-label="login">Sign In
+          </button>
+        </div>
+      </form>
+            
+      <div [hidden]="error == ''">
+
+          <p class="md-body-1">{{ error }}</p>
+
+      </div>
+  
+      <div >
+        <a  [routerLink]="['/Register']">Need an account?</a>
+      </div>
+
+
+</div>
+
+
