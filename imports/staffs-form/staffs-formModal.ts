@@ -16,12 +16,13 @@ import {Staffs} from '../../imports/api/staffs';
 import {TabView} from '../directives/tabview/tabview';
 import {TabPanel} from '../directives/tabview/tabpanel';
 import {StaffsTab1} from '../../imports/staffs-form/staffs-tab1';
+import {StaffsTab2} from '../../imports/staffs-form/staffs-tab2';
 import {ADMediaUpload} from '../directives/mediaUpload/adMediaUpload';
 
 @Component({
   selector: 'staffs-form-modal',
   templateUrl: '/imports/staffs-form/staffs-formModal.html',
-    directives: [TabView, TabPanel,StaffsTab1, ADMediaUpload],
+    directives: [TabView, TabPanel,StaffsTab1,StaffsTab2, ADMediaUpload],
 
 })
 export class StaffsFormModal implements OnInit {
