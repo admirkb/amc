@@ -17,11 +17,12 @@ import {FormBuilder, ControlGroup, Validators, Control} from 'angular2/common';
 import {StaffsForm} from '../staffs-form/staffs-form.ts';
 import {StaffsItem} from '../staffs-item/staffs-item.ts';
 import {Staffs} from '../../imports/api/staffs';
+import {Modal} from '../directives/modal/modal';
 
 @Component({
   selector: 'staffs-list',
   templateUrl: '/imports/staffs-list/staffs-list.html',
-  directives: [StaffsItem, StaffsForm],
+  directives: [StaffsItem, StaffsForm, Modal],
 })
 export class StaffsList extends MeteorComponent implements OnInit {
   @ViewChildren(StaffsItem) staffsList: QueryList<StaffsItem>;
@@ -30,7 +31,9 @@ export class StaffsList extends MeteorComponent implements OnInit {
   // helloEvent: EventEmitter = new EventEmitter();
   // public selfConnectionId: ReactiveVar<string> = new ReactiveVar<string>();
   @Output() helloEvent: EventEmitter<any> = new EventEmitter();
-
+  display: boolean = false;
+  n: number = 0;
+    data: any = new Object();
 
   constructor() {
     super();
@@ -171,7 +174,17 @@ export class StaffsList extends MeteorComponent implements OnInit {
 
   }
 
+  showDialog(n, data) {
+    this.display = true;
+    // console.log(this.display);
+    //     console.log(n);
+    //     this.n = n;
 
+    //             this.data = data;
+    //                     console.dir(this.data);
+                        
+       
+  }
 }
 
 

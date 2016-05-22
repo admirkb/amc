@@ -1,6 +1,27 @@
 <!--<staffs-form [hidden]="!user"></staffs-form>-->
-<staffs-form></staffs-form>
+<!--<staffs-form> </staffs-form>-->
 <!--<div [hidden]="user">You need to login to create new parties!</div>-->
+
+<h1>Hello {{n}}</h1>
+
+<p-modal header="Title" [(visible)]="display" width="600">
+
+      <staffs-form [staffModelItem]="data"> </staffs-form>
+      
+      <!--<div class="modal-body"  >
+
+
+
+  </div>-->
+  
+</p-modal>
+
+    <!--<input type="text" [(ngModel)]="n" />-->
+
+     <button (click)="showDialog(0)" class="btn btn-primary btn-sm">Add Staff!</button>
+
+
+
 
 
 <div class="container">

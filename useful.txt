@@ -1,0 +1,49 @@
+<p-modal  header="New Staff" [(visible)]="display" width="600" style="background-color:black; border-width:2px; border-style:solid; border-color:white; border-radius:6px;">
+  <!--Content{{staffModelItem.name}}-->
+  <!--<input type="text" [(ngModel)]="staffModelItem.name" />-->
+
+  <div class="modal-body">
+
+    <div style="width:60%; background-color:transparent;margin-left: auto; margin-right: auto; ">
+      <div style="width:100%; ">
+        <table style="width:100%; position:relative; background-color:transparent;">
+          <tr>
+            <td *ngIf="staffModelItem != null">{{staffModelItem._id}}
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+
+  <form [ngFormModel]="staffsForm" #f="ngForm" (submit)="addStaff(f.value)">
+    <input type="text" [(ngModel)]="staffModelItem.name" />
+    <div layout-gt-sm="row">
+
+      <p-tabView>
+        <p-tabPanel header="Details">
+          <staffs-tab1 [(staffModelTab1)]="staffModelItem"></staffs-tab1>
+        </p-tabPanel>
+        <p-tabPanel header="Roles">
+          <staffs-tab2 [staffModelTab2]="staffModelItem"></staffs-tab2>
+        </p-tabPanel>
+
+
+      </p-tabView>
+
+      <!--<label class="copy1">New Staff: </label>
+      <input ngControl="name" placeholder="Name" style="color:black;" />
+      <input ngControl="phone" placeholder="Phone" style="color:black;" />
+      <button type="submit" class="btn btn-primary btn-sm">Add Staff!</button>-->
+
+
+    </div>
+
+      <div class="modal-footer">
+     <button type="submit" class="btn btn-primary btn-sm">Add Staff!</button>
+        <button type="button" class="btn btn-primary btn-sm"  (click)="hide($event)" >Close</button>
+      </div>
+  </form>
+</p-modal>

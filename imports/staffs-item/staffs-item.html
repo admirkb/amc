@@ -4,7 +4,6 @@
 <div class="col-md-4" style="color:wheat;border-width:2px; border-style:solid; border-radius:6px;text-align:center">
     <div style="border-style:solid; border-width:2px; border-color:white; border-radius:4px; width:1%; background:green">
 
-
         <div style="width:60%; background-color:transparent;margin-left: auto; margin-right: auto; ">
             <div style="width:100%; position:absolute; background-color:#D00A00; opacity:.3" ng-style="{height: defaultHeight + 'px'}"></div>
             <table style="width:100%; position:relative; background-color:transparent;">
@@ -64,20 +63,13 @@
             </tr>
         </table>
 
-
-
-        <!--<div id="myModal{{theIndex}}" class="modal fade" role="dialog">
-    <staffs-form [staffModelItem]="staffModel"></staffs-form>
-</div>-->
-        <div style="border-style:solid; border-width:2px; border-color:white; border-radius:4px; width:1%; background:green">
-            <div id="myStaffFormModal{{theIndex}}" class="modal fade" role="dialog" style="background:orange;width:60%;auto; margin-right: auto; ">
-
-                <button>ASDfasdfasdf</button>
-                <!--<staffs-form-modal [staffModelItem]="staffModel"></staffs-form-modal>-->
-            </div>
-        </div>
     </div>
 
+</div>
+
+<div id="myStaffFormModal{{theIndex}}" class="modal fade" role="dialog" style="background:transparent;width:50%;margin-left: 25%; margin-right: 25%; ;text-align:center">
+
+    <staffs-form-modal [staffModelItem]="staffModel" style="background:red;width:100%;"></staffs-form-modal>
 </div>
 
 <!--<table>
