@@ -6,7 +6,7 @@
 
 <p-modal header="Title" [(visible)]="display" width="600">
 
-      <staffs-form [staffModelItem]="data" (HideDialogEvent)="hideDialog($event)"> </staffs-form>
+      <staffs-form [staffModelItem]="data" [action]="action" (HideDialogEvent)="hideDialog($event)"> </staffs-form>
       
       <!--<div class="modal-body"  >
 

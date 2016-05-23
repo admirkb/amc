@@ -1,7 +1,7 @@
 <div>
   <h4 class="modal-title">Staff Maintenence</h4>
 
-  <form [ngFormModel]="staffsForm" #f="ngForm" (submit)="addStaff(f.value)">
+  <form [ngFormModel]="staffsForm" #f="ngForm" >
 
     <div *ngIf="staffModelItem.imageAsData != null" layout-gt-sm="row" style="text-align:center">
       <img [(src)]="staffModelItem.imageAsData" />
@@ -10,6 +10,7 @@
     <div layout-gt-sm="row">
 
       <label class="copy1">New Staff: </label>
+      <input [(ngModel)]="staffModelItem._id" ngControl="_id" placeholder="Name" style="color:black;" />
       <input [(ngModel)]="staffModelItem.name" ngControl="name" placeholder="Name" style="color:black;" />
       <input [(ngModel)]="staffModelItem.phone" ngControl="phone" placeholder="Phone" style="color:black;" />
       <input [(ngModel)]="staffModelItem.email" ngControl="email" placeholder="Email" style="color:black;" />
@@ -30,7 +31,8 @@
 
       <div class="footer">
 
-        <button type="submit" class="btn btn-primary btn-sm">Add Staff!</button>
+        <button *ngIf="action == 'add'" (click)="addStaff(f.value)"class="btn btn-primary btn-sm">Add Staff!</button>
+        <button *ngIf="action == 'update'" (click)="updateStaff(f.value)" class="btn btn-primary btn-sm">Modify Staff!</button>
         <button type="button" class="btn btn-primary btn-sm" (click)="hideDialog()">Close</button>
 
 

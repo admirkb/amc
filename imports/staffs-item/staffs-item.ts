@@ -11,24 +11,27 @@ import {MeteorComponent} from 'angular2-meteor';
 
 import {StaffsForm} from '../../imports/staffs-form/staffs-form';
 import {StaffsFormModal} from '../../imports/staffs-form/staffs-formModal';
+import {Modal} from '../directives/modal/modal';
 
 @Component({
   selector: 'staffs-item',
   templateUrl: '/imports/staffs-item/staffs-item.html',
-  directives: [StaffsForm, StaffsFormModal],
+  directives: [StaffsForm, StaffsFormModal, Modal],
   // properties: ['problem']
 })
 export class StaffsItem extends MeteorComponent implements OnInit {
   @ViewChild(StaffsForm) staffsForm: StaffsForm;
-  @ViewChild(StaffsFormModal) staffsForm: StaffsFormModal;
+  // @ViewChild(StaffsFormModal) staffsForm: StaffsFormModal;
   @Input() staffModel;
   @Input() theIndex;
   private _element: any;
-
+   display: boolean = false;
+  action: string;
 
   constructor(elementRef: ElementRef) {
     super();
 
+    this.action = "update";
     this._element = elementRef.nativeElement;
 
 
@@ -103,12 +106,12 @@ export class StaffsItem extends MeteorComponent implements OnInit {
     console.dir(staff)
 
     Meteor.call('staffs.update', { _id: staff._id }, {
-      $set: {
-        isDisabled: false, isEditable: false, problem: staff.problem,
-        response: staff.response, dateResolved: new Date(), editColor: "transparent",
-        imageAsData: staff.imageAsData
+          $set: {
+            isDisabled: false, isEditable: false, name: staff.name,
+            phone: staff.phone, dateResolved: new Date(), editColor: "transparent",
+            imageAsData: staff.imageAsData, email: staff.email
 
-      }
+          }
     }, function (error, result) {
       // console.log("here")
       // console.dir(error)
@@ -189,5 +192,22 @@ export class StaffsItem extends MeteorComponent implements OnInit {
     //  this._element.getElementById('myModal1').modal('show');
 
     // $('#testButton').attr('data-target','#testModal2');
+  }
+
+  showDialog(n, data) {
+    this.display = true;
+    // console.log(this.display);
+    //     console.log(n);
+    //     this.n = n;
+
+    //             this.data = data;
+    //                     console.dir(this.data);
+
+
+  }
+
+  hideDialog(e) {
+    console.dir(e)
+    this.display = false;
   }
 }

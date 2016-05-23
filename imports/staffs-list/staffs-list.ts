@@ -34,11 +34,12 @@ export class StaffsList extends MeteorComponent implements OnInit {
   display: boolean = false;
   n: number = 0;
   data: any = new Object();
+  action: string;
 
   constructor() {
     super();
 
-
+      this.action = "add";
     this.helloEvent.subscribe((args) => {
       var self = this;
 

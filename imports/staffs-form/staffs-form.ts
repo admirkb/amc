@@ -25,6 +25,7 @@ import {ADMediaUpload} from '../directives/mediaUpload/adMediaUpload';
 })
 export class StaffsForm implements OnInit {
   @Input() staffModelItem;
+  @Input() action;
   staffsForm: ControlGroup;
   @Output() HideDialogEvent: EventEmitter<any> = new EventEmitter();
   n: number = 0;
@@ -42,6 +43,7 @@ export class StaffsForm implements OnInit {
       imageAsData: ['', Validators.required],
       name: ['', Validators.required],
       email: ['', Validators.required],
+      _id: '',
 
     });
 
@@ -53,8 +55,9 @@ export class StaffsForm implements OnInit {
 
   ngOnInit() {
 
-    // console.dir(this.staffModelItem);
-
+    console.dir(this.staffModelItem);
+    console.log("this.action")
+    console.log(this.action)
   }
 
   addStaff(staff) {
@@ -67,8 +70,56 @@ export class StaffsForm implements OnInit {
 
         (<Control>this.staffsForm.controls['name']).updateValue('');
         (<Control>this.staffsForm.controls['phone']).updateValue('');
+        (<Control>this.staffsForm.controls['imageAsData']).updateValue('');
+        (<Control>this.staffsForm.controls['email']).updateValue('');
         this.staffModelItem.name = "";
         this.staffModelItem.phone = "";
+        this.staffModelItem.imageAsData = null;
+        this.staffModelItem.email = "";
+
+        this.hideDialog();
+      } else {
+        alert('Please log in to add a staff');
+      }
+    }
+    else {
+      alert('Please fill required fields');
+    }
+  }
+
+  updateStaff(staff) {
+
+
+    if (this.staffsForm.valid) {
+      if (Meteor.userId()) {
+
+        console.dir(staff)
+            console.log("staff._id")
+    console.log(staff._id)
+
+        Meteor.call('staffs.update', { _id: staff._id }, {
+          $set: {
+            isDisabled: false, isEditable: false, name: staff.name,
+            phone: staff.phone, dateResolved: new Date(), editColor: "transparent",
+            imageAsData: staff.imageAsData, email: staff.email
+
+          }
+        }, function (error, result) {
+          // console.log("here")
+          // console.dir(error)
+          // console.dir(result)
+
+          console.log("staffs.update updateStaff callback")
+        });
+
+        (<Control>this.staffsForm.controls['name']).updateValue('');
+        (<Control>this.staffsForm.controls['phone']).updateValue('');
+        (<Control>this.staffsForm.controls['imageAsData']).updateValue('');
+        (<Control>this.staffsForm.controls['email']).updateValue('');
+        this.staffModelItem.name = "";
+        this.staffModelItem.phone = "";
+        this.staffModelItem.imageAsData = null;
+        this.staffModelItem.email = "";
 
         this.hideDialog();
       } else {
