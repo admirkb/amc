@@ -3,32 +3,33 @@ import 'reflect-metadata';
 import { Meteor } from 'meteor/meteor';
 
 // Angular
-import {Component, EventEmitter, OnInit, Input} from 'angular2/core';
+import {Component, EventEmitter, OnInit, Input, Output} from 'angular2/core';
 import {MeteorComponent} from 'angular2-meteor';
 import {FormBuilder, ControlGroup, Validators, Control, FORM_DIRECTIVES} from 'angular2/common';
 
 // Admir
 import {Staffs} from '../../imports/api/staffs';
-import {Modal} from '../directives/modal/modal';
+// import {Modal} from '../directives/modal/modal';
 import {TabView} from '../directives/tabview/tabview';
 import {TabPanel} from '../directives/tabview/tabpanel';
 import {StaffsTab1} from '../../imports/staffs-form/staffs-tab1';
 import {StaffsTab2} from '../../imports/staffs-form/staffs-tab2';
+import {ADMediaUpload} from '../directives/mediaUpload/adMediaUpload';
 // import {StaffsItem} from '../../imports/staffs-item/staffs-item';
 
 
 @Component({
   selector: 'staffs-form',
   templateUrl: '/imports/staffs-form/staffs-form.html',
-  directives: [Modal, TabView, TabPanel, StaffsTab1, StaffsTab2, FORM_DIRECTIVES],
-
+  directives: [TabView, TabPanel, StaffsTab1, StaffsTab2, FORM_DIRECTIVES, ADMediaUpload],
 })
 export class StaffsForm implements OnInit {
   @Input() staffModelItem;
   staffsForm: ControlGroup;
-  display: boolean = false;
+  @Output() HideDialogEvent: EventEmitter<any> = new EventEmitter();
   n: number = 0;
   data: any;
+
 
   constructor() {
 
@@ -38,28 +39,21 @@ export class StaffsForm implements OnInit {
     this.staffsForm = fb.group({
       phone: ['', Validators.required],
       expiryDate: new Date(),
+      imageAsData: ['', Validators.required],
       name: ['', Validators.required],
+      email: ['', Validators.required],
 
     });
 
     // console.log("staffModelItem");
     // console.dir(this.staffModelItem);
+
+
   }
 
   ngOnInit() {
 
-    // console.log(this._element.outerHTML)
-
-    // (<Control>this.staffsForm.controls['name']).updateValue('freddy argh');
-
-    console.dir(this.staffModelItem);
-
-    // (<Control>this.staffsForm.controls['name']).updateValue(this.staffModelItem.name);
-    // alert(this.staffModelItem.name)
-
-
-    // this.staffsForm.value.name = this.staffModelItem.name;
-
+    // console.dir(this.staffModelItem);
 
   }
 
@@ -76,25 +70,32 @@ export class StaffsForm implements OnInit {
         this.staffModelItem.name = "";
         this.staffModelItem.phone = "";
 
+        this.hideDialog();
       } else {
         alert('Please log in to add a staff');
       }
     }
+    else {
+      alert('Please fill required fields');
+    }
+  }
+  ImageChangedEvent(args) {
+
+    var o = args;
+
+    console.log(o.time)
+    console.log(o.imageAsData)
+
+    this.staffModelItem.imageAsData = o.imageAsData;
   }
 
-  //   showDialog(n,d) {
-  //      console.dir(this.staffModelItem);
-  //   this.display = true;
-  //   // console.log(this.display);
+  hideDialog() {
+    var o = new Object();
+    o.time = new Date();
 
-  //       this.n = n;
-  //       this.data = d;
+    this.HideDialogEvent.emit(o)
 
-  //               console.log(this.n);
-  //           console.dir(this.data);
+  }
 
-  //    this.staffModelItem = this.data;
 
-  //    this.staffsForm.value.name = this.data.name;
-  // }
 }

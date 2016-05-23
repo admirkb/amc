@@ -6,7 +6,7 @@
 
 <p-modal header="Title" [(visible)]="display" width="600">
 
-      <staffs-form [staffModelItem]="data"> </staffs-form>
+      <staffs-form [staffModelItem]="data" (HideDialogEvent)="hideDialog($event)"> </staffs-form>
       
       <!--<div class="modal-body"  >
 
@@ -19,6 +19,7 @@
     <!--<input type="text" [(ngModel)]="n" />-->
 
      <button (click)="showDialog(0)" class="btn btn-primary btn-sm">Add Staff!</button>
+          <!--<button (click)="hideDialog()" class="btn btn-primary btn-sm">Hide Staff!</button>-->
 
 
 

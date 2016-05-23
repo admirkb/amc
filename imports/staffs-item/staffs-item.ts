@@ -31,13 +31,15 @@ export class StaffsItem extends MeteorComponent implements OnInit {
 
     this._element = elementRef.nativeElement;
 
+
+
+
   }
 
 
   ngOnInit() {
 
     // console.log(this._element.outerHTML)
-
 
   }
 
@@ -100,12 +102,14 @@ export class StaffsItem extends MeteorComponent implements OnInit {
   updateStaff(staff) {
     console.dir(staff)
 
-    Meteor.call('staffs.update', { _id: staff._id }, { 
-      $set: { isDisabled: false, isEditable: false, problem: staff.problem, 
-        response: staff.response, dateResolved: new Date(), editColor: "transparent" ,
+    Meteor.call('staffs.update', { _id: staff._id }, {
+      $set: {
+        isDisabled: false, isEditable: false, problem: staff.problem,
+        response: staff.response, dateResolved: new Date(), editColor: "transparent",
         imageAsData: staff.imageAsData
-      
-    } }, function (error, result) {
+
+      }
+    }, function (error, result) {
       // console.log("here")
       // console.dir(error)
       // console.dir(result)

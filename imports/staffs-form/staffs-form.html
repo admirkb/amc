@@ -3,16 +3,44 @@
 
   <form [ngFormModel]="staffsForm" #f="ngForm" (submit)="addStaff(f.value)">
 
+    <div *ngIf="staffModelItem.imageAsData != null" layout-gt-sm="row" style="text-align:center">
+      <img [(src)]="staffModelItem.imageAsData" />
+    </div>
+
     <div layout-gt-sm="row">
 
       <label class="copy1">New Staff: </label>
       <input [(ngModel)]="staffModelItem.name" ngControl="name" placeholder="Name" style="color:black;" />
-      <input [(ngModel)]="staffModelItem.phone"  ngControl="phone" placeholder="Phone" style="color:black;" />
-      <button type="submit" class="btn btn-primary btn-sm">Add Staff!</button>
+      <input [(ngModel)]="staffModelItem.phone" ngControl="phone" placeholder="Phone" style="color:black;" />
+      <input [(ngModel)]="staffModelItem.email" ngControl="email" placeholder="Email" style="color:black;" />
+      <input [(ngModel)]="staffModelItem.imageAsData" ngControl="imageAsData" placeholder="imageAsData" style="display:none;" />
+
+
+
+
+
+      <p-tabView>
+        <p-tabPanel header="Details">
+          <staffs-tab1 [staffModelTab1]="staffModelItem"></staffs-tab1>
+        </p-tabPanel>
+        <p-tabPanel header="Roles">
+          <staffs-tab2 [staffModelTab2]="staffModelItem"></staffs-tab2>
+        </p-tabPanel>
+      </p-tabView>
+
+      <div class="footer">
+
+        <button type="submit" class="btn btn-primary btn-sm">Add Staff!</button>
+        <button type="button" class="btn btn-primary btn-sm" (click)="hideDialog()">Close</button>
+
+
+      </div>
 
     </div>
-
   </form>
+
+
+  <ad-media-upload (ImageChangedEvent)="ImageChangedEvent($event)"></ad-media-upload>
 
 </div>
 <hr/>

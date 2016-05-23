@@ -11,7 +11,7 @@ import {Component, ElementRef, EventEmitter, Output} from 'angular2/core';
                     <div id="divHost" >
 
 <div style="color:red;"></div>
-    <div id="angularFileDisplayArea" [innerHTML]="angularFileDisplayArea" style="display:; width:250;height:250px;background:yellow"></div>
+    <div id="angularFileDisplayArea" [innerHTML]="angularFileDisplayArea" style="display:; width:250;height:0px;background:yellow; display:none;"></div>
 
 
     <table style="width:100%;background-color:red;">

@@ -33,7 +33,7 @@ export class StaffsList extends MeteorComponent implements OnInit {
   @Output() helloEvent: EventEmitter<any> = new EventEmitter();
   display: boolean = false;
   n: number = 0;
-    data: any = new Object();
+  data: any = new Object();
 
   constructor() {
     super();
@@ -123,9 +123,9 @@ export class StaffsList extends MeteorComponent implements OnInit {
 
             // self.helloEvent.emit(staff)
 
-              // self.staffsList.toArray().forEach((list) => {
-              //   list.setStaff(list.staffModel);
-              // });
+            // self.staffsList.toArray().forEach((list) => {
+            //   list.setStaff(list.staffModel);
+            // });
 
 
 
@@ -182,9 +182,14 @@ export class StaffsList extends MeteorComponent implements OnInit {
 
     //             this.data = data;
     //                     console.dir(this.data);
-                        
-       
+
+
   }
+  hideDialog(e) {
+    console.dir(e)
+    this.display = false;
+  }
+
 }
 
 
