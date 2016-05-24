@@ -2,7 +2,7 @@
     {{staffModel.editColor}}{{staffModel.problem}}myDiv{{theIndex}}myDiv---{{'#myModal'+ '1'}}
 </td>-->
 
-<p-modal header="Title" [(visible)]="display" width="600">
+<p-modal header="Staff Maintenance: {{staffModel.name}}" [(visible)]="display" width="600">
 
       <staffs-form [staffModelItem]="staffModel" [action]="action"  (HideDialogEvent)="hideDialog($event)"> </staffs-form>
       
@@ -10,9 +10,18 @@
 </p-modal>
 
 <div class="col-md-4" style="color:wheat;border-width:2px; border-style:solid; border-radius:6px;text-align:center">
-    <div style="border-style:solid; border-width:2px; border-color:white; border-radius:4px; width:100%; background:transparent">
+    <div style="border-style:none; border-width:2px; border-color:white; border-radius:4px; width:100%; background:transparent">
 
         <table style="width:100%; position:relative; background-color:transparent;">
+            <tr>
+                <td>
+
+                    <div style="text-align:center; width:100%; height:100%;font-size:1.25em">
+                        {{staffModel.name}}
+                    </div>
+
+                </td>
+            </tr>
             <tr>
                 <td>
 
@@ -22,7 +31,7 @@
 
                 </td>
             </tr>
-        </table>
+                    </table>
 
         <table style="background-color:#D00A00;">
 
@@ -31,14 +40,11 @@
                 <td style="width:100%;vertical-align:top; padding:0px 10px 0px 0px">
 
                     <table style="width:100%; height:100%;">
-                        <tr class="copy2" [ngStyle]="{  'background': staffModel.editColor }">
-
-
+                        <tr [ngStyle]="{  'background': staffModel.editColor }">
                             <td style="width:150px;">
-                                <input *ngIf="staffModel.isEditable" style="width:150px;" [(ngModel)]="staffModel.name" [disabled]="staffModel.isDisabled == null ? false : staffModel.isDisabled"
-                                />
-                                <div class="adtooltip">
-                                    <div id="myDiv{{theIndex}}" *ngIf="!staffModel.isEditable" style="width:150px;white-space:nowrap; overflow:hidden;">{{staffModel.name}}</div>
+                                <input *ngIf="staffModel.isEditable" style="width:150px;background:white; color:black;" [(ngModel)]="staffModel.name" [disabled]="staffModel.isDisabled == null ? false : staffModel.isDisabled"/>
+                                <div >
+                                    <div id="myDiv{{theIndex}}" *ngIf="!staffModel.isEditable" style="width:150px;white-space:nowrap; overflow:hidden;"></div>
                                 </div>
                             </td>
 

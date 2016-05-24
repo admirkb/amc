@@ -1,5 +1,5 @@
-<div>
-  <h4 class="modal-title">{{staffModelItem.name}}</h4>
+<div style="background:black;">
+  <!--<h4 class="modal-title">{{staffModelItem.name}}</h4>-->
 
   <form [ngFormModel]="staffsForm" #f="ngForm">
 
@@ -27,32 +27,26 @@
 
 
       <p-tabView>
-        <p-tabPanel header="Details">
-          <table style="background-color:transparent;width:100%;">
-            <tr>
-              <td style="text-align:left;color:red;">Id</td>
-              <td>
-                <input type="text" [ngModel]="staffModelItem._id" />
-              </td>
-            </tr>
+        <p-tabPanel header="Details" >
+          <table style="background-color:black;width:100%;">
             <tr>
               <td style="text-align:left;color:red;">Name</td>
               <td>
-                <input type="text" [(ngModel)]="staffModelItem.name" ngControl="name" placeholder="Name" required/>
+                <input style="color:white;background:black;" type="text" [(ngModel)]="staffModelItem.name" ngControl="name" placeholder="Name" required/>
               </td>
             </tr>
 
             <tr>
               <td style="text-align:left;color:red;">Phone</td>
               <td>
-                <input type="text" [(ngModel)]="staffModelItem.phone"  ngControl="phone" placeholder="Phone" required/>
+                <input style="color:white;background:black;" type="text" [(ngModel)]="staffModelItem.phone"  ngControl="phone" placeholder="Phone" required/>
               </td>
             </tr>
 
             <tr>
               <td style="text-align:left;color:red;">Email</td>
               <td>
-                <input type="text" [(ngModel)]="staffModelItem.email" ngControl="email" placeholder="Email" required/>
+                <input style="color:white;background:black;" type="text" [(ngModel)]="staffModelItem.email" ngControl="email" placeholder="Email" required/>
               </td>
             </tr>
 
@@ -61,22 +55,15 @@
         <p-tabPanel header="Roles">
           <table style="background-color:transparent;width:100%;">
             <tr>
-              <td style="text-align:left;color:red;">Id</td>
-              <td>
-                <input type="text" [ngModel]="staffModelItem._id" />
-              </td>
-            </tr>
-
-            <tr>
               <td style="text-align:left;color:red;">Width</td>
               <td>
-                <input type="text" [(ngModel)]="staffModelItem.width" ngControl="width" placeholder="Width" required/>
+                <input style="color:white;background:black;" type="text" [(ngModel)]="staffModelItem.width" ngControl="width" placeholder="Width" minlength="3"/>
               </td>
             </tr>
             <tr>
               <td style="text-align:left;color:red;">Height</td>
               <td>
-                <input type="text" [(ngModel)]="staffModelItem.height" ngControl="height" placeholder="Height" required/>
+                <input style="color:white;background:black;" type="text" [(ngModel)]="staffModelItem.height" ngControl="height" placeholder="Height" minlength="3"/>
               </td>
             </tr>
           </table>

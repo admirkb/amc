@@ -4,7 +4,7 @@ import {TabView} from './tabview';
 @Component({
     selector: 'p-tabPanel',
     template: `
-        <div class="ui-tabview-panel ui-widget-content" [style.display]="selected ? 'block' : 'none'" *ngIf="!closed">
+        <div style="background-color:black" class="ui-tabview-panel ui-widget-content" [style.display]="selected ? 'block' : 'none'" *ngIf="!closed">
             <ng-content></ng-content>
         </div>
     `,

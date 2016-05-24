@@ -50,3 +50,8 @@
 
 
     // console.log(this._element.outerHTML)
+    
+                // console.log(field + " = " + this.staffsForm.controls[field].value);
+            // if (this.staffsForm.controls[field].dirty) {
+            //   $set[field] = this.staffsForm.controls[field].value;
+            // }

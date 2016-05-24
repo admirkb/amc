@@ -45,13 +45,12 @@ export class StaffsForm implements OnInit {
       name: ['', Validators.required],
       email: ['', Validators.required],
       _id: '',
-      width: 320,
-      height: 180,
+      width: [320, Validators.minLength(3)],
+      height: [180, Validators.minLength(3)],
 
     });
 
     this.email = this.staffsForm.controls['email'];
-
     this.email.valueChanges.subscribe(
       (value: string) => {
         console.log('email changed to:', value);
@@ -113,10 +112,6 @@ export class StaffsForm implements OnInit {
 
         for (var field in this.staffsForm.controls) {
           if (field != "_id") {
-            // console.log(field + " = " + this.staffsForm.controls[field].value);
-            // if (this.staffsForm.controls[field].dirty) {
-            //   $set[field] = this.staffsForm.controls[field].value;
-            // }
             $set[field] = this.staffsForm.controls[field].value;
           }
         }
