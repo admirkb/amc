@@ -109,7 +109,7 @@ export class StaffsItem extends MeteorComponent implements OnInit {
           $set: {
             isDisabled: false, isEditable: false, name: staff.name,
             phone: staff.phone, dateResolved: new Date(), editColor: "transparent",
-            imageAsData: staff.imageAsData, email: staff.email
+            imageAsData: staff.imageAsData, email: staff.email, width: staff.width, height: staff.height
 
           }
     }, function (error, result) {

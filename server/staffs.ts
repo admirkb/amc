@@ -23,7 +23,7 @@ Meteor.methods({
         Staffs.remove(staffId);
     },
     'staffs.update'(staffId, action) {
-        
+        // console.dir(action)
         Staffs.update(staffId, action);
     },
 

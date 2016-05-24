@@ -12,8 +12,8 @@ import {Staffs} from '../../imports/api/staffs';
 // import {Modal} from '../directives/modal/modal';
 import {TabView} from '../directives/tabview/tabview';
 import {TabPanel} from '../directives/tabview/tabpanel';
-import {StaffsTab1} from '../../imports/staffs-form/staffs-tab1';
-import {StaffsTab2} from '../../imports/staffs-form/staffs-tab2';
+// import {StaffsTab1} from '../../imports/staffs-form/staffs-tab1';
+// import {StaffsTab2} from '../../imports/staffs-form/staffs-tab2';
 import {ADMediaUpload} from '../directives/mediaUpload/adMediaUpload';
 // import {StaffsItem} from '../../imports/staffs-item/staffs-item';
 
@@ -21,7 +21,7 @@ import {ADMediaUpload} from '../directives/mediaUpload/adMediaUpload';
 @Component({
   selector: 'staffs-form',
   templateUrl: '/imports/staffs-form/staffs-form.html',
-  directives: [TabView, TabPanel, StaffsTab1, StaffsTab2, FORM_DIRECTIVES, ADMediaUpload],
+  directives: [TabView, TabPanel, FORM_DIRECTIVES, ADMediaUpload],
 })
 export class StaffsForm implements OnInit {
   @Input() staffModelItem;
@@ -30,6 +30,7 @@ export class StaffsForm implements OnInit {
   @Output() HideDialogEvent: EventEmitter<any> = new EventEmitter();
   n: number = 0;
   data: any;
+  email: any;
 
 
   constructor() {
@@ -44,9 +45,18 @@ export class StaffsForm implements OnInit {
       name: ['', Validators.required],
       email: ['', Validators.required],
       _id: '',
+      width: 320,
+      height: 180,
 
     });
 
+    this.email = this.staffsForm.controls['email'];
+
+    this.email.valueChanges.subscribe(
+      (value: string) => {
+        console.log('email changed to:', value);
+      }
+    );
     // console.log("staffModelItem");
     // console.dir(this.staffModelItem);
 
@@ -68,14 +78,13 @@ export class StaffsForm implements OnInit {
 
         Meteor.call('staffs.insert', staff);
 
-        (<Control>this.staffsForm.controls['name']).updateValue('');
-        (<Control>this.staffsForm.controls['phone']).updateValue('');
-        (<Control>this.staffsForm.controls['imageAsData']).updateValue('');
-        (<Control>this.staffsForm.controls['email']).updateValue('');
-        this.staffModelItem.name = "";
-        this.staffModelItem.phone = "";
-        this.staffModelItem.imageAsData = null;
-        this.staffModelItem.email = "";
+        /* Clear the controls */
+        for (var field in this.staffsForm.controls) {
+          if (field != "_id") {
+            (<Control>this.staffsForm.controls[field]).updateValue('');
+            this.staffModelItem[field] = "";
+          }
+        }
 
         this.hideDialog();
       } else {
@@ -93,33 +102,66 @@ export class StaffsForm implements OnInit {
     if (this.staffsForm.valid) {
       if (Meteor.userId()) {
 
-        console.dir(staff)
-            console.log("staff._id")
-    console.log(staff._id)
+        // console.dir(staff)
+        // console.log("staff._id")
+        // console.log(staff._id)
+        // console.log(this.staffsForm.value);
+        // console.dir(this.staffsForm.controls);
+
+        /* Build up $set dynamically so we send all fields on the controls */
+        var $set = {};
+
+        for (var field in this.staffsForm.controls) {
+          if (field != "_id") {
+            // console.log(field + " = " + this.staffsForm.controls[field].value);
+            // if (this.staffsForm.controls[field].dirty) {
+            //   $set[field] = this.staffsForm.controls[field].value;
+            // }
+            $set[field] = this.staffsForm.controls[field].value;
+          }
+        }
+        $set['isDisabled'] = false;
+        $set['isEditable'] = false;
+        $set['editColor'] = 'transparent';
+        $set['dateResolved'] = new Date();
 
         Meteor.call('staffs.update', { _id: staff._id }, {
-          $set: {
-            isDisabled: false, isEditable: false, name: staff.name,
-            phone: staff.phone, dateResolved: new Date(), editColor: "transparent",
-            imageAsData: staff.imageAsData, email: staff.email
 
-          }
+          $set: $set
+          // Static way
+          // $set: { 
+          //   isDisabled: false, isEditable: false,
+          //   dateResolved: new Date(), editColor: "transparent",
+          //   imageAsData: staff.imageAsData,
+          //   email: staff.email, 
+          //   width: staff.width, 
+          //   height: staff.height, 
+          //   name: staff.name, 
+          //   phone: staff.phone,
+          // }
+
         }, function (error, result) {
-          // console.log("here")
-          // console.dir(error)
-          // console.dir(result)
 
-          console.log("staffs.update updateStaff callback")
+          console.log("staffs.update updateStaff callback error" + error)
         });
 
-        (<Control>this.staffsForm.controls['name']).updateValue('');
-        (<Control>this.staffsForm.controls['phone']).updateValue('');
-        (<Control>this.staffsForm.controls['imageAsData']).updateValue('');
-        (<Control>this.staffsForm.controls['email']).updateValue('');
-        this.staffModelItem.name = "";
-        this.staffModelItem.phone = "";
-        this.staffModelItem.imageAsData = null;
-        this.staffModelItem.email = "";
+
+        /* Clear the controls */
+        // for (var field in this.staffsForm.controls) {
+        //   if (field != "_id") {
+        //     (<Control>this.staffsForm.controls[field]).updateValue('');
+        //     this.staffModelItem[field] = "";
+        //   }
+        // }
+
+        // (<Control>this.staffsForm.controls['name']).updateValue('');
+        // (<Control>this.staffsForm.controls['phone']).updateValue('');
+        // (<Control>this.staffsForm.controls['imageAsData']).updateValue('');
+        // (<Control>this.staffsForm.controls['email']).updateValue('');
+        // this.staffModelItem.name = "";
+        // this.staffModelItem.phone = "";
+        // this.staffModelItem.imageAsData = null;
+        // this.staffModelItem.email = "";
 
         this.hideDialog();
       } else {

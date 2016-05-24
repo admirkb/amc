@@ -1,7 +1,7 @@
 <div>
-  <h4 class="modal-title">Staff Maintenence</h4>
+  <h4 class="modal-title">{{staffModelItem.name}}</h4>
 
-  <form [ngFormModel]="staffsForm" #f="ngForm" >
+  <form [ngFormModel]="staffsForm" #f="ngForm">
 
     <div *ngIf="staffModelItem.imageAsData != null" layout-gt-sm="row" style="text-align:center">
       <img [(src)]="staffModelItem.imageAsData" />
@@ -9,12 +9,18 @@
 
     <div layout-gt-sm="row">
 
-      <label class="copy1">New Staff: </label>
-      <input [(ngModel)]="staffModelItem._id" ngControl="_id" placeholder="Name" style="color:black;" />
-      <input [(ngModel)]="staffModelItem.name" ngControl="name" placeholder="Name" style="color:black;" />
-      <input [(ngModel)]="staffModelItem.phone" ngControl="phone" placeholder="Phone" style="color:black;" />
-      <input [(ngModel)]="staffModelItem.email" ngControl="email" placeholder="Email" style="color:black;" />
-      <input [(ngModel)]="staffModelItem.imageAsData" ngControl="imageAsData" placeholder="imageAsData" style="display:none;" />
+      <div style="display:none;">
+        <label class="copy1">New Staff: </label>
+        <input [(ngModel)]="staffModelItem._id" ngControl="_id" placeholder="Name" style="color:black;" />
+        <!--<input [(ngModel)]="staffModelItem.name" ngControl="name" placeholder="Name" style="color:black;" />-->
+        <!--<input [(ngModel)]="staffModelItem.phone" ngControl="phone" placeholder="Phone" style="color:black;" />-->
+        <!--<input [(ngModel)]="staffModelItem.email" ngControl="email" placeholder="Email" style="color:black;" />-->
+        <input [(ngModel)]="staffModelItem.imageAsData" ngControl="imageAsData" placeholder="imageAsData" />
+        <!--<input [(ngModel)]="staffModelItem.width" ngControl="width" />-->
+        <!--<input [(ngModel)]="staffModelItem.height" ngControl="height" />-->
+      </div>
+
+
 
 
 
@@ -22,18 +28,74 @@
 
       <p-tabView>
         <p-tabPanel header="Details">
-          <staffs-tab1 [staffModelTab1]="staffModelItem"></staffs-tab1>
+          <table style="background-color:transparent;width:100%;">
+            <tr>
+              <td style="text-align:left;color:red;">Id</td>
+              <td>
+                <input type="text" [ngModel]="staffModelItem._id" />
+              </td>
+            </tr>
+            <tr>
+              <td style="text-align:left;color:red;">Name</td>
+              <td>
+                <input type="text" [(ngModel)]="staffModelItem.name" ngControl="name" placeholder="Name" required/>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="text-align:left;color:red;">Phone</td>
+              <td>
+                <input type="text" [(ngModel)]="staffModelItem.phone"  ngControl="phone" placeholder="Phone" required/>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="text-align:left;color:red;">Email</td>
+              <td>
+                <input type="text" [(ngModel)]="staffModelItem.email" ngControl="email" placeholder="Email" required/>
+              </td>
+            </tr>
+
+          </table>
         </p-tabPanel>
         <p-tabPanel header="Roles">
-          <staffs-tab2 [staffModelTab2]="staffModelItem"></staffs-tab2>
+          <table style="background-color:transparent;width:100%;">
+            <tr>
+              <td style="text-align:left;color:red;">Id</td>
+              <td>
+                <input type="text" [ngModel]="staffModelItem._id" />
+              </td>
+            </tr>
+
+            <tr>
+              <td style="text-align:left;color:red;">Width</td>
+              <td>
+                <input type="text" [(ngModel)]="staffModelItem.width" ngControl="width" placeholder="Width" required/>
+              </td>
+            </tr>
+            <tr>
+              <td style="text-align:left;color:red;">Height</td>
+              <td>
+                <input type="text" [(ngModel)]="staffModelItem.height" ngControl="height" placeholder="Height" required/>
+              </td>
+            </tr>
+          </table>
         </p-tabPanel>
+        <p-tabPanel header="Component Directive here.">
+          <!--<ng-include src="/imports/staffs-form/staffs-tab1.html"></ng-include>-->
+          </p-tabPanel>
       </p-tabView>
 
       <div class="footer">
 
-        <button *ngIf="action == 'add'" (click)="addStaff(f.value)"class="btn btn-primary btn-sm">Add Staff!</button>
-        <button *ngIf="action == 'update'" (click)="updateStaff(f.value)" class="btn btn-primary btn-sm">Modify Staff!</button>
-        <button type="button" class="btn btn-primary btn-sm" (click)="hideDialog()">Close</button>
+        <ad-media-upload (ImageChangedEvent)="ImageChangedEvent($event)"></ad-media-upload>
+        <div style="text-align:right; background:transparent; width:100%;">
+          <button *ngIf="action == 'add'" (click)="addStaff(f.value)" class="btn btn-primary btn-sm">Add Staff!</button>
+          <button *ngIf="action == 'update'" (click)="updateStaff(f.value)" class="btn btn-primary btn-sm">Modify Staff!</button>
+          <button type="button" class="btn btn-primary btn-sm" (click)="hideDialog()">Close</button>
+        </div>
+
+
 
 
       </div>
@@ -42,7 +104,7 @@
   </form>
 
 
-  <ad-media-upload (ImageChangedEvent)="ImageChangedEvent($event)"></ad-media-upload>
+
 
 </div>
 <hr/>

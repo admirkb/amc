@@ -62,9 +62,9 @@
                     <button style="color:white;background-color:#D00A00;" class="btn btn-primary btn-xs" [disabled]="staffModel.isDisabled == null ? false : staffModel.isDisabled"
                         (click)="cancelStaff(staffModel, key)" *ngIf="staffModel.isEditable">Cancel</button>
 
-                    <button style="color:white;background-color:#D00A00;" class="btn btn-primary btn-xs" data-toggle="modal" [attr.data-target]="'#myStaffFormModal' + theIndex"
+                    <!--<button style="color:white;background-color:#D00A00;" class="btn btn-primary btn-xs" data-toggle="modal" [attr.data-target]="'#myStaffFormModal' + theIndex"
                         (click)="doModal($event)" [disabled]="staffModel.isDisabled == null ? false : staffModel.isDisabled"
-                        *ngIf="!staffModel.isEditable">Run</button>
+                        *ngIf="!staffModel.isEditable">Run</button>-->
 
                     <button style="color:white;background-color:#D00A00;" class="btn btn-primary btn-xs" 
                         [disabled]="staffModel.isDisabled == null ? false : staffModel.isDisabled"
