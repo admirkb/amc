@@ -28,6 +28,7 @@ export class StaffsForm implements OnInit {
   @Input() action;
   staffsForm: ControlGroup;
   @Output() HideDialogEvent: EventEmitter<any> = new EventEmitter();
+  @Output() DeleteObjectEvent: EventEmitter<any> = new EventEmitter();
   n: number = 0;
   data: any;
   email: any;
@@ -167,6 +168,29 @@ export class StaffsForm implements OnInit {
       alert('Please fill required fields');
     }
   }
+
+  deleteStaff(staff) {
+
+
+    if (this.staffsForm.valid) {
+      if (Meteor.userId()) {
+
+
+        var o = new Object();
+        o.time = new Date();
+        o.type = this.action
+        o.staff = staff;
+
+        this.DeleteObjectEvent.emit(o)
+
+      } else {
+        alert('Please log in to add a staff');
+      }
+    }
+    else {
+      alert('Please fill required fields');
+    }
+  }
   ImageChangedEvent(args) {
 
     var o = args;
@@ -180,6 +204,7 @@ export class StaffsForm implements OnInit {
   hideDialog() {
     var o = new Object();
     o.time = new Date();
+    o.type = this.action
 
     this.HideDialogEvent.emit(o)
 

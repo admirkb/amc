@@ -12,11 +12,12 @@ import {MeteorComponent} from 'angular2-meteor';
 import {StaffsForm} from '../../imports/staffs-form/staffs-form';
 import {StaffsFormModal} from '../../imports/staffs-form/staffs-formModal';
 import {Modal} from '../directives/modal/modal';
+import {Modal2} from '../directives/modal/modal2';
 
 @Component({
   selector: 'staffs-item',
   templateUrl: '/imports/staffs-item/staffs-item.html',
-  directives: [StaffsForm, StaffsFormModal, Modal],
+  directives: [StaffsForm, StaffsFormModal, Modal, Modal2],
   // properties: ['problem']
 })
 export class StaffsItem extends MeteorComponent implements OnInit {
@@ -25,7 +26,8 @@ export class StaffsItem extends MeteorComponent implements OnInit {
   @Input() staffModel;
   @Input() theIndex;
   private _element: any;
-   display: boolean = false;
+  display: boolean = false;
+  displayDeleteModal: boolean = false;
   action: string;
 
   constructor(elementRef: ElementRef) {
@@ -106,12 +108,12 @@ export class StaffsItem extends MeteorComponent implements OnInit {
     console.dir(staff)
 
     Meteor.call('staffs.update', { _id: staff._id }, {
-          $set: {
-            isDisabled: false, isEditable: false, name: staff.name,
-            phone: staff.phone, dateResolved: new Date(), editColor: "transparent",
-            imageAsData: staff.imageAsData, email: staff.email, width: staff.width, height: staff.height
+      $set: {
+        isDisabled: false, isEditable: false, name: staff.name,
+        phone: staff.phone, dateResolved: new Date(), editColor: "transparent",
+        imageAsData: staff.imageAsData, email: staff.email, width: staff.width, height: staff.height
 
-          }
+      }
     }, function (error, result) {
       // console.log("here")
       // console.dir(error)
@@ -122,9 +124,10 @@ export class StaffsItem extends MeteorComponent implements OnInit {
 
   }
 
-  deleteStaff(staff) {
+  deleteStaff(o) {
 
-    Meteor.call('staffs.remove', { _id: staff._id });
+   alert("deleting..." + o.staff._id)
+    Meteor.call('staffs.remove', { _id: o.staff._id });
   }
 
   editStaff(staff) {
@@ -194,8 +197,15 @@ export class StaffsItem extends MeteorComponent implements OnInit {
     // $('#testButton').attr('data-target','#testModal2');
   }
 
-  showDialog(n, data) {
-    this.display = true;
+  showDialog(type) {
+
+    if (type == 'add' || type == 'update') {
+      this.display = true;
+    }
+    else {
+      this.displayDeleteModal = true;
+    }
+
     // console.log(this.display);
     //     console.log(n);
     //     this.n = n;
@@ -208,6 +218,14 @@ export class StaffsItem extends MeteorComponent implements OnInit {
 
   hideDialog(e) {
     console.dir(e)
-    this.display = false;
+    // this.display = false;
+    //     this.displayDeleteModal = false;
+
+    if (e.type == 'add' || e.type == 'update') {
+      this.display = false;
+    }
+    else {
+      this.displayDeleteModal = false;
+    }
   }
 }
