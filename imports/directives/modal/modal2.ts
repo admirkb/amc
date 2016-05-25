@@ -4,7 +4,7 @@ import {DomHandler} from '../dom/domhandler';
 import {Modal} from './modal';
 
 @Component({
-    selector: 'p-xxxx',
+    selector: 'p-modal-delete',
     template: `
         <div style="background:black;" [ngClass]="{'ui-dialog ui-widget ui-widget-content ui-corner-all ui-shadow':true,'ui-dialog-rtl':rtl,'ui-dialog-draggable':draggable}" 
             [style.display]="visible ? 'block' : 'none'" [style.width.px]="width" [style.height.px]="height" (mousedown)="moveOnTop()">

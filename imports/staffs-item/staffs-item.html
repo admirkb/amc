@@ -9,14 +9,14 @@
   
 </p-modal>
 
-<p-xxxx header="Staff Maintenance: {{staffModel.name}}" [(visible)]="displayDeleteModal" width="500">
+<p-modal-delete header="Staff Maintenance: Delete ~ {{staffModel.name}}" [(visible)]="displayDeleteModal" width="500">
 
  <staffs-form [staffModelItem]="staffModel" [action]="'delete'"  
   (DeleteObjectEvent)="deleteStaff($event)"
   (HideDialogEvent)="hideDialog($event)"> </staffs-form>
       
   
-</p-xxxx>
+</p-modal-delete>
 
 <div  class="col-md-4" style="color:wheat;border-width:2px; border-style:solid; border-radius:6px;text-align:center">
     <div style="border-style:none; border-width:2px; border-color:white; border-radius:4px; width:100%; background:transparent">
