@@ -4,21 +4,23 @@
 
 <p-modal header="Staff Maintenance: {{staffModel.name}}" responsive="true" [(visible)]="display" width="600">
 
-      <staffs-form [staffModelItem]="staffModel" [action]="action"  (HideDialogEvent)="hideDialog($event)"> </staffs-form>
-      
-  
+    <staffs-form [staffModelItem]="staffModel" [action]="action" (HideDialogEvent)="hideDialog($event)"> </staffs-form>
+
+
 </p-modal>
 
 <p-modal-delete header="Staff Maintenance: Delete ~ {{staffModel.name}}" [(visible)]="displayDeleteModal" width="500">
 
- <staffs-form [staffModelItem]="staffModel" [action]="'delete'"  
-  (DeleteObjectEvent)="deleteStaff($event)"
-  (HideDialogEvent)="hideDialog($event)"> </staffs-form>
-      
-  
+    <staffs-form [staffModelItem]="staffModel" [action]="'delete'" (DeleteObjectEvent)="deleteStaff($event)" (HideDialogEvent)="hideDialog($event)">
+    </staffs-form>
+
+
 </p-modal-delete>
 
-<div  class="col-md-4" style="color:wheat;border-width:2px; border-style:solid; border-radius:6px;text-align:center">
+
+
+
+<div class="col-md-4" style="color:wheat;border-width:2px; border-style:solid; border-radius:6px;text-align:center">
     <div style="border-style:none; border-width:2px; border-color:white; border-radius:4px; width:100%; background:transparent">
 
         <table style="width:100%; position:relative; background-color:transparent;">
@@ -40,7 +42,7 @@
 
                 </td>
             </tr>
-                    </table>
+        </table>
 
         <table style="background-color:#D00A00;">
 
@@ -51,8 +53,9 @@
                     <table style="width:100%; height:100%;">
                         <tr [ngStyle]="{  'background': staffModel.editColor }">
                             <td style="width:150px;">
-                                <input *ngIf="staffModel.isEditable" style="width:150px;background:white; color:black;" [(ngModel)]="staffModel.name" [disabled]="staffModel.isDisabled == null ? false : staffModel.isDisabled"/>
-                                <div >
+                                <input *ngIf="staffModel.isEditable" style="width:150px;background:white; color:black;" [(ngModel)]="staffModel.name" [disabled]="staffModel.isDisabled == null ? false : staffModel.isDisabled"
+                                />
+                                <div>
                                     <div id="myDiv{{theIndex}}" *ngIf="!staffModel.isEditable" style="width:150px;white-space:nowrap; overflow:hidden;"></div>
                                 </div>
                             </td>
@@ -72,8 +75,7 @@
                         (click)="updateStaff(staffModel)" *ngIf="staffModel.isEditable">Update</button>
 
                     <button style="color:white;background-color:#D00A00;" class="btn btn-primary btn-xs" [disabled]="staffModel.isDisabled == null ? false : staffModel.isDisabled"
-                       (click)="showDialog('delete')" 
-                        *ngIf="!staffModel.isEditable">Delete</button>
+                        (click)="showDialog('delete')" *ngIf="!staffModel.isEditable">Delete</button>
 
                     <button style="color:white;background-color:#D00A00;" class="btn btn-primary btn-xs" [disabled]="staffModel.isDisabled == null ? false : staffModel.isDisabled"
                         (click)="cancelStaff(staffModel, key)" *ngIf="staffModel.isEditable">Cancel</button>
@@ -82,9 +84,10 @@
                         (click)="doModal($event)" [disabled]="staffModel.isDisabled == null ? false : staffModel.isDisabled"
                         *ngIf="!staffModel.isEditable">Run</button>-->
 
-                    <button style="color:white;background-color:#D00A00;" class="btn btn-primary btn-xs" 
-                        [disabled]="staffModel.isDisabled == null ? false : staffModel.isDisabled"
-                        *ngIf="!staffModel.isEditable" (click)="showDialog('update')" >Modify</button>
+                    <button style="color:white;background-color:#D00A00;" class="btn btn-primary btn-xs" [disabled]="staffModel.isDisabled == null ? false : staffModel.isDisabled"
+                        *ngIf="!staffModel.isEditable" (click)="showDialog('update')">Modify</button>
+
+
 
                 </td>
 
@@ -96,10 +99,11 @@
 
 </div>
 
-<div id="myStaffFormModal{{theIndex}}" class="modal fade" role="dialog" style="background:transparent;width:50%;margin-left: 25%; margin-right: 25%;text-align:center">
 
-    <staffs-form-modal [staffModelItem]="staffModel" style="background:red;width:100%;"></staffs-form-modal>
-</div>
+
+
+
+
 
 <!--<table>
     <tr *ngIf="theIndex == 0">

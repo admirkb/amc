@@ -1,0 +1,39 @@
+<!--<users-form [hidden]="!user"></users-form>-->
+<!--<users-form> </users-form>-->
+<!--<div [hidden]="user">You need to login to create new parties!</div>-->
+
+<!--<h1>Hello {{n}}</h1>-->
+
+<p-modal header="User Maintenance: New..." [(visible)]="display" width="600">
+
+    <users-form [userModelItem]="data" [action]="action" (HideDialogEvent)="hideDialog($event)"> </users-form>
+
+    <!--<div class="modal-body"  >
+
+
+
+  </div>-->
+
+</p-modal>
+
+<!--<p-modal header="User Maintenance2: New..." [(visible)]="display" width="600">
+
+<button><Click here/button>
+  
+</p-modal>-->
+<!--<input type="text" [(ngModel)]="n" />-->
+
+
+<div class="container">
+    <div class="row">
+
+        <users-item *ngFor="#user of users; #i = index" [userModel]="user" [theIndex]="i" ></users-item>
+
+
+    </div>
+    <div style="text-align:right;width:100%;">
+        <button (click)="showDialog(0)" class="btn btn-primary btn-sm">Add User!</button>
+    </div>
+
+
+</div>

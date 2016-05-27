@@ -8,25 +8,25 @@ import {MeteorComponent} from 'angular2-meteor';
 import {FormBuilder, ControlGroup, Validators, Control, FORM_DIRECTIVES} from 'angular2/common';
 
 // Admir
-import {Staffs} from '../../imports/api/staffs';
+// import {Users} from '../../imports/api/users';
 // import {Modal} from '../directives/modal/modal';
 import {TabView} from '../directives/tabview/tabview';
 import {TabPanel} from '../directives/tabview/tabpanel';
-// import {StaffsTab1} from '../../imports/staffs-form/staffs-tab1';
-// import {StaffsTab2} from '../../imports/staffs-form/staffs-tab2';
+// import {UsersTab1} from '../../imports/users-form/users-tab1';
+// import {UsersTab2} from '../../imports/users-form/users-tab2';
 import {ADMediaUpload} from '../directives/mediaUpload/adMediaUpload';
-// import {StaffsItem} from '../../imports/staffs-item/staffs-item';
+// import {UsersItem} from '../../imports/users-item/users-item';
 
 
 @Component({
-  selector: 'staffs-form',
-  templateUrl: '/imports/staffs-form/staffs-form.html',
+  selector: 'users-form',
+  templateUrl: '/imports/users-form/users-form.html',
   directives: [TabView, TabPanel, FORM_DIRECTIVES, ADMediaUpload],
 })
-export class StaffsForm implements OnInit {
-  @Input() staffModelItem;
+export class UsersForm implements OnInit {
+  @Input() userModelItem;
   @Input() action;
-  staffsForm: ControlGroup;
+  usersForm: ControlGroup;
   @Output() HideDialogEvent: EventEmitter<any> = new EventEmitter();
   @Output() DeleteObjectEvent: EventEmitter<any> = new EventEmitter();
   n: number = 0;
@@ -36,10 +36,10 @@ export class StaffsForm implements OnInit {
 
   constructor() {
 
-    // if (this.staffModelItem == null){this.staffModelItem = new Object()}
+    // if (this.userModelItem == null){this.userModelItem = new Object()}
     let fb = new FormBuilder();
 
-    this.staffsForm = fb.group({
+    this.usersForm = fb.group({
       phone: ['', Validators.required],
       expiryDate: new Date(),
       imageAsData: ['', Validators.required],
@@ -51,44 +51,44 @@ export class StaffsForm implements OnInit {
 
     });
 
-    this.email = this.staffsForm.controls['email'];
+    this.email = this.usersForm.controls['email'];
     this.email.valueChanges.subscribe(
       (value: string) => {
         console.log('email changed to:', value);
       }
     );
-    // console.log("staffModelItem");
-    // console.dir(this.staffModelItem);
+    // console.log("userModelItem");
+    // console.dir(this.userModelItem);
 
 
   }
 
   ngOnInit() {
 
-    console.dir(this.staffModelItem);
+    console.dir(this.userModelItem);
     console.log("this.action")
     console.log(this.action)
   }
 
-  addStaff(staff) {
+  addUser(user) {
 
 
-    if (this.staffsForm.valid) {
+    if (this.usersForm.valid) {
       if (Meteor.userId()) {
 
-        Meteor.call('staffs.insert', staff);
+        Meteor.call('users.insert', user);
 
         /* Clear the controls */
-        for (var field in this.staffsForm.controls) {
+        for (var field in this.usersForm.controls) {
           if (field != "_id") {
-            (<Control>this.staffsForm.controls[field]).updateValue('');
-            this.staffModelItem[field] = "";
+            (<Control>this.usersForm.controls[field]).updateValue('');
+            this.userModelItem[field] = "";
           }
         }
 
         this.hideDialog();
       } else {
-        alert('Please log in to add a staff');
+        alert('Please log in to add a user');
       }
     }
     else {
@@ -96,24 +96,24 @@ export class StaffsForm implements OnInit {
     }
   }
 
-  updateStaff(staff) {
+  updateUser(user) {
 
 
-    if (this.staffsForm.valid) {
+    if (this.usersForm.valid) {
       if (Meteor.userId()) {
 
-        // console.dir(staff)
-        // console.log("staff._id")
-        // console.log(staff._id)
-        // console.log(this.staffsForm.value);
-        // console.dir(this.staffsForm.controls);
+        // console.dir(user)
+        // console.log("user._id")
+        // console.log(user._id)
+        // console.log(this.usersForm.value);
+        // console.dir(this.usersForm.controls);
 
         /* Build up $set dynamically so we send all fields on the controls */
         var $set = {};
 
-        for (var field in this.staffsForm.controls) {
+        for (var field in this.usersForm.controls) {
           if (field != "_id") {
-            $set[field] = this.staffsForm.controls[field].value;
+            $set[field] = this.usersForm.controls[field].value;
           }
         }
         $set['isDisabled'] = false;
@@ -121,47 +121,47 @@ export class StaffsForm implements OnInit {
         $set['editColor'] = 'transparent';
         $set['dateResolved'] = new Date();
 
-        Meteor.call('staffs.update', { _id: staff._id }, {
+        Meteor.call('users.update', { _id: user._id }, {
 
           $set: $set
           // Static way
           // $set: { 
           //   isDisabled: false, isEditable: false,
           //   dateResolved: new Date(), editColor: "transparent",
-          //   imageAsData: staff.imageAsData,
-          //   email: staff.email, 
-          //   width: staff.width, 
-          //   height: staff.height, 
-          //   name: staff.name, 
-          //   phone: staff.phone,
+          //   imageAsData: user.imageAsData,
+          //   email: user.email, 
+          //   width: user.width, 
+          //   height: user.height, 
+          //   name: user.name, 
+          //   phone: user.phone,
           // }
 
         }, function (error, result) {
 
-          console.log("staffs.update updateStaff callback error" + error)
+          console.log("users.update updateUser callback error" + error)
         });
 
 
         /* Clear the controls */
-        // for (var field in this.staffsForm.controls) {
+        // for (var field in this.usersForm.controls) {
         //   if (field != "_id") {
-        //     (<Control>this.staffsForm.controls[field]).updateValue('');
-        //     this.staffModelItem[field] = "";
+        //     (<Control>this.usersForm.controls[field]).updateValue('');
+        //     this.userModelItem[field] = "";
         //   }
         // }
 
-        // (<Control>this.staffsForm.controls['name']).updateValue('');
-        // (<Control>this.staffsForm.controls['phone']).updateValue('');
-        // (<Control>this.staffsForm.controls['imageAsData']).updateValue('');
-        // (<Control>this.staffsForm.controls['email']).updateValue('');
-        // this.staffModelItem.name = "";
-        // this.staffModelItem.phone = "";
-        // this.staffModelItem.imageAsData = null;
-        // this.staffModelItem.email = "";
+        // (<Control>this.usersForm.controls['name']).updateValue('');
+        // (<Control>this.usersForm.controls['phone']).updateValue('');
+        // (<Control>this.usersForm.controls['imageAsData']).updateValue('');
+        // (<Control>this.usersForm.controls['email']).updateValue('');
+        // this.userModelItem.name = "";
+        // this.userModelItem.phone = "";
+        // this.userModelItem.imageAsData = null;
+        // this.userModelItem.email = "";
 
         this.hideDialog();
       } else {
-        alert('Please log in to add a staff');
+        alert('Please log in to add a user');
       }
     }
     else {
@@ -169,7 +169,7 @@ export class StaffsForm implements OnInit {
     }
   }
 
-  deleteStaff(staff) {
+  deleteUser(user) {
 
 
 
@@ -179,12 +179,12 @@ export class StaffsForm implements OnInit {
       var o = new Object();
       o.time = new Date();
       o.type = this.action
-      o.staff = staff;
+      o.user = user;
 
       this.DeleteObjectEvent.emit(o)
 
     } else {
-      alert('Please log in to add a staff');
+      alert('Please log in to add a user');
     }
 
   }
@@ -196,7 +196,7 @@ export class StaffsForm implements OnInit {
     console.log(o.time)
     console.log(o.imageAsData)
 
-    this.staffModelItem.imageAsData = o.imageAsData;
+    this.userModelItem.imageAsData = o.imageAsData;
   }
 
   hideDialog() {

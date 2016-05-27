@@ -24,6 +24,7 @@ import {Bugs} from '../../imports/api/bugs';
 import {BugsList} from '../../imports/bugs-list/bugs-list';
 import {Locales} from '../../imports/api/locales';
 import {LocalesList} from '../../imports/locales-list/locales-list';
+import {UsersList} from '../../imports/users-list/users-list';
 
 import {Register} from '../../imports/auth/register/register';
 import {Login} from '../../imports/auth/login/login';
@@ -33,17 +34,18 @@ import {DisplayName} from '../../imports/pipes/pipes.ts';
 @Component({
   selector: 'you-watchers',
   templateUrl: 'client/youWatchers/youWatchers.html',
-  directives: [StaffsList, RouterLink, ROUTER_DIRECTIVES, BugsList, LocalesList, Register, Login, HomeView],
+  directives: [StaffsList, RouterLink, ROUTER_DIRECTIVES, BugsList, UsersList, LocalesList, Register, Login, HomeView],
   pipes: [DisplayName]
 })
 @RouteConfig([
   { path: '/', as: 'HomeView', component: HomeView },
-    { path: '/staffs', as: 'Staffs', component: StaffsList },
+  { path: '/staffs', as: 'Staffs', component: StaffsList },
+  { path: '/users', as: 'Users', component: UsersList },
   { path: '/register', as: 'Register', component: Register },
-    { path: '/login', as: 'Login', component: Login },
+  { path: '/login', as: 'Login', component: Login },
   { path: '/bugs', as: 'Bugs', component: BugsList },
   { path: '/locales', as: 'Locales', component: LocalesList },
-    { path: '/homeView', as: 'HomeView', component: HomeView },
+  { path: '/homeView', as: 'HomeView', component: HomeView },
 
 ])
 @InjectUser()
@@ -55,17 +57,17 @@ class AdmirYouWatchers extends AdmirMessagingWatchCore implements OnInit {
   private name: string = "Kelvin";
   public user: Meteor.User;
   public role: string;
-  
+
   constructor(private router: Router) {
     super();
 
 
-this.role = "Admin";
+    this.role = "Admin";
 
   }
-        // this.inAdmin () {
-        //   return Roles.userIsInRole(Meteor.userId(), ['admin'], 'default-group');
-        // }
+  // this.inAdmin () {
+  //   return Roles.userIsInRole(Meteor.userId(), ['admin'], 'default-group');
+  // }
   ngOnInit() {
     console.log(this._today.getTime());
 
@@ -82,16 +84,16 @@ this.role = "Admin";
   }
 
 
-    
+
   logout() {
     this.autorun(() => {
       Meteor.logout();
-            this.router.navigate(['/HomeView']);
+      this.router.navigate(['/HomeView']);
     });
   }
-  
 
-  
+
+
 }
 
 

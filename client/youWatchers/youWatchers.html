@@ -1,4 +1,3 @@
-
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -15,9 +14,10 @@
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
                             <li> <a [routerLink]="['/HomeView']">Home</a></li>
-                            <li  *ngIf="inAdmin"> <a [routerLink]="['/Staffs']">Staffs</a></li>
+                            <li *ngIf="inAdmin"> <a [routerLink]="['/Staffs']">Staffs</a></li>
                             <li><a [routerLink]="['/Locales']">Locales</a></li>
                             <li> <a [routerLink]="['/Bugs']">Bugs</a></li>
+                            <li> <a [routerLink]="['/Users']">Users</a></li>
                         </ul>
                     </div>
                 </div>
@@ -29,7 +29,7 @@
 
                         </div>
                         <div [hidden]="!user">
-                 <span>{{ user | displayName }}</span>
+                            <span>{{ user | displayName }}</span>
                             <button class="btn btn-primary btn-xs" (click)="logout()">Logout</button>
                         </div>
                     </div>
@@ -48,22 +48,20 @@
 <router-outlet></router-outlet>
 
 
-        <hr />
-        <footer>
+<hr />
+<footer>
 
-            <table style="width:100%; background-color:transparent;">
+    <table style="width:100%; background-color:transparent;">
 
-                <tr>
-                    <td style="text-align:center">
-                        <p class="admir-h3" style="color:wheat">&copy; {{_today | date:'yyyy'}} - Admir Digital</p>
-                    </td>
-                </tr>
-            </table>
+        <tr>
+            <td style="text-align:center">
+                <p class="admir-h3" style="color:wheat">&copy; {{_today | date:'yyyy'}} - Admir Digital</p>
+            </td>
+        </tr>
+    </table>
 
-        </footer>
-        
-        
+</footer>
+
+
 <!--<staffs-list></staffs-list>-->
-                            <!--<li> <a class="btn btn-primary btn-xs admirColor" [routerLink]="['/Bugs']">Bugs</a></li>-->
-                            
-                            
+<!--<li> <a class="btn btn-primary btn-xs admirColor" [routerLink]="['/Bugs']">Bugs</a></li>-->

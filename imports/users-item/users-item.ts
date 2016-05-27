@@ -9,22 +9,22 @@ import {MeteorComponent} from 'angular2-meteor';
 // Admir
 
 
-import {StaffsForm} from '../../imports/staffs-form/staffs-form';
-import {StaffsFormModal} from '../../imports/staffs-form/staffs-formModal';
+import {UsersForm} from '../../imports/users-form/users-form';
+// import {UsersFormModal} from '../../imports/users-form/users-formModal';
 import {Modal} from '../directives/modal/modal';
 import {Modal2} from '../directives/modal/modal2';
 import {ModalAdmir} from '../directives/modal/modalAdmir';
 
 @Component({
-  selector: 'staffs-item',
-  templateUrl: '/imports/staffs-item/staffs-item.html',
-  directives: [StaffsForm, StaffsFormModal, Modal, Modal2,ModalAdmir],
+  selector: 'users-item',
+  templateUrl: '/imports/users-item/users-item.html',
+  directives: [UsersForm, Modal, Modal2,ModalAdmir],
   // properties: ['problem']
 })
-export class StaffsItem extends MeteorComponent implements OnInit {
-  @ViewChild(StaffsForm) staffsForm: StaffsForm;
-  // @ViewChild(StaffsFormModal) staffsForm: StaffsFormModal;
-  @Input() staffModel;
+export class UsersItem extends MeteorComponent implements OnInit {
+  @ViewChild(UsersForm) usersForm: UsersForm;
+  // @ViewChild(UsersFormModal) usersForm: UsersFormModal;
+  @Input() userModel;
   @Input() theIndex;
   private _element: any;
   display: boolean = false;
@@ -50,35 +50,35 @@ export class StaffsItem extends MeteorComponent implements OnInit {
 
   }
 
-  public setStaff(staff) {
-    // staff.editColor = "purple"
-    staff.editColor = "blue";
-    // console.log("In setStaff")
-    console.dir(staff)
+  public setUser(user) {
+    // user.editColor = "purple"
+    user.editColor = "blue";
+    // console.log("In setUser")
+    console.dir(user)
     this._element.style.background = "orange";
 
     console.dir(this._element)
 
-    // this.staffModel.problem = staff.problem;
-    // alert(this.staffModel.problem + " / " + staff.problem)
+    // this.userModel.problem = user.problem;
+    // alert(this.userModel.problem + " / " + user.problem)
 
-    // this.myThis.staffModel.editColor =    staff.editColor  ;
-    // this.staffModel.editColor = staff.editColor;
+    // this.myThis.userModel.editColor =    user.editColor  ;
+    // this.userModel.editColor = user.editColor;
   }
 
   /* */
 
-  cancelStaff(staff) {
+  cancelUser(user) {
 
-    staff.isEditable = false;
-    staff.problem = staff.origProblem;
-    staff.response = staff.origResponse;
+    user.isEditable = false;
+    user.problem = user.origProblem;
+    user.response = user.origResponse;
 
     var self = this;
-    Meteor.call('staffs.update', { _id: staff._id }, { $set: { isDisabled: false, isEditable: staff.isEditable, editColor: "transparent" } }, function (error, result) {
-      // console.log("here" + staff.selfConnectionId)
-      staff.isDisabled = false;
-      staff.editColor = "transparent";
+    Meteor.call('users.update', { _id: user._id }, { $set: { isDisabled: false, isEditable: user.isEditable, editColor: "transparent" } }, function (error, result) {
+      // console.log("here" + user.selfConnectionId)
+      user.isDisabled = false;
+      user.editColor = "transparent";
 
       var cells = self._element.getElementsByTagName("td");
       for (var i = 0; i < cells.length; i++) {
@@ -101,19 +101,19 @@ export class StaffsItem extends MeteorComponent implements OnInit {
       }
 
 
-      console.log("staffs.update editStaff callback")
+      console.log("users.update editUser callback")
     });
 
   }
 
-  updateStaff(staff) {
-    console.dir(staff)
+  updateUser(user) {
+    console.dir(user)
 
-    Meteor.call('staffs.update', { _id: staff._id }, {
+    Meteor.call('users.update', { _id: user._id }, {
       $set: {
-        isDisabled: false, isEditable: false, name: staff.name,
-        phone: staff.phone, dateResolved: new Date(), editColor: "transparent",
-        imageAsData: staff.imageAsData, email: staff.email, width: staff.width, height: staff.height
+        isDisabled: false, isEditable: false, name: user.name,
+        phone: user.phone, dateResolved: new Date(), editColor: "transparent",
+        imageAsData: user.imageAsData, email: user.email, width: user.width, height: user.height
 
       }
     }, function (error, result) {
@@ -121,28 +121,28 @@ export class StaffsItem extends MeteorComponent implements OnInit {
       // console.dir(error)
       // console.dir(result)
 
-      console.log("staffs.update updateStaff callback")
+      console.log("users.update updateUser callback")
     });
 
   }
 
-  deleteStaff(o) {
+  deleteUser(o) {
 
-    Meteor.call('staffs.remove', { _id: o.staff._id });
+    Meteor.call('users.remove', { _id: o.user._id });
         this.hideDialog('delete')
   }
 
-  editStaff(staff) {
+  editUser(user) {
 
-    staff.isEditable = true;
-    staff.origProblem = staff.problem;
-    staff.origResponse = staff.response;
+    user.isEditable = true;
+    user.origProblem = user.problem;
+    user.origResponse = user.response;
 
     var self = this;
-    Meteor.call('staffs.update', { _id: staff._id }, { $set: { isDisabled: true, isEditable: staff.isEditable, editColor: "red" } }, function (error, result) {
-      // console.log("here" + staff.selfConnectionId)
-      staff.isDisabled = false;
-      staff.editColor = "transparent";
+    Meteor.call('users.update', { _id: user._id }, { $set: { isDisabled: true, isEditable: user.isEditable, editColor: "red" } }, function (error, result) {
+      // console.log("here" + user.selfConnectionId)
+      user.isDisabled = false;
+      user.editColor = "transparent";
 
       var cells = self._element.getElementsByTagName("td");
       for (var i = 0; i < cells.length; i++) {
@@ -165,15 +165,15 @@ export class StaffsItem extends MeteorComponent implements OnInit {
       }
 
 
-      console.log("staffs.update editStaff callback")
+      console.log("users.update editUser callback")
     });
 
 
   }
 
-  runStaff(staff) {
+  runUser(user) {
 
-    alert(staff._id);
+    alert(user._id);
   }
 
   doModal(ev) {

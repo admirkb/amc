@@ -55,3 +55,30 @@
             // if (this.staffsForm.controls[field].dirty) {
             //   $set[field] = this.staffsForm.controls[field].value;
             // }
+            
+            <p-modal-admir 
+[ngClass]="{  admirShow: admirShowValue, admirHide: !admirShowValue}" 
+style="
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width:auto;margin-left: 25%; margin-right: 25%;text-align:center">
+
+   <staffs-form [staffModelItem]="staffModel" [action]="action" (HideDialogEvent)="xxxxHide($event)"> </staffs-form>
+   
+</p-modal-admir>
+
+<div id="myStaffFormModal{{theIndex}}" class="modal fade" style="background:transparent;width:50%;margin-left: 25%; margin-right: 25%;text-align:center">
+
+    <staffs-form-modal [staffModelItem]="staffModel" style="background:red;width:100%;"></staffs-form-modal>
+
+
+</div>
+
+                    <button style="color:white;background-color:#D00A00;" class="btn btn-primary btn-xs"
+                    (click)="xxxxShow()"
+                        [disabled]="staffModel.isDisabled == null ? false : staffModel.isDisabled"
+                        *ngIf="!staffModel.isEditable" >Modify</button>
