@@ -23,7 +23,6 @@ import {ModalAdmir} from '../directives/modal/modalAdmir';
 })
 export class UsersItem extends MeteorComponent implements OnInit {
   @ViewChild(UsersForm) usersForm: UsersForm;
-  // @ViewChild(UsersFormModal) usersForm: UsersFormModal;
   @Input() userModel;
   @Input() theIndex;
   private _element: any;

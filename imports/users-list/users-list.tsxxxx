@@ -47,7 +47,40 @@ export class UsersList extends MeteorComponent implements OnInit {
 
     console.log("I'm being called when component is initalized after constructor method from users-list.ts");
 
+    this.subscribe('users', () => {
+      var self = this;
 
+      // this.users = Users.find({});
+
+
+      var query = Meteor.users.find({});
+      var handle = query.observeChanges({
+        added: function (id) {
+          console.log("subscribe Added: " + id)
+          console.dir(id)
+
+
+        },
+        removed: function (id) {
+          console.log("subscribe Removed: " + id)
+        },
+        changed: function (id, o) {
+          console.log("subscribe Changed: " + id)
+          console.dir(o)
+
+          var user = o;
+          if (user.editColor == 'red') {
+
+            console.log("not interested in sending this to self!")
+
+
+          };
+
+        },
+      });
+
+      this.users = query;
+    }, true);
 
   }
 

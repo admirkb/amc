@@ -24,7 +24,7 @@ import {Bugs} from '../../imports/api/bugs';
 import {BugsList} from '../../imports/bugs-list/bugs-list';
 import {Locales} from '../../imports/api/locales';
 import {LocalesList} from '../../imports/locales-list/locales-list';
-import {UsersList} from '../../imports/users-list/users-list';
+import {UsersList} from '../../imports/users/users-list/users-list';
 
 import {Register} from '../../imports/auth/register/register';
 import {Login} from '../../imports/auth/login/login';

@@ -1,4 +1,4 @@
-import { Meteor } from 'meteor/meteor';
-import { Mongo } from 'meteor/mongo';
+// import { Meteor } from 'meteor/meteor';
+// import { Mongo } from 'meteor/mongo';
 
-export const Users = new Mongo.Collection("users");
+// export const Users = new Mongo.Collection("users");
