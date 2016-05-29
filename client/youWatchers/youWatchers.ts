@@ -19,7 +19,7 @@ import {InjectUser} from 'angular2-meteor-accounts-ui';
 import {AdmirMessagingWatchCore} from  '../../client/coreWatch';
 
 import {Staffs} from '../../imports/api/staffs';
-import {StaffsList} from '../../imports/staffs-list/staffs-list';
+import {StaffsList} from '../../imports/staffs/staffs-list/staffs-list';
 import {Bugs} from '../../imports/api/bugs';
 import {BugsList} from '../../imports/bugs-list/bugs-list';
 import {Locales} from '../../imports/api/locales';

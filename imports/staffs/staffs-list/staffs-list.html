@@ -1,0 +1,39 @@
+<!--<staffs-form [hidden]="!user"></staffs-form>-->
+<!--<staffs-form> </staffs-form>-->
+<!--<div [hidden]="user">You need to login to create new parties!</div>-->
+
+<!--<h1>Hello {{n}}</h1>-->
+
+<p-modal header="Staff Maintenance: New..." [(visible)]="display" width="600">
+
+    <staffs-form [staffModelItem]="data" [action]="action" (HideDialogEvent)="hideDialog($event)"> </staffs-form>
+
+    <!--<div class="modal-body"  >
+
+
+
+  </div>-->
+
+</p-modal>
+
+<!--<p-modal header="Staff Maintenance2: New..." [(visible)]="display" width="600">
+
+<button><Click here/button>
+  
+</p-modal>-->
+<!--<input type="text" [(ngModel)]="n" />-->
+
+
+<div class="container">
+    <div class="row">
+
+        <staffs-item *ngFor="#staff of staffs; #i = index" [staffModel]="staff" [theIndex]="i" ></staffs-item>
+
+
+    </div>
+    <div style="text-align:right;width:100%;">
+        <button (click)="showDialog(0)" class="btn btn-primary btn-sm">Add Staff!</button>
+    </div>
+
+
+</div>

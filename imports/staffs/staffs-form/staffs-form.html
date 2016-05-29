@@ -1,0 +1,109 @@
+<div style="background:black;">
+  <!--<h4 class="modal-title">{{staffModelItem.name}}</h4>-->
+
+  <form [ngFormModel]="staffsForm" #f="ngForm">
+
+    <div *ngIf="staffModelItem.imageAsData != null" layout-gt-sm="row" style="text-align:center">
+      <img [(src)]="staffModelItem.imageAsData" />
+    </div>
+
+    <div layout-gt-sm="row">
+
+      <div style="display:none;">
+        <label class="copy1">New Staff: </label>
+        <input [(ngModel)]="staffModelItem._id" ngControl="_id" placeholder="Name" style="color:black;" />
+        <!--<input [(ngModel)]="staffModelItem.name" ngControl="name" placeholder="Name" style="color:black;" />-->
+        <!--<input [(ngModel)]="staffModelItem.phone" ngControl="phone" placeholder="Phone" style="color:black;" />-->
+        <!--<input [(ngModel)]="staffModelItem.email" ngControl="email" placeholder="Email" style="color:black;" />-->
+        <input [(ngModel)]="staffModelItem.imageAsData" ngControl="imageAsData" placeholder="imageAsData" />
+        <!--<input [(ngModel)]="staffModelItem.width" ngControl="width" />-->
+        <!--<input [(ngModel)]="staffModelItem.height" ngControl="height" />-->
+      </div>
+
+
+
+      <div *ngIf="action == 'add' || action == 'update'">
+
+        <p-tabView>
+          <p-tabPanel header="Details">
+            <table style="background-color:black;width:100%;">
+              <tr>
+                <td style="text-align:left;color:red;">Name</td>
+                <td>
+                  <input style="color:white;background:black;" type="text" [(ngModel)]="staffModelItem.name" ngControl="name" placeholder="Name"
+                    required/>
+                </td>
+              </tr>
+
+              <tr>
+                <td style="text-align:left;color:red;">Phone</td>
+                <td>
+                  <input style="color:white;background:black;" type="text" [(ngModel)]="staffModelItem.phone" ngControl="phone" placeholder="Phone"
+                    required/>
+                </td>
+              </tr>
+
+              <tr>
+                <td style="text-align:left;color:red;">Email</td>
+                <td>
+                  <input style="color:white;background:black;" type="text" [(ngModel)]="staffModelItem.email" ngControl="email" placeholder="Email"
+                    required/>
+                </td>
+              </tr>
+
+            </table>
+          </p-tabPanel>
+          <p-tabPanel header="Roles">
+            <table style="background-color:transparent;width:100%;">
+              <tr>
+                <td style="text-align:left;color:red;">Width</td>
+                <td>
+                  <input style="color:white;background:black;" type="text" [(ngModel)]="staffModelItem.width" ngControl="width" placeholder="Width"
+                    minlength="3" />
+                </td>
+              </tr>
+              <tr>
+                <td style="text-align:left;color:red;">Height</td>
+                <td>
+                  <input style="color:white;background:black;" type="text" [(ngModel)]="staffModelItem.height" ngControl="height" placeholder="Height"
+                    minlength="3" />
+                </td>
+              </tr>
+            </table>
+          </p-tabPanel>
+          <p-tabPanel header="Component Directive here.">
+            <!--<ng-include src="/imports/staffs-form/staffs-tab1.html"></ng-include>-->
+          </p-tabPanel>
+        </p-tabView>
+
+        <ad-media-upload (ImageChangedEvent)="ImageChangedEvent($event)"></ad-media-upload>
+      </div>
+
+
+
+
+
+    </div>
+
+
+    <div class="footer">
+
+
+      <div style="text-align:right; background:transparent; width:100%;">
+        <button *ngIf="action == 'add'" (click)="addStaff(f.value)" class="btn btn-primary btn-sm">Add Staff!</button>
+        <button *ngIf="action == 'update'" (click)="updateStaff(f.value)" class="btn btn-primary btn-sm">Modify Staff!</button>
+        <button *ngIf="action == 'delete'" (click)="deleteStaff(f.value)" class="btn btn-primary btn-sm">Delete Staff!</button>
+        <button type="button" class="btn btn-primary btn-sm" (click)="hideDialog()">Close</button>
+      </div>
+
+
+
+
+    </div>
+  </form>
+
+
+
+
+</div>
+<hr/>
