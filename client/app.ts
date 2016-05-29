@@ -17,7 +17,7 @@ import {ANGULAR2_GOOGLE_MAPS_DIRECTIVES} from 'angular2-google-maps/core';
 import {AdmirMessagingWatchCore} from  '../client/coreWatch';
 
 import {Staffs} from '../imports/api/staffs';
-import {StaffsList} from '../imports/staffs-list/staffs-list.ts';
+import {StaffsList} from '../imports/staffs/staffs-list/staffs-list.ts';
 import {LocalesList} from '../imports/locales-list/locales-list.ts';
 
 @Component({

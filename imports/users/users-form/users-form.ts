@@ -40,7 +40,7 @@ export class UsersForm implements OnInit {
     let fb = new FormBuilder();
 
     this.usersForm = fb.group({
-      phone: ['', Validators.required],
+      createdAt: ['', Validators.required],
       expiryDate: new Date(),
       imageAsData: ['', Validators.required],
       name: ['', Validators.required],
@@ -66,6 +66,11 @@ export class UsersForm implements OnInit {
   ngOnInit() {
 
     console.dir(this.userModelItem);
+    if (this.userModelItem.roles != null){
+              console.log("this.userModelItem.roles.default-group");
+                console.dir(this.userModelItem.roles['default-group']);
+    }
+
     console.log("this.action")
     console.log(this.action)
   }
