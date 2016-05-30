@@ -1,0 +1,82 @@
+<div style="background:black;">
+  <!--<h4 class="modal-title">{{roleModelItem.name}}</h4>-->
+
+  <form [ngFormModel]="rolesForm" #f="ngForm">
+
+    <div *ngIf="roleModelItem.imageAsData != null" layout-gt-sm="row" style="text-align:center">
+      <img [(src)]="roleModelItem.imageAsData" />
+    </div>
+
+    <div layout-gt-sm="row">
+
+      <div style="display:none;">
+        <label class="copy1">New Role: </label>
+        <input [(ngModel)]="roleModelItem._id" ngControl="_id" placeholder="Name" style="color:black;" />
+        <!--<input [(ngModel)]="roleModelItem.name" ngControl="name" placeholder="Name" style="color:black;" />-->
+        <!--<input [(ngModel)]="roleModelItem.phone" ngControl="phone" placeholder="Phone" style="color:black;" />-->
+        <!--<input [(ngModel)]="roleModelItem.email" ngControl="email" placeholder="Email" style="color:black;" />-->
+        <input [(ngModel)]="roleModelItem.imageAsData" ngControl="imageAsData" placeholder="imageAsData" />
+        <!--<input [(ngModel)]="roleModelItem.width" ngControl="width" />-->
+        <!--<input [(ngModel)]="roleModelItem.height" ngControl="height" />-->
+      </div>
+
+
+
+      <div *ngIf="action == 'add' || action == 'update'">
+
+        <table style="background-color:black;width:100%;">
+          <tr>
+            <td style="text-align:left;color:red;">Name</td>
+            <td>
+              <input style="color:white;background:black;" type="text" [(ngModel)]="roleModelItem.name" ngControl="name" placeholder="Name"
+                required/>
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align:left;color:red;">Width</td>
+            <td>
+              <input style="color:white;background:black;" type="text" [(ngModel)]="roleModelItem.width" ngControl="width" placeholder="Width"
+                minlength="3" />
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align:left;color:red;">Height</td>
+            <td>
+              <input style="color:white;background:black;" type="text" [(ngModel)]="roleModelItem.height" ngControl="height" placeholder="Height"
+                minlength="3" />
+            </td>
+          </tr>
+        </table>
+
+
+        <ad-media-upload (ImageChangedEvent)="ImageChangedEvent($event)"></ad-media-upload>
+      </div>
+
+
+
+
+
+    </div>
+
+
+    <div class="footer">
+
+
+      <div style="text-align:right; background:transparent; width:100%;">
+        <button *ngIf="action == 'add'" (click)="addRole(f.value)" class="btn btn-primary btn-sm">Add Role!</button>
+        <button *ngIf="action == 'update'" (click)="updateRole(f.value)" class="btn btn-primary btn-sm">Modify Role!</button>
+        <button *ngIf="action == 'delete'" (click)="deleteRole(f.value)" class="btn btn-primary btn-sm">Delete Role!</button>
+        <button type="button" class="btn btn-primary btn-sm" (click)="hideDialog()">Close</button>
+      </div>
+
+
+
+
+    </div>
+  </form>
+
+
+
+
+</div>
+<hr/>

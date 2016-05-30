@@ -17,7 +17,8 @@
                             <li *ngIf="inAdmin"> <a [routerLink]="['/Staffs']">Staffs</a></li>
                             <li><a [routerLink]="['/Locales']">Locales</a></li>
                             <li> <a [routerLink]="['/Bugs']">Bugs</a></li>
-                            <li> <a [routerLink]="['/Users']">Users</a></li>
+                            <li *ngIf="inAdmin"> <a [routerLink]="['/Users']">Users</a></li>
+                            <li *ngIf="inAdmin"> <a [routerLink]="['/Roles']">Roles</a></li>
                         </ul>
                     </div>
                 </div>

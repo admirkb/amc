@@ -1,0 +1,39 @@
+<!--<roles-form [hidden]="!user"></roles-form>-->
+<!--<roles-form> </roles-form>-->
+<!--<div [hidden]="user">You need to login to create new parties!</div>-->
+
+<!--<h1>Hello {{n}}</h1>-->
+
+<p-modal header="Role Maintenance: New..." [(visible)]="display" width="600">
+
+    <roles-form [roleModelItem]="data" [action]="action" (HideDialogEvent)="hideDialog($event)"> </roles-form>
+
+    <!--<div class="modal-body"  >
+
+
+
+  </div>-->
+
+</p-modal>
+
+<!--<p-modal header="Role Maintenance2: New..." [(visible)]="display" width="600">
+
+<button><Click here/button>
+  
+</p-modal>-->
+<!--<input type="text" [(ngModel)]="n" />-->
+
+
+<div class="container">
+    <div class="row">
+
+        <roles-item *ngFor="#role of roles; #i = index" [roleModel]="role" [theIndex]="i" ></roles-item>
+
+
+    </div>
+    <div style="text-align:right;width:100%;">
+        <button (click)="showDialog(0)" class="btn btn-primary btn-sm">Add Role!</button>
+    </div>
+
+
+</div>

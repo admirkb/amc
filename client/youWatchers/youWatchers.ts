@@ -25,7 +25,7 @@ import {BugsList} from '../../imports/bugs-list/bugs-list';
 import {Locales} from '../../imports/api/locales';
 import {LocalesList} from '../../imports/locales-list/locales-list';
 import {UsersList} from '../../imports/users/users-list/users-list';
-
+import {RolesList} from '../../imports/roles/roles-list/roles-list';
 import {Register} from '../../imports/auth/register/register';
 import {Login} from '../../imports/auth/login/login';
 import {HomeView} from '../../imports/homeView/homeView';
@@ -34,7 +34,7 @@ import {DisplayName} from '../../imports/pipes/pipes.ts';
 @Component({
   selector: 'you-watchers',
   templateUrl: 'client/youWatchers/youWatchers.html',
-  directives: [StaffsList, RouterLink, ROUTER_DIRECTIVES, BugsList, UsersList, LocalesList, Register, Login, HomeView],
+  directives: [StaffsList, RouterLink, ROUTER_DIRECTIVES, BugsList, UsersList, LocalesList, Register, Login, HomeView, RolesList],
   pipes: [DisplayName]
 })
 @RouteConfig([
@@ -46,6 +46,7 @@ import {DisplayName} from '../../imports/pipes/pipes.ts';
   { path: '/bugs', as: 'Bugs', component: BugsList },
   { path: '/locales', as: 'Locales', component: LocalesList },
   { path: '/homeView', as: 'HomeView', component: HomeView },
+    { path: '/roles', as: 'Roles', component: RolesList },
 
 ])
 @InjectUser()
