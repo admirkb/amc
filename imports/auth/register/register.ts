@@ -4,12 +4,12 @@ import { Meteor } from 'meteor/meteor';
 import {Mongo} from 'meteor/mongo';
 
 // // Angular
-import {Component} from 'angular2/core';
+import {Component} from '@angular/core';
 import {MeteorComponent} from 'angular2-meteor';
-import {Router} from 'angular2/router';
-import {FormBuilder, ControlGroup, Validators} from 'angular2/common';
-import {MATERIAL_DIRECTIVES} from 'ng2-material/all';
-import {RouterLink} from 'angular2/router';
+import {Router} from '@angular/router-deprecated';
+import {FormBuilder, ControlGroup, Validators} from '@angular/common';
+// import {MATERIAL_DIRECTIVES} from 'ng2-material/all';
+import {RouterLink} from '@angular/router-deprecated';
 
 
 
@@ -18,7 +18,7 @@ import {RouterLink} from 'angular2/router';
 
 @Component({
   selector: 'signup',
-  directives: [MATERIAL_DIRECTIVES, RouterLink],
+  directives: [RouterLink],
   templateUrl: '/imports/auth/register/register.html'
 })
 export class Register extends MeteorComponent {

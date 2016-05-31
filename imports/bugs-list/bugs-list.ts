@@ -9,9 +9,9 @@ import {Mongo} from 'meteor/mongo';
 
 // Angular
 import {MeteorComponent} from 'angular2-meteor';
-import {Component, EventEmitter, OnInit, Output, ViewChild, ViewChildren, ContentChildren, QueryList} from 'angular2/core';
+import {Component, EventEmitter, OnInit, Output, ViewChild, ViewChildren, ContentChildren, QueryList} from '@angular/core';
 import {bootstrap} from 'angular2-meteor-auto-bootstrap';
-import {FormBuilder, ControlGroup, Validators, Control} from 'angular2/common';
+import {FormBuilder, ControlGroup, Validators, Control} from '@angular/common';
 
 // Admir
 import {BugsForm} from '../bugs-form/bugs-form.ts';

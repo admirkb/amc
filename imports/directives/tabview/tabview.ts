@@ -1,4 +1,4 @@
-import {Component,ElementRef,Input,Output,EventEmitter,Query,QueryList} from 'angular2/core';
+import {Component,ElementRef,Input,Output,EventEmitter,Query,QueryList} from '@angular/core';
 import {TabPanel} from './tabpanel';
 
 @Component({
@@ -7,11 +7,11 @@ import {TabPanel} from './tabpanel';
         <div [ngClass]="'ui-tabview ui-widget ui-widget-content ui-corner-all ui-tabview-' + orientation" [ngStyle]="style" [class]="styleClass">
             <ul class="ui-tabview-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
 
-                <template ngFor #tab [ngForOf]="tabs"  #i="index">
+                <template ngFor #tab [ngForOf]="tabs" >
                     <li [class]="getDefaultHeaderClass(tab)" [ngStyle]="tab.headerStyle"
                         [ngClass]="{'ui-tabview-selected ui-state-active': tab.selected, 'ui-state-hover': tab.hoverHeader&&!tab.disabled, 'ui-state-disabled': tab.disabled}"
-                        (mouseenter)="tab.hoverHeader=true" (mouseleave)="tab.hoverHeader=false" (click)="open($event,tab)" *ngIf="!tab.closed">
-                        <a href="#">{{tab.header}}</a><span *ngIf="tab.closable" class="fa fa-close" (click)="close($event,tab)"></span>
+                        (mouseenter)="tab.hoverHeader=true" (mouseleave)="tab.hoverHeader=false" (click)="open($event,tab)" *ngIf="!tab.closed" >
+                           <a href="#">{{tab.header}}</a><span *ngIf="tab.closable" class="fa fa-close" (click)="close($event,tab)"></span>
                     </li>
                 </template>
                          

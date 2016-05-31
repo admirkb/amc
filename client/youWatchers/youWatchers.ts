@@ -4,14 +4,15 @@ import { Meteor } from 'meteor/meteor';
 import {Mongo} from 'meteor/mongo';
 
 // Angular
-import {Component, EventEmitter, OnInit, provide} from 'angular2/core';
+import {Component, EventEmitter, OnInit, provide} from '@angular/core';
 import {MeteorComponent} from 'angular2-meteor';
 import {bootstrap} from 'angular2-meteor-auto-bootstrap';
 import {ANGULAR2_GOOGLE_MAPS_PROVIDERS} from 'angular2-google-maps/core';
 import {ANGULAR2_GOOGLE_MAPS_DIRECTIVES} from 'angular2-google-maps/core';
-import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig, APP_BASE_HREF} from 'angular2/router';
-import {RouterLink} from 'angular2/router';
-import {Router} from 'angular2/router';
+import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig} from '@angular/router-deprecated';
+import { APP_BASE_HREF } from '@angular/common';
+import {RouterLink} from '@angular/router-deprecated';
+import {Router} from '@angular/router-deprecated';
 import {InjectUser} from 'angular2-meteor-accounts-ui';
 
 // Admir
@@ -34,7 +35,7 @@ import {DisplayName} from '../../imports/pipes/pipes.ts';
 @Component({
   selector: 'you-watchers',
   templateUrl: 'client/youWatchers/youWatchers.html',
-  directives: [StaffsList, RouterLink, ROUTER_DIRECTIVES, BugsList, UsersList, LocalesList, Register, Login, HomeView, RolesList],
+  directives: [StaffsList, RouterLink, ROUTER_DIRECTIVES, BugsList, HomeView, LocalesList, Register, Login, UsersList,RolesList],
   pipes: [DisplayName]
 })
 @RouteConfig([
@@ -46,10 +47,10 @@ import {DisplayName} from '../../imports/pipes/pipes.ts';
   { path: '/bugs', as: 'Bugs', component: BugsList },
   { path: '/locales', as: 'Locales', component: LocalesList },
   { path: '/homeView', as: 'HomeView', component: HomeView },
-    { path: '/roles', as: 'Roles', component: RolesList },
+  { path: '/roles', as: 'Roles', component: RolesList },
 
 ])
-@InjectUser()
+// @InjectUser()
 class AdmirYouWatchers extends AdmirMessagingWatchCore implements OnInit {
 
 

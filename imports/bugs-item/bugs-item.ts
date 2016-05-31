@@ -4,7 +4,7 @@ import { Meteor } from 'meteor/meteor';
 
 // Angular
 
-import {Component, EventEmitter, OnInit, Input, ElementRef,ViewChild} from 'angular2/core';
+import {Component, EventEmitter, OnInit, Input, ElementRef,ViewChild} from '@angular/core';
 import {MeteorComponent} from 'angular2-meteor';
 
 // Admir

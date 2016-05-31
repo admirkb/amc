@@ -82,3 +82,12 @@ style="
                     (click)="xxxxShow()"
                         [disabled]="staffModel.isDisabled == null ? false : staffModel.isDisabled"
                         *ngIf="!staffModel.isEditable" >Modify</button>
+                        
+                        
+                <template ngFor #tab [ngForOf]="tabs" #i="index" >
+                    <li [class]="getDefaultHeaderClass(tab)" [ngStyle]="tab.headerStyle"
+                        [ngClass]="{'ui-tabview-selected ui-state-active': tab.selected, 'ui-state-hover': tab.hoverHeader&&!tab.disabled, 'ui-state-disabled': tab.disabled}"
+                        (mouseenter)="tab.hoverHeader=true" (mouseleave)="tab.hoverHeader=false" (click)="open($event,tab)" *ngIf="!tab.closed">
+                        <a href="#">{{tab.header}}</a><span *ngIf="tab.closable" class="fa fa-close" (click)="close($event,tab)"></span>
+                    </li>
+                </template>

@@ -3,14 +3,14 @@ import 'reflect-metadata';
 import { Meteor } from 'meteor/meteor';
 
 // Angular
-import {Component, EventEmitter, OnInit, Input, ElementRef, ViewChild} from 'angular2/core';
+import {Component, EventEmitter, OnInit, Input, ElementRef, ViewChild} from '@angular/core';
 import {MeteorComponent} from 'angular2-meteor';
 
 // Admir
 
 
 import {StaffsForm} from '../../../imports/staffs/staffs-form/staffs-form';
-import {StaffsFormModal} from '../../../imports/staffs/staffs-form/staffs-formModal';
+// import {StaffsFormModal} from '../../../imports/staffs/staffs-form/staffs-formModal';
 import {Modal} from '../../directives/modal/modal';
 import {Modal2} from '../../directives/modal/modal2';
 import {ModalAdmir} from '../../directives/modal/modalAdmir';
@@ -18,7 +18,7 @@ import {ModalAdmir} from '../../directives/modal/modalAdmir';
 @Component({
   selector: 'staffs-item',
   templateUrl: '/imports/staffs/staffs-item/staffs-item.html',
-  directives: [StaffsForm, StaffsFormModal, Modal, Modal2,ModalAdmir],
+  directives: [StaffsForm, Modal, Modal2,ModalAdmir],
   // properties: ['problem']
 })
 export class StaffsItem extends MeteorComponent implements OnInit {

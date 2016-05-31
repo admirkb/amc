@@ -3,9 +3,9 @@ import 'reflect-metadata';
 import { Meteor } from 'meteor/meteor';
 
 // Angular
-import {Component, EventEmitter, OnInit, Input} from 'angular2/core';
+import {Component, EventEmitter, OnInit, Input} from '@angular/core';
 import {MeteorComponent} from 'angular2-meteor';
-import {FormBuilder, ControlGroup, Validators, Control} from 'angular2/common';
+import {FormBuilder, ControlGroup, Validators, Control} from '@angular/common';
 
 // Admir
 import {Bugs} from '../../imports/api/bugs';

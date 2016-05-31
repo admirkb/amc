@@ -3,12 +3,12 @@ import 'reflect-metadata';
 import { Meteor } from 'meteor/meteor';
 
 // Angular
-import {Component, EventEmitter, OnInit, Input, Output} from 'angular2/core';
+import {Component, EventEmitter, OnInit, Input, Output} from '@angular/core';
 import {MeteorComponent} from 'angular2-meteor';
-import {FormBuilder, ControlGroup, Validators, Control, FORM_DIRECTIVES} from 'angular2/common';
+import {FormBuilder, ControlGroup, Validators, Control, FORM_DIRECTIVES} from '@angular/common';
 
 // Admir
-import {Roles} from '../../../imports/api/roles';
+// import {Roles} from '../../../imports/api/roles';
 // import {Modal} from '../directives/modal/modal';
 import {TabView} from '../../directives/tabview/tabview';
 import {TabPanel} from '../../directives/tabview/tabpanel';

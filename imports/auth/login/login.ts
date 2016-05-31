@@ -4,12 +4,12 @@ import { Meteor } from 'meteor/meteor';
 import {Mongo} from 'meteor/mongo';
 
 // Angular
-import {Component} from 'angular2/core';
-import {FormBuilder, ControlGroup, Validators} from 'angular2/common';
+import {Component} from '@angular/core';
+import {FormBuilder, ControlGroup, Validators} from '@angular/common';
 import {MeteorComponent} from 'angular2-meteor';
-import {MATERIAL_DIRECTIVES} from 'ng2-material/all';
-import {RouterLink} from 'angular2/router';
-import {Router} from 'angular2/router';
+// import {MATERIAL_DIRECTIVES} from 'ng2-material/all';
+import {RouterLink} from '@angular/router-deprecated';
+import {Router} from '@angular/router-deprecated';
 
 
 
@@ -19,7 +19,7 @@ import {AdmirMessagingCore} from  '../../../client/core';
 
 @Component({
   selector: 'login',
-  directives: [MATERIAL_DIRECTIVES, RouterLink],
+  directives: [RouterLink],
   templateUrl: '/imports/auth/login/login.html'
 })
 

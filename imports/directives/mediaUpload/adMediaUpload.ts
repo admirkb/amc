@@ -1,6 +1,6 @@
 // angular
 
-import {Component, ElementRef, EventEmitter, Output} from 'angular2/core';
+import {Component, ElementRef, EventEmitter, Output} from '@angular/core';
 
 
 @Component({

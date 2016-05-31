@@ -1,7 +1,7 @@
 // Meteor
 
 // Angular
-import {Component, Pipe} from 'angular2/core';
+import {Component, Pipe} from '@angular/core';
 import {MeteorComponent} from 'angular2-meteor';
 
 // Admir

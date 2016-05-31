@@ -15,7 +15,7 @@
 
                     <tr>
                         <td>
-                            <bugs-item *ngFor="#bug of bugs; #i = index" [bugModel]="bug" [theIndex]="i"></bugs-item>
+                            <bugs-item *ngFor="let bug of bugs; let i = index" [bugModel]="bug" [theIndex]="i"></bugs-item>
                         </td>
                     </tr>
 

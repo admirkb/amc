@@ -4,7 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import {Mongo} from 'meteor/mongo';
 
 // Angular
-import {Component, EventEmitter, OnInit} from 'angular2/core';
+import {Component, EventEmitter, OnInit} from '@angular/core';
 import {MeteorComponent} from 'angular2-meteor';
 
 // Admir

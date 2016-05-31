@@ -4,7 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import {Mongo} from 'meteor/mongo';
 
 // Angular
-import {Component, EventEmitter, OnInit} from 'angular2/core';
+import {Component, EventEmitter, OnInit} from '@angular/core';
 import {MeteorComponent} from 'angular2-meteor';
 import {bootstrap} from 'angular2-meteor-auto-bootstrap';
 import {ANGULAR2_GOOGLE_MAPS_PROVIDERS} from 'angular2-google-maps/core';
@@ -20,10 +20,13 @@ import {Staffs} from '../imports/api/staffs';
 import {StaffsList} from '../imports/staffs/staffs-list/staffs-list.ts';
 import {LocalesList} from '../imports/locales-list/locales-list.ts';
 
+import {Bugs} from '../imports/api/bugs';
+import {BugsList} from '../imports/bugs-list/bugs-list.ts';
+
 @Component({
   selector: 'app',
   templateUrl: 'client/app.html',
-  directives: [StaffsList, LocalesList, ANGULAR2_GOOGLE_MAPS_DIRECTIVES]
+  directives: [StaffsList, LocalesList, ANGULAR2_GOOGLE_MAPS_DIRECTIVES, BugsList]
 })
 class AdmirMessagingWatch extends AdmirMessagingWatchCore implements OnInit {
   centerLat: Number = 51.47879;
