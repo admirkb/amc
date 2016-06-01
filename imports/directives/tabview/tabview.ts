@@ -6,14 +6,32 @@ import {TabPanel} from './tabpanel';
     template: `
         <div [ngClass]="'ui-tabview ui-widget ui-widget-content ui-corner-all ui-tabview-' + orientation" [ngStyle]="style" [class]="styleClass">
             <ul class="ui-tabview-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+<!--
+<li *ngFor="let tab of tabs; let i = index">
+<a href="#">{{tab.header}}</a>
 
-                <template ngFor #tab [ngForOf]="tabs" >
+</li>
+-->
+
+<!--
+<li template="ngFor let tab of tabs; let i = index">
+    <a href="#">{{tab.header}}</a>
+</li>
+-->
+<!--
+   <template ngFor let-tab [ngForOf]="tabs" let-i = "index" >
+    <li>
+        <a href="#">{{tab.header}}</a>
+    </li>
+   </template>
+   -->
+            <template ngFor let-tab [ngForOf]="tabs" let-i = "index" >
                     <li [class]="getDefaultHeaderClass(tab)" [ngStyle]="tab.headerStyle"
                         [ngClass]="{'ui-tabview-selected ui-state-active': tab.selected, 'ui-state-hover': tab.hoverHeader&&!tab.disabled, 'ui-state-disabled': tab.disabled}"
-                        (mouseenter)="tab.hoverHeader=true" (mouseleave)="tab.hoverHeader=false" (click)="open($event,tab)" *ngIf="!tab.closed" >
-                           <a href="#">{{tab.header}}</a><span *ngIf="tab.closable" class="fa fa-close" (click)="close($event,tab)"></span>
+                        (mouseenter)="tab.hoverHeader=true" (mouseleave)="tab.hoverHeader=false" (click)="open($event,tab)" *ngIf="!tab.closed">
+                        <a href="#">{{tab.header}}</a><span *ngIf="tab.closable" class="fa fa-close" (click)="close($event,tab)"></span>
                     </li>
-                </template>
+                </template>   
                          
             </ul>
             <div class="ui-tabview-panels">

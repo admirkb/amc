@@ -21,7 +21,7 @@ import {StaffsList} from '../imports/staffs/staffs-list/staffs-list.ts';
 import {LocalesList} from '../imports/locales-list/locales-list.ts';
 
 import {Bugs} from '../imports/api/bugs';
-import {BugsList} from '../imports/bugs-list/bugs-list.ts';
+import {BugsList} from '../imports/bugs/bugs-list/bugs-list.ts';
 
 @Component({
   selector: 'app',

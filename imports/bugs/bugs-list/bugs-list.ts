@@ -16,12 +16,12 @@ import {FormBuilder, ControlGroup, Validators, Control} from '@angular/common';
 // Admir
 import {BugsForm} from '../bugs-form/bugs-form.ts';
 import {BugsItem} from '../bugs-item/bugs-item.ts';
-import {Bugs} from '../../imports/api/bugs';
+import {Bugs} from '../../../imports/api/bugs';
 
 
 @Component({
   selector: 'bugs-list',
-  templateUrl: '/imports/bugs-list/bugs-list.html',
+  templateUrl: '/imports/bugs/bugs-list/bugs-list.html',
   directives: [BugsForm, BugsItem],
 })
 export class BugsList extends MeteorComponent implements OnInit {

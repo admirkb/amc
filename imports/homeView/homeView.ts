@@ -14,7 +14,7 @@ import {RouterLink} from '@angular/router-deprecated';
 // Admir
 
 import {Bugs} from '../../imports/api/bugs';
-import {BugsList} from '../../imports/bugs-list/bugs-list';
+import {BugsList} from '../../imports/bugs/bugs-list/bugs-list';
 // Component
 
 @Component({

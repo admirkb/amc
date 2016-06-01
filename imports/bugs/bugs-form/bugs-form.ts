@@ -8,13 +8,13 @@ import {MeteorComponent} from 'angular2-meteor';
 import {FormBuilder, ControlGroup, Validators, Control} from '@angular/common';
 
 // Admir
-import {Bugs} from '../../imports/api/bugs';
+import {Bugs} from '../../../imports/api/bugs';
 
 
 
 @Component({
   selector: 'bugs-form',
-  templateUrl: '/imports/bugs-form/bugs-form.html',
+  templateUrl: '/imports/bugs/bugs-form/bugs-form.html',
 })
 export class BugsForm {
     @Input() bugModelItem;

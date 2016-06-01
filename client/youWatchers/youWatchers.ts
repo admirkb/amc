@@ -22,7 +22,7 @@ import {AdmirMessagingWatchCore} from  '../../client/coreWatch';
 import {Staffs} from '../../imports/api/staffs';
 import {StaffsList} from '../../imports/staffs/staffs-list/staffs-list';
 import {Bugs} from '../../imports/api/bugs';
-import {BugsList} from '../../imports/bugs-list/bugs-list';
+import {BugsList} from '../../imports/bugs/bugs-list/bugs-list';
 import {Locales} from '../../imports/api/locales';
 import {LocalesList} from '../../imports/locales-list/locales-list';
 import {UsersList} from '../../imports/users/users-list/users-list';

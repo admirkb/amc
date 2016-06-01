@@ -8,11 +8,11 @@ import {Component, EventEmitter, OnInit, Input, ElementRef,ViewChild} from '@ang
 import {MeteorComponent} from 'angular2-meteor';
 
 // Admir
-import {BugsForm} from '../../imports/bugs-form/bugs-form';
+import {BugsForm} from '../../../imports/bugs/bugs-form/bugs-form';
 
 @Component({
   selector: 'bugs-item',
-  templateUrl: '/imports/bugs-item/bugs-item.html',
+  templateUrl: '/imports/bugs/bugs-item/bugs-item.html',
   directives: [BugsForm],
   // properties: ['problem']
 })
