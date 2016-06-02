@@ -57,18 +57,38 @@
 
             <table style="background-color:transparent;width:100%;">
               <tr *ngFor="let role of userModelItem.roles['default-group']; let i = index">
-                <td style="text-align:left;color:red;">DropDown here</td>
-                <td>
-                  <input style="color:white;background:black;" type="text" [(ngModel)]="userModelItem.roles['default-group'][i]"  minlength="3" />
+                <td style="text-align:left;color:red;">
+
+
+
+
+                  <!-- Split button -->
+                  <div class="btn-group" dropdown>
+                    <button id="split-button" type="button" class="btn btn-danger">Action</button>
+                    <button type="button" class="btn btn-danger dropdown-toggle" dropdownToggle>
+                      <span class="caret"></span>
+                      <span class="sr-only">Split button!</span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="split-button">
+                      <li *ngFor="let choice of items">
+                        <a (click)="dropDownRoleClick(choice, role, i)" class="dropdown-item" href="#">{{choice}}</a>
+                      </li>
+                    </ul>
+                  </div>
+
                 </td>
                 <td>
-                 <button (click)="removeRole(role)" class="btn btn-primary btn-sm">Remove</button>
+                  <input style="color:white;background:black;" type="text" [(ngModel)]="userModelItem.roles['default-group'][i]" minlength="3"
+                  />
+                </td>
+                <td>
+                  <button (click)="removeRole(role)" class="btn btn-primary btn-sm">Remove</button>
                 </td>
               </tr>
             </table>
 
-        <button (click)="newRole()" class="btn btn-primary btn-sm">New Role</button>
-        
+            <button (click)="newRole()" class="btn btn-primary btn-sm">New Role</button>
+
             <table style="background-color:transparent;width:100%;">
               <tr>
                 <td style="text-align:left;color:red;">Width</td>

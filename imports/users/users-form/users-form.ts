@@ -17,11 +17,13 @@ import {TabPanel} from '../../directives/tabview/tabpanel';
 import {ADMediaUpload} from '../../directives/mediaUpload/adMediaUpload';
 // import {UsersItem} from '../../imports/users-item/users-item';
 
+import {CORE_DIRECTIVES} from '@angular/common';
+import { DROPDOWN_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
 
 @Component({
   selector: 'users-form',
   templateUrl: '/imports/users/users-form/users-form.html',
-  directives: [TabView, TabPanel, FORM_DIRECTIVES, ADMediaUpload],
+  directives: [TabView, TabPanel, FORM_DIRECTIVES, ADMediaUpload, CORE_DIRECTIVES, DROPDOWN_DIRECTIVES],
 })
 export class UsersForm implements OnInit {
   @Input() userModelItem;
@@ -33,6 +35,34 @@ export class UsersForm implements OnInit {
   data: any;
   email: any;
 
+  public disabled: boolean = false;
+  public status: { isopen: boolean } = { isopen: false };
+  public items: Array<string> = ['Butcher',
+    'Candlestick maker', 'Baker'];
+
+  public toggled(open: boolean): void {
+    console.log('Dropdown is now: ', open);
+  }
+
+  public toggleDropdown($event: MouseEvent): void {
+    $event.preventDefault();
+    $event.stopPropagation();
+    this.status.isopen = !this.status.isopen;
+  }
+
+  public dropDownRoleClick(newRole, origRole, index) {
+    console.dir(newRole)
+
+    for (var i = 0; i < this.userModelItem.roles['default-group'].length; i++) {
+
+      if (i == index) {
+        // console.log(this.userModelItem.roles['default-group'][i] + " / " + origRole + " / " + newRole)
+        this.userModelItem.roles['default-group'][i] = newRole;
+      }
+
+
+    }
+  }
 
   constructor() {
 
@@ -70,7 +100,20 @@ export class UsersForm implements OnInit {
     if (this.userModelItem.roles != null) {
       console.log("this.userModelItem.roles.default-group");
       console.dir(this.userModelItem.roles['default-group']);
+
+      for (var i = 0; i < this.userModelItem.roles['default-group'].length; i++) {
+        this.items.push(this.userModelItem.roles['default-group'][i])
+
+      }
+
+      for (var i = 0; i < this.items.length; i++) {
+        console.log(this.items[i])
+
+      }
     }
+
+
+
 
     console.log("this.action")
     console.log(this.action)
@@ -123,7 +166,7 @@ export class UsersForm implements OnInit {
           }
         }
 
-        $set['roles']= { 'default-group' : this.userModelItem.roles['default-group']} ;
+        $set['roles'] = { 'default-group': this.userModelItem.roles['default-group'] };
 
 
         Meteor.call('users.update', { _id: user._id }, {
