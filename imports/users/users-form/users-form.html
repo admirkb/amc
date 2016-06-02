@@ -56,15 +56,19 @@
           <p-tabPanel header="Roles">
 
             <table style="background-color:transparent;width:100%;">
-              <tr *ngFor="#role of userModelItem.roles['default-group']; #i = index">
-                <td style="text-align:left;color:red;">Role</td>
+              <tr *ngFor="let role of userModelItem.roles['default-group']; let i = index">
+                <td style="text-align:left;color:red;">DropDown here</td>
                 <td>
-                  <input style="color:white;background:black;" type="text" [(ngModel)]="userModelItem.roles['default-group'][i]" 
-                    minlength="3" />
+                  <input style="color:white;background:black;" type="text" [(ngModel)]="userModelItem.roles['default-group'][i]"  minlength="3" />
+                </td>
+                <td>
+                 <button (click)="removeRole(role)" class="btn btn-primary btn-sm">Remove</button>
                 </td>
               </tr>
             </table>
 
+        <button (click)="newRole()" class="btn btn-primary btn-sm">New Role</button>
+        
             <table style="background-color:transparent;width:100%;">
               <tr>
                 <td style="text-align:left;color:red;">Width</td>

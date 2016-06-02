@@ -49,6 +49,7 @@ export class UsersForm implements OnInit {
       width: [320, Validators.minLength(3)],
       height: [180, Validators.minLength(3)],
 
+
     });
 
     this.email = this.usersForm.controls['email'];
@@ -66,9 +67,9 @@ export class UsersForm implements OnInit {
   ngOnInit() {
 
     console.dir(this.userModelItem);
-    if (this.userModelItem.roles != null){
-              console.log("this.userModelItem.roles.default-group");
-                console.dir(this.userModelItem.roles['default-group']);
+    if (this.userModelItem.roles != null) {
+      console.log("this.userModelItem.roles.default-group");
+      console.dir(this.userModelItem.roles['default-group']);
     }
 
     console.log("this.action")
@@ -121,10 +122,9 @@ export class UsersForm implements OnInit {
             $set[field] = this.usersForm.controls[field].value;
           }
         }
-        $set['isDisabled'] = false;
-        $set['isEditable'] = false;
-        $set['editColor'] = 'transparent';
-        $set['dateResolved'] = new Date();
+
+        $set['roles']= { 'default-group' : this.userModelItem.roles['default-group']} ;
+
 
         Meteor.call('users.update', { _id: user._id }, {
 
@@ -212,6 +212,29 @@ export class UsersForm implements OnInit {
     this.HideDialogEvent.emit(o)
 
   }
+  removeRole(role) {
 
+
+
+    console.dir(this.userModelItem.roles['default-group'])
+
+    var array = this.userModelItem.roles['default-group'];
+    var index = array.indexOf(role, 0);
+    if (index > -1) {
+      array.splice(index, 1);
+    }
+
+    console.dir(this.userModelItem.roles['default-group'])
+
+  }
+
+  newRole() {
+
+    console.dir(this.userModelItem.roles['default-group'])
+
+    var array = this.userModelItem.roles['default-group'];
+    array.push('')
+
+  }
 
 }

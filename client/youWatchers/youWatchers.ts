@@ -50,7 +50,8 @@ import {DisplayName} from '../../imports/pipes/pipes.ts';
   { path: '/roles', as: 'Roles', component: RolesList },
 
 ])
-// @InjectUser()
+
+@InjectUser("user")
 class AdmirYouWatchers extends AdmirMessagingWatchCore implements OnInit {
 
 

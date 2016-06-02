@@ -27,7 +27,7 @@
 <div class="container">
     <div class="row">
 
-        <roles-item *ngFor="#role of roles; #i = index" [roleModel]="role" [theIndex]="i" ></roles-item>
+        <roles-item *ngFor="let role of roles; let i = index" [roleModel]="role" [theIndex]="i" ></roles-item>
 
 
     </div>

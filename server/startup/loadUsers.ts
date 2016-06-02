@@ -70,12 +70,12 @@ setUpUser("kelvin.beech", "password", "f", ['god', 'admin']);
 
     // temp remove me
 
-var user = Meteor.users.findOne({ "emails.address": "kelvin@admir.tv" })
+// var user = Meteor.users.findOne({ "emails.address": "kelvin@admir.tv" })
   
-if (user != null) {
+// if (user != null) {
 
-    Meteor.users.remove({ _id: user._id });
-}
+//     Meteor.users.remove({ _id: user._id });
+// }
 
 return;
     var credentials = {
