@@ -84,8 +84,6 @@ export class UsersList extends MeteorComponent implements OnInit {
 
   }
 
-
-
 }
 
 

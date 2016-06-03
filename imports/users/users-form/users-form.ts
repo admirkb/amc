@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 
 import { Meteor } from 'meteor/meteor';
+import {Mongo} from 'meteor/mongo';
 
 // Angular
 import {Component, EventEmitter, OnInit, Input, Output} from '@angular/core';
@@ -25,7 +26,7 @@ import { DROPDOWN_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
   templateUrl: '/imports/users/users-form/users-form.html',
   directives: [TabView, TabPanel, FORM_DIRECTIVES, ADMediaUpload, CORE_DIRECTIVES, DROPDOWN_DIRECTIVES],
 })
-export class UsersForm implements OnInit {
+export class UsersForm extends MeteorComponent implements OnInit {
   @Input() userModelItem;
   @Input() action;
   usersForm: ControlGroup;
@@ -34,11 +35,14 @@ export class UsersForm implements OnInit {
   n: number = 0;
   data: any;
   email: any;
+  roles: Mongo.Cursor<Object>;
+  savedRoles: Array<string> = [];
 
   public disabled: boolean = false;
   public status: { isopen: boolean } = { isopen: false };
-  public items: Array<string> = ['Butcher',
-    'Candlestick maker', 'Baker'];
+  // public items: Array<string> = ['Butcher',
+  //   'Candlestick maker', 'Baker'];
+  public items: Array<string> = [];
 
   public toggled(open: boolean): void {
     console.log('Dropdown is now: ', open);
@@ -65,6 +69,7 @@ export class UsersForm implements OnInit {
   }
 
   constructor() {
+    super()
 
     // if (this.userModelItem == null){this.userModelItem = new Object()}
     let fb = new FormBuilder();
@@ -92,26 +97,44 @@ export class UsersForm implements OnInit {
     // console.dir(this.userModelItem);
 
 
+
   }
 
   ngOnInit() {
 
-    console.dir(this.userModelItem);
-    if (this.userModelItem.roles != null) {
-      console.log("this.userModelItem.roles.default-group");
-      console.dir(this.userModelItem.roles['default-group']);
+    var self = this;
+    this.subscribe('roles', () => {
 
-      for (var i = 0; i < this.userModelItem.roles['default-group'].length; i++) {
-        this.items.push(this.userModelItem.roles['default-group'][i])
+      this.roles = Meteor.roles.find({}, { sort: { name: 1 } });
+
+      console.log("roles")
+      this.roles.forEach(function (role) {
+        self.items.push(role.name)
+
+      })
+
+    }, true);
+
+    this.subscribe('users', () => {
+
+      if (this.userModelItem.roles != null) {
+        console.log("this.userModelItem.roles.default-group");
+        console.dir(this.userModelItem.roles['default-group']);
+
+        for (var i = 0; i < this.userModelItem.roles['default-group'].length; i++) {
+
+          this.savedRoles.push(this.userModelItem.roles['default-group'][i]);
+
+
+        }
+        // this.savedRoles = this.userModelItem.roles['default-group'];
+
+        console.log("this.savedRoles");
+        console.dir(this.savedRoles);
 
       }
 
-      for (var i = 0; i < this.items.length; i++) {
-        console.log(this.items[i])
-
-      }
-    }
-
+    }, true);
 
 
 
@@ -246,11 +269,38 @@ export class UsersForm implements OnInit {
 
     this.userModelItem.imageAsData = o.imageAsData;
   }
+  cancelUser(user) {
+
+
+
+    if (Meteor.userId()) {
+
+      this.userModelItem.roles['default-group'] = [];
+      for (var i = 0; i < this.savedRoles.length; i++) {
+
+        this.userModelItem.roles['default-group'].push(this.savedRoles[i]);
+
+
+      }
+
+      // this.userModelItem.roles['default-group'] = this.savedRoles;
+      console.dir(this.userModelItem.roles['default-group']);
+      console.dir(this.savedRoles);
+      // this.savedRoles = [];
+      this.hideDialog();
+
+
+    } else {
+      alert('Please log in to add a user');
+    }
+
+  }
 
   hideDialog() {
     var o = new Object();
     o.time = new Date();
     o.type = this.action
+
 
     this.HideDialogEvent.emit(o)
 

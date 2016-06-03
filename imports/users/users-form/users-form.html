@@ -128,7 +128,7 @@
         <button *ngIf="action == 'add'" (click)="addUser(f.value)" class="btn btn-primary btn-sm">Add User!</button>
         <button *ngIf="action == 'update'" (click)="updateUser(f.value)" class="btn btn-primary btn-sm">Modify User!</button>
         <button *ngIf="action == 'delete'" (click)="deleteUser(f.value)" class="btn btn-primary btn-sm">Delete User!</button>
-        <button type="button" class="btn btn-primary btn-sm" (click)="hideDialog()">Close</button>
+        <button type="button" class="btn btn-primary btn-sm" (click)="cancelUser(f.value)">Cancel</button>
       </div>
 
 
