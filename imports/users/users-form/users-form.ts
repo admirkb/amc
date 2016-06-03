@@ -44,29 +44,6 @@ export class UsersForm extends MeteorComponent implements OnInit {
   //   'Candlestick maker', 'Baker'];
   public items: Array<string> = [];
 
-  public toggled(open: boolean): void {
-    console.log('Dropdown is now: ', open);
-  }
-
-  public toggleDropdown($event: MouseEvent): void {
-    $event.preventDefault();
-    $event.stopPropagation();
-    this.status.isopen = !this.status.isopen;
-  }
-
-  public dropDownRoleClick(newRole, origRole, index) {
-    console.dir(newRole)
-
-    for (var i = 0; i < this.userModelItem.roles['default-group'].length; i++) {
-
-      if (i == index) {
-        // console.log(this.userModelItem.roles['default-group'][i] + " / " + origRole + " / " + newRole)
-        this.userModelItem.roles['default-group'][i] = newRole;
-      }
-
-
-    }
-  }
 
   constructor() {
     super()
@@ -126,6 +103,14 @@ export class UsersForm extends MeteorComponent implements OnInit {
           this.savedRoles.push(this.userModelItem.roles['default-group'][i]);
 
 
+
+          // Remove new role from dropdown list, not available    
+          var dropDownindex = this.items.indexOf(this.userModelItem.roles['default-group'][i], 0);
+          if (dropDownindex > -1) {
+            this.items.splice(dropDownindex, 1);
+          }
+
+
         }
         // this.savedRoles = this.userModelItem.roles['default-group'];
 
@@ -133,6 +118,9 @@ export class UsersForm extends MeteorComponent implements OnInit {
         console.dir(this.savedRoles);
 
       }
+
+
+
 
     }, true);
 
@@ -271,22 +259,35 @@ export class UsersForm extends MeteorComponent implements OnInit {
   }
   cancelUser(user) {
 
-
-
     if (Meteor.userId()) {
 
+      // Reset everything...
       this.userModelItem.roles['default-group'] = [];
       for (var i = 0; i < this.savedRoles.length; i++) {
 
         this.userModelItem.roles['default-group'].push(this.savedRoles[i]);
-
-
       }
 
       // this.userModelItem.roles['default-group'] = this.savedRoles;
-      console.dir(this.userModelItem.roles['default-group']);
-      console.dir(this.savedRoles);
-      // this.savedRoles = [];
+      // console.dir(this.userModelItem.roles['default-group']);
+      // console.dir(this.savedRoles);
+
+      this.items = [];
+      this.roles = Meteor.roles.find({}, { sort: { name: 1 } });
+      this.roles.forEach((role) => {
+        this.items.push(role.name)
+      });
+      
+      // Remove new role from dropdown list, not available    
+      for (var i = 0; i < this.userModelItem.roles['default-group'].length; i++) {
+        var dropDownindex = this.items.indexOf(this.userModelItem.roles['default-group'][i], 0);
+        if (dropDownindex > -1) {
+          this.items.splice(dropDownindex, 1);
+        }
+
+      }
+
+
       this.hideDialog();
 
 
@@ -308,7 +309,7 @@ export class UsersForm extends MeteorComponent implements OnInit {
   removeRole(role) {
 
 
-
+    // Remove role from users list
     console.dir(this.userModelItem.roles['default-group'])
 
     var array = this.userModelItem.roles['default-group'];
@@ -319,7 +320,13 @@ export class UsersForm extends MeteorComponent implements OnInit {
 
     console.dir(this.userModelItem.roles['default-group'])
 
+    // Add role to dropdown list as now available again
+    this.items.push(role)
+
+
   }
+
+
 
   newRole() {
 
@@ -330,4 +337,34 @@ export class UsersForm extends MeteorComponent implements OnInit {
 
   }
 
+
+  public toggled(open: boolean): void {
+    console.log('Dropdown is now: ', open);
+  }
+
+  public toggleDropdown($event: MouseEvent): void {
+    $event.preventDefault();
+    $event.stopPropagation();
+    this.status.isopen = !this.status.isopen;
+  }
+
+  public dropDownRoleClick(newRole, origRole, index) {
+    console.dir(newRole)
+
+    for (var i = 0; i < this.userModelItem.roles['default-group'].length; i++) {
+
+      if (i == index) {
+        // console.log(this.userModelItem.roles['default-group'][i] + " / " + origRole + " / " + newRole)
+        this.userModelItem.roles['default-group'][i] = newRole;
+      }
+    }
+
+    // Remove new role from dropdown list, not available    var array = this.userModelItem.roles['default-group'];
+    var dropDownindex = this.items.indexOf(newRole, 0);
+    if (dropDownindex > -1) {
+      this.items.splice(dropDownindex, 1);
+      this.items.push(origRole)
+    }
+
+  }
 }
