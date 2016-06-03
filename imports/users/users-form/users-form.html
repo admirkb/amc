@@ -60,8 +60,6 @@
                 <td style="text-align:left;color:red;">
 
 
-
-
                   <!-- Split button -->
                   <div class="btn-group" dropdown>
                     <button id="split-button" type="button" class="btn btn-danger">Action</button>
@@ -81,13 +79,17 @@
                   <input style="color:white;background:black;" type="text" [(ngModel)]="userModelItem.roles['default-group'][i]" minlength="3"
                   />
                 </td>
-                <td>
-                  <button (click)="removeRole(role)" class="btn btn-primary btn-sm">Remove</button>
+                <td style="text-align:right; width:10%;">
+                  <button (click)="removeRole(role)" class="btn btn-danger btn-sm">Remove</button>
                 </td>
               </tr>
               <tr>
-                <td colspan="3">
-                              <button (click)="newRole()" class="btn btn-primary btn-sm">New Role</button>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td style="text-align:right; width:10%;">
+                  <button (click)="newRole()" class="btn btn-danger btn-sm">New Role</button>
                 </td>
               </tr>
             </table>
@@ -130,10 +132,10 @@
 
 
       <div style="text-align:right; background:transparent; width:100%;">
-        <button *ngIf="action == 'add'" (click)="addUser(f.value)" class="btn btn-primary btn-sm">Add User!</button>
-        <button *ngIf="action == 'update'" (click)="updateUser(f.value)" class="btn btn-primary btn-sm">Modify User!</button>
-        <button *ngIf="action == 'delete'" (click)="deleteUser(f.value)" class="btn btn-primary btn-sm">Delete User!</button>
-        <button type="button" class="btn btn-primary btn-sm" (click)="cancelUser(f.value)">Cancel</button>
+        <button *ngIf="action == 'add'" (click)="addUser(f.value)" class="btn btn-danger btn-sm">Add User!</button>
+        <button *ngIf="action == 'update'" (click)="updateUser(f.value)" class="btn btn-danger btn-sm">Modify User!</button>
+        <button *ngIf="action == 'delete'" (click)="deleteUser(f.value)" class="btn btn-danger btn-sm">Delete User!</button>
+        <button type="button" class="btn btn-danger btn-sm" (click)="cancelUser(f.value)">Cancel</button>
       </div>
 
 

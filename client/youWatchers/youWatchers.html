@@ -15,10 +15,10 @@
                         <ul class="nav navbar-nav">
                             <li> <a [routerLink]="['/HomeView']">Home</a></li>
                             <li *ngIf="inAdmin"> <a [routerLink]="['/Staffs']">Staffs</a></li>
-                            <li><a [routerLink]="['/Locales']">Locales</a></li>
+                            <li *ngIf="inDoctor && inRegistered"><a [routerLink]="['/Locales']">Locales</a></li>
                             <li> <a [routerLink]="['/Bugs']">Bugs</a></li>
                             <li *ngIf="inAdmin"> <a [routerLink]="['/Users']">Users</a></li>
-                            <li *ngIf="inAdmin"> <a [routerLink]="['/Roles']">Roles</a></li>
+                            <li *ngIf="inAdmin || inRegistered"> <a [routerLink]="['/Roles']">Roles</a></li>
                         </ul>
                     </div>
                 </div>
