@@ -32,6 +32,8 @@ import {Login} from '../../imports/auth/login/login';
 import {HomeView} from '../../imports/homeView/homeView';
 import {DisplayName} from '../../imports/pipes/pipes.ts';
 
+import {GenericList} from '../../imports/generic/generic-list/generic-list';
+
 @Component({
   selector: 'you-watchers',
   templateUrl: 'client/youWatchers/youWatchers.html',
@@ -48,6 +50,7 @@ import {DisplayName} from '../../imports/pipes/pipes.ts';
   { path: '/locales', as: 'Locales', component: LocalesList },
   { path: '/homeView', as: 'HomeView', component: HomeView },
   { path: '/roles', as: 'Roles', component: RolesList },
+    { path: '/generic', as: 'Generic', component: GenericList },
 
 ])
 

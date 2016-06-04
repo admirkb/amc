@@ -1,4 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
-export const generiCcollection = "genericcollection";
-export const GenericTable = new Mongo.Collection(generiCcollection);
+export const genericCollection = "customersGeneric";
+export const GenericCollection = new Mongo.Collection(genericCollection);
+
+
+
+
