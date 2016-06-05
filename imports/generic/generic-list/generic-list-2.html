@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="row">
+
+        <h4>Default</h4>
+
+        <pagination [boundaryLinks]="true" [totalItems]="totalItems" [itemsPerPage]="itemsPerPage" [(ngModel)]="currentPage" class="pagination-sm"
+            (pageChanged)="pageChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"></pagination>
+
+     <pre class="card card-block card-header">The selected page no: {{currentPage}}/{{ maxPagesCalc }}</pre>
+        <button type="button" class="btn btn-info" (click)="setPage(3)">Set current page to: 3</button>
+
+        <div class="col-md-6">
+            <ul class="list-group">
+
+
+                <li *ngFor="let o of genericRecords; let i = index;">
+                    <button>{{o._id}}</button>
+                    <button>{{o.problem}}</button>
+
+                    <button>{{o['problem']}}</button>
+                    <input [(ngModel)]="o['problem']" />
+
+
+                    <!--<div style="color:green;" [innerHTML]="o['problem'].text + o['problem'].value "></div>-->
+                    <div style="color:green;" [innerHTML]="o"></div>
+
+                </li>
+
+
+            </ul>
+        </div>
+
+        <br/>
+        <div *ngFor="let a of arr; let i = index;">
+            <div *ngFor="let aa of a; let j = index;">
+
+                <input [(ngModel)]="a[j]" />
+                <button>{{a[j]}}</button>
+
+            </div>
+            <!--<button>{{a[0]}}</button>
+            <button>{{a[1]}}</button>
+                    <input [(ngModel)]="a[2]" />-->
+
+
+
+        </div>
+
+        <!--<users-item *ngFor="let user of users; let i = index" [userModel]="user" [theIndex]="i" ></users-item>-->
+    </div>
+    <div style="text-align:right;width:100%;">
+        <button (click)="showDialog(0)" class="btn btn-primary btn-sm">Add Generic!</button>
+    </div>
+
+
+</div>

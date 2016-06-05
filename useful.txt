@@ -91,3 +91,15 @@ style="
                         <a href="#">{{tab.header}}</a><span *ngIf="tab.closable" class="fa fa-close" (click)="close($event,tab)"></span>
                     </li>
                 </template>
+                
+                
+                // Dynamic template url
+                
+                @Component({
+  selector: 'generic-list',
+  templateUrl: function () {
+    return 1 == 0 ? '/imports/generic/generic-list/generic-list.html' : '/imports/generic/generic-list/generic-list-2.html';
+  } (),
+  directives: [Modal],
+})
+expo

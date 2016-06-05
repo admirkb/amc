@@ -12,9 +12,15 @@ console.log("meteorGenericCollection - start")
 console.log(meteorGenericCollection)
 console.log("meteorGenericCollection - end")
 
-Meteor.publish(genericCollection, function () {
-  return GenericCollection.find({});
+Meteor.publish(genericCollection, function (options: Object, searchString: string) {
+    
+        let selector = {
+        problem: { '$regex': '.*' + searchString || '' + '.*', '$options': 'i' },
+    };
+  return GenericCollection.find(selector , options);
 });
+
+
 
 
 Meteor.methods({
