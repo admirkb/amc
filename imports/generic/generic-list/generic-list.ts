@@ -16,6 +16,8 @@ import {FormBuilder, ControlGroup, Validators, Control} from '@angular/common';
 import {CORE_DIRECTIVES, FORM_DIRECTIVES} from '@angular/common';
 import { PAGINATION_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
 
+import {Counts} from 'meteor/tmeasday:publish-counts';
+
 // Admir
 // import {UsersForm} from '../../users/users-form/users-form.ts';
 // import {UsersItem} from '../../users/users-item/users-item.ts';
@@ -42,24 +44,28 @@ export class GenericList extends MeteorComponent implements OnInit {
   data: any = new Object();
   action: string;
   arr: [];
-  
+  searchString: string;
 
- public totalItems:number = 64;
-  public currentPage:number = 4;
-   public itemsPerPage:number = 5;
 
-  public maxSize:number = 5;
-  public bigTotalItems:number = 175;
-  public bigCurrentPage:number = 1;
-  public maxPagesCalc = Math.ceil(this.totalItems / this.itemsPerPage) ;
+  public totalItems: number = 64;
+  public currentPage: number = 1;
+  public curPage: ReactiveVar<number> = new ReactiveVar<number>(1);
+  public itemsPerPage: number = 5;
 
-  public setPage(pageNo:number):void {
-    this.currentPage = pageNo;
-  };
+  public maxSize: number = 5;
+  public bigTotalItems: number = 175;
+  public bigCurrentPage: number = 1;
+  public maxPagesCalc = Math.ceil(this.totalItems / this.itemsPerPage);
 
-  public pageChanged(event:any):void {
+  // public setPage(pageNo: number): void {
+  //   this.currentPage = pageNo;
+  // };
+
+  public pageChanged(event: any): void {
     console.log('Page changed to: ' + event.page);
     console.log('Number items per page: ' + event.itemsPerPage);
+    this.currentPage = event.page;
+       this.curPage.set(event.page);
   };
 
 
@@ -68,16 +74,18 @@ export class GenericList extends MeteorComponent implements OnInit {
 
     this.autorun(() => {
       let options = {
-        limit: this.totalItems,
-        skip: (this.currentPage - 1) * this.maxSize,
+        limit: this.itemsPerPage,
+        skip: (this.curPage.get() - 1) * this.itemsPerPage,
         sort: { problem: 1 }
       };
+
+      this.searchString = "Gen";
 
       // this.subscribe('parties', options, this.location.get(), () => {
       //   this.parties = Parties.find({}, { sort: { name: this.nameOrder.get() } });
       // }, true);
 
-      this.subscribe(genericCollection, options, () => {
+      this.subscribe(genericCollection, options, this.searchString, () => {
         var self = this;
 
         var query = GenericCollection.find({});
@@ -129,6 +137,14 @@ export class GenericList extends MeteorComponent implements OnInit {
 
       }, true);
     });
+
+
+    this.autorun(() => {
+      this.totalItems = Counts.get('numberOfRecords');
+      this.maxPagesCalc = Math.ceil(this.totalItems / this.itemsPerPage);
+    }, true);
+    
+    
     console.log("hello from generic-list.ts")
 
     console.log("hello from generic-list.ts")

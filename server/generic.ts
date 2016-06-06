@@ -2,6 +2,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import {GenericCollection, genericCollection} from '../imports/api/generic';
+import {Counts} from 'meteor/tmeasday:publish-counts';
 
 console.log("genericCollection - start")
 console.log(genericCollection)
@@ -17,6 +18,13 @@ Meteor.publish(genericCollection, function (options: Object, searchString: strin
         let selector = {
         problem: { '$regex': '.*' + searchString || '' + '.*', '$options': 'i' },
     };
+    
+        Counts.publish(this, 'numberOfRecords', GenericCollection.find(selector), { noReady: true });
+        
+        console.log("selector" + selector)
+        console.dir(selector)
+                console.dir(options)
+    console.log("searchString" + searchString)
   return GenericCollection.find(selector , options);
 });
 
