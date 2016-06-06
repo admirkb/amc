@@ -19,10 +19,14 @@ import {RolesItem} from '../../roles/roles-item/roles-item.ts';
 // import {Roles} from '../../../imports/api/roles';
 import {Modal} from '../../directives/modal/modal';
 
+import {CORE_DIRECTIVES, FORM_DIRECTIVES} from '@angular/common';
+import { PAGINATION_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
+import {Counts} from 'meteor/tmeasday:publish-counts';
+
 @Component({
   selector: 'roles-list',
   templateUrl: '/imports/roles/roles-list/roles-list.html',
-  directives: [RolesItem, RolesForm, Modal],
+  directives: [RolesItem, RolesForm, Modal, PAGINATION_DIRECTIVES, FORM_DIRECTIVES, CORE_DIRECTIVES],
 })
 export class RolesList extends MeteorComponent implements OnInit {
   @ViewChildren(RolesItem) rolesList: QueryList<RolesItem>;
@@ -35,9 +39,82 @@ export class RolesList extends MeteorComponent implements OnInit {
   n: number = 0;
   data: any = new Object();
   action: string;
+    searchString: string;
+  public totalItems: number = 64;
+  public currentPage: number = 1;
+  public curPage: ReactiveVar<number> = new ReactiveVar<number>(1);
+  public itemsPerPage: number = 5;
+
+  public maxSize: number = 5;
+  public bigTotalItems: number = 175;
+  public bigCurrentPage: number = 1;
+  public maxPagesCalc = Math.ceil(this.totalItems / this.itemsPerPage);
+
+  public pageChanged(event: any): void {
+    console.log('Page changed to: ' + event.page);
+    console.log('Number items per page: ' + event.itemsPerPage);
+    this.currentPage = event.page;
+       this.curPage.set(event.page);
+  };
 
   constructor() {
     super();
+
+    this.autorun(() => {
+      let options = {
+        limit: this.itemsPerPage,
+        skip: (this.curPage.get() - 1) * this.itemsPerPage,
+        sort: { problem: 1 }
+      };
+
+      this.searchString = "";
+
+      // this.subscribe('parties', options, this.location.get(), () => {
+      //   this.parties = Parties.find({}, { sort: { name: this.nameOrder.get() } });
+      // }, true);
+
+      this.subscribe('roles', options, this.searchString, () => {
+        var self = this;
+
+
+        var query = Meteor.roles.find({});
+        
+        var handle = query.observeChanges({
+          added: function (id) {
+            console.log("subscribe Added: " + id)
+            console.dir(id)
+
+
+          },
+          removed: function (id) {
+            console.log("subscribe Removed: " + id)
+          },
+          changed: function (id, o) {
+            console.log("subscribe Changed: " + id)
+            console.dir(o)
+
+            var genericRecord = o;
+            if (genericRecord.editColor == 'red') {
+
+
+            };
+
+          },
+        });
+
+         this.roles = query;
+
+
+      }, true);
+    });
+
+
+    this.autorun(() => {
+      this.totalItems = Counts.get('numberOfRecords');
+      this.maxPagesCalc = Math.ceil(this.totalItems / this.itemsPerPage);
+    }, true);
+
+
 
       this.action = "add";
     this.helloEvent.subscribe((args) => {
@@ -74,80 +151,6 @@ export class RolesList extends MeteorComponent implements OnInit {
   ngOnInit() {
 
     console.log("I'm being called when component is initalized after constructor method from roles-list.ts");
-
-
-    this.subscribe('roles', () => {
-      var self = this;
-
-      // this.roles = Roles.find({});
-
-
-
-      // bubble up event from obserchanges
-      var helloEventInSubscribe = new EventEmitter();
-      helloEventInSubscribe.subscribe((args) => {
-        this.helloEvent.emit(args)
-      });
-
-
-      // var b = new Object();
-      // this.helloEvent.emit(b)
-
-      var query = Meteor.roles.find({});
-      var handle = query.observeChanges({
-        added: function (id) {
-          console.log("subscribe Added: " + id)
-          console.dir(id)
-
-
-        },
-        removed: function (id) {
-          console.log("subscribe Removed: " + id)
-        },
-        changed: function (id, o) {
-          console.log("subscribe Changed: " + id)
-          console.dir(o)
-
-          var role = o;
-          if (role.editColor == 'red') {
-
-            console.log("not interested in sending this to self!")
-            // console.log("not interested in sending this to self!" + options.currentRoleId + "----<<<")
-            // console.log("not interested in sending this to self!" + role.selfConnectionId + "----<<<")
-            // console.dir(role)
-            //self.stop();
-            //console.log(self._session.id)
-            // if (role.selfConnectionId == options.currentRoleId) {
-
-
-            // }
-
-            // self.helloEvent.emit(role)
-
-            // self.rolesList.toArray().forEach((list) => {
-            //   list.setRole(list.roleModel);
-            // });
-
-
-
-
-            // setTimeout(() => {
-            //   var role = new Object();
-            //   console.log("in timeout");
-            //          helloEventInSubscribe.emit(role);
-            // }, 1000 * 5);
-
-            // helloEventInSubscribe.emit(role);
-            // var b = new Object();
-            // helloEventInSubscribe.emit(b);
-
-          };
-
-        },
-      });
-
-      this.roles = query;
-    }, true);
 
 
 

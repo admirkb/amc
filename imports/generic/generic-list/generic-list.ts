@@ -47,6 +47,7 @@ export class GenericList extends MeteorComponent implements OnInit {
   searchString: string;
 
 
+
   public totalItems: number = 64;
   public currentPage: number = 1;
   public curPage: ReactiveVar<number> = new ReactiveVar<number>(1);
@@ -88,7 +89,18 @@ export class GenericList extends MeteorComponent implements OnInit {
       this.subscribe(genericCollection, options, this.searchString, () => {
         var self = this;
 
+// var yyyy = GenericCollection.find().map( function(u) { return u; } ).forEach(function (obj) {
+
+//         });
+// this.genericRecords2 = yyyy;
+
+//         var xxxx = GenericCollection.find({}).forEach(function (obj) {
+//           console.log("obj2")
+//           console.dir(obj)
+//         });
+        
         var query = GenericCollection.find({});
+        
         var handle = query.observeChanges({
           added: function (id) {
             console.log("subscribe Added: " + id)
