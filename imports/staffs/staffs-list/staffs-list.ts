@@ -18,13 +18,18 @@ import {StaffsForm} from '../../staffs/staffs-form/staffs-form.ts';
 import {StaffsItem} from '../../staffs/staffs-item/staffs-item.ts';
 import {Staffs} from '../../../imports/api/staffs';
 import {Modal} from '../../directives/modal/modal';
+import {AdmirMessagingBaseList} from '../../../client/baseList';
+
+import {CORE_DIRECTIVES, FORM_DIRECTIVES} from '@angular/common';
+import { PAGINATION_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
+import {Counts} from 'meteor/tmeasday:publish-counts';
 
 @Component({
   selector: 'staffs-list',
   templateUrl: '/imports/staffs/staffs-list/staffs-list.html',
-  directives: [StaffsItem, StaffsForm, Modal],
+  directives: [StaffsItem, StaffsForm, Modal, PAGINATION_DIRECTIVES, FORM_DIRECTIVES, CORE_DIRECTIVES],
 })
-export class StaffsList extends MeteorComponent implements OnInit {
+export class StaffsList extends AdmirMessagingBaseList implements OnInit {
   @ViewChildren(StaffsItem) staffsList: QueryList<StaffsItem>;
 
   staffs: Mongo.Cursor<Object>;
@@ -38,6 +43,62 @@ export class StaffsList extends MeteorComponent implements OnInit {
 
   constructor() {
     super();
+
+    this.autorun(() => {
+      let options = {
+        limit: this.itemsPerPage,
+        skip: (this.curPage.get() - 1) * this.itemsPerPage,
+        sort: { problem: 1 }
+      };
+
+      this.searchString = "";
+
+      // this.subscribe('parties', options, this.location.get(), () => {
+      //   this.parties = Parties.find({}, { sort: { name: this.nameOrder.get() } });
+      // }, true);
+
+      this.subscribe('staffs', options, this.searchString, () => {
+        var self = this;
+
+
+        var query = Staffs.find({});
+        
+        var handle = query.observeChanges({
+          added: function (id) {
+            console.log("subscribe Added: " + id)
+            console.dir(id)
+
+
+          },
+          removed: function (id) {
+            console.log("subscribe Removed: " + id)
+          },
+          changed: function (id, o) {
+            console.log("subscribe Changed: " + id)
+            console.dir(o)
+
+            var genericRecord = o;
+            if (genericRecord.editColor == 'red') {
+
+
+            };
+
+          },
+        });
+
+     this.staffs = query;
+
+
+      }, true);
+    });
+
+
+    this.autorun(() => {
+      this.totalItems = Counts.get('numberOfRecords');
+      this.maxPagesCalc = Math.ceil(this.totalItems / this.itemsPerPage);
+    }, true);
+
+
 
       this.action = "add";
     this.helloEvent.subscribe((args) => {
@@ -76,78 +137,6 @@ export class StaffsList extends MeteorComponent implements OnInit {
     console.log("I'm being called when component is initalized after constructor method from staffs-list.ts");
 
 
-    this.subscribe('staffs', () => {
-      var self = this;
-
-      // this.staffs = Staffs.find({});
-
-
-
-      // bubble up event from obserchanges
-      var helloEventInSubscribe = new EventEmitter();
-      helloEventInSubscribe.subscribe((args) => {
-        this.helloEvent.emit(args)
-      });
-
-
-      // var b = new Object();
-      // this.helloEvent.emit(b)
-
-      var query = Staffs.find({});
-      var handle = query.observeChanges({
-        added: function (id) {
-          console.log("subscribe Added: " + id)
-          console.dir(id)
-
-
-        },
-        removed: function (id) {
-          console.log("subscribe Removed: " + id)
-        },
-        changed: function (id, o) {
-          console.log("subscribe Changed: " + id)
-          console.dir(o)
-
-          var staff = o;
-          if (staff.editColor == 'red') {
-
-            console.log("not interested in sending this to self!")
-            // console.log("not interested in sending this to self!" + options.currentStaffId + "----<<<")
-            // console.log("not interested in sending this to self!" + staff.selfConnectionId + "----<<<")
-            // console.dir(staff)
-            //self.stop();
-            //console.log(self._session.id)
-            // if (staff.selfConnectionId == options.currentStaffId) {
-
-
-            // }
-
-            // self.helloEvent.emit(staff)
-
-            // self.staffsList.toArray().forEach((list) => {
-            //   list.setStaff(list.staffModel);
-            // });
-
-
-
-
-            // setTimeout(() => {
-            //   var staff = new Object();
-            //   console.log("in timeout");
-            //          helloEventInSubscribe.emit(staff);
-            // }, 1000 * 5);
-
-            // helloEventInSubscribe.emit(staff);
-            // var b = new Object();
-            // helloEventInSubscribe.emit(b);
-
-          };
-
-        },
-      });
-
-      this.staffs = query;
-    }, true);
 
 
 

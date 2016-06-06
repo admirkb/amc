@@ -22,6 +22,10 @@
   
 </p-modal>-->
 <!--<input type="text" [(ngModel)]="n" />-->
+<pagination [boundaryLinks]="true" [totalItems]="totalItems" [itemsPerPage]="itemsPerPage" [(ngModel)]="currentPage" class="pagination-sm"
+    (pageChanged)="pageChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"></pagination>
+
+<pre class="card card-block card-header">The selected page no: {{currentPage}}/{{ maxPagesCalc }}</pre>
 
 
 <div class="container">

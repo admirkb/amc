@@ -22,6 +22,7 @@ import {Counts} from 'meteor/tmeasday:publish-counts';
 // import {UsersForm} from '../../users/users-form/users-form.ts';
 // import {UsersItem} from '../../users/users-item/users-item.ts';
 // import {Users} from '../../imports/api/users';
+import {AdmirMessagingBaseList} from '../../../client/baseList';
 
 import {GenericCollection, genericCollection} from '../../../imports/api/generic';
 import {Modal} from '../../directives/modal/modal';
@@ -34,7 +35,7 @@ import {Modal} from '../../directives/modal/modal';
   directives: [Modal, PAGINATION_DIRECTIVES, FORM_DIRECTIVES, CORE_DIRECTIVES],
 
 })
-export class GenericList extends MeteorComponent implements OnInit {
+export class GenericList extends AdmirMessagingBaseList implements OnInit {
   // @ViewChildren(UsersItem) usersList: QueryList<UsersItem>;
 
   genericRecords: Mongo.Cursor<Object>;
@@ -44,30 +45,6 @@ export class GenericList extends MeteorComponent implements OnInit {
   data: any = new Object();
   action: string;
   arr: [];
-  searchString: string;
-
-
-
-  public totalItems: number = 64;
-  public currentPage: number = 1;
-  public curPage: ReactiveVar<number> = new ReactiveVar<number>(1);
-  public itemsPerPage: number = 5;
-
-  public maxSize: number = 5;
-  public bigTotalItems: number = 175;
-  public bigCurrentPage: number = 1;
-  public maxPagesCalc = Math.ceil(this.totalItems / this.itemsPerPage);
-
-  // public setPage(pageNo: number): void {
-  //   this.currentPage = pageNo;
-  // };
-
-  public pageChanged(event: any): void {
-    console.log('Page changed to: ' + event.page);
-    console.log('Number items per page: ' + event.itemsPerPage);
-    this.currentPage = event.page;
-       this.curPage.set(event.page);
-  };
 
 
   constructor() {
