@@ -1,8 +1,31 @@
 
 import { Meteor } from 'meteor/meteor';
-Meteor.publish("users", function () {
-  return Meteor.users.find({}, {fields: {emails: 1, profile: 1, roles:1, createdAt:1, width:1, height:1, imageAsData:1}});
+import {Counts} from 'meteor/tmeasday:publish-counts';
+
+Meteor.publish("users", function (options: Object, searchString: string) {
+
+    let selector = {
+        email: { '$regex': '.*' + searchString || '' + '.*', '$options': 'i' },
+    };
+
+    Counts.publish(this, 'numberOfRecords', Meteor.users.find(selector), { noReady: true });
+    return Meteor.users.find({}, { fields: { emails: 1, profile: 1, roles: 1, createdAt: 1, width: 1, height: 1, imageAsData: 1 } });
 });
+
+// Meteor.publish('users', function (options: Object, searchString: string) {
+
+//         let selector = {
+//         email: { '$regex': '.*' + searchString || '' + '.*', '$options': 'i' },
+//     };
+
+//         Counts.publish(this, 'numberOfRecords', Meteor.users.find(selector), { noReady: true });
+
+//         console.log("selector" + selector)
+//         console.dir(selector)
+//                 console.dir(options)
+//     console.log("searchString" + searchString)
+//   return Meteor.users.find(selector , options);
+// });
 
 
 Meteor.methods({

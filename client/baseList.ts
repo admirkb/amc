@@ -7,9 +7,7 @@ import {ReactiveVar} from 'meteor/reactive-var';
 // Angular
 import {Component, EventEmitter, OnInit} from '@angular/core';
 import {MeteorComponent} from 'angular2-meteor';
-import {CORE_DIRECTIVES, FORM_DIRECTIVES} from '@angular/common';
-import { PAGINATION_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
-import {Counts} from 'meteor/tmeasday:publish-counts';
+
 
 // Admir
 

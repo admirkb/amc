@@ -19,12 +19,18 @@ import {UsersItem} from '../../users/users-item/users-item.ts';
 // import {Users} from '../../imports/api/users';
 import {Modal} from '../../directives/modal/modal';
 
+import {AdmirMessagingBaseList} from '../../../client/baseList';
+
+import {CORE_DIRECTIVES, FORM_DIRECTIVES} from '@angular/common';
+import { PAGINATION_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
+import {Counts} from 'meteor/tmeasday:publish-counts';
+
 @Component({
   selector: 'users-list',
   templateUrl: '/imports/users/users-list/users-list.html',
-  directives: [UsersItem, UsersForm, Modal],
+  directives: [UsersItem, UsersForm, Modal, PAGINATION_DIRECTIVES, FORM_DIRECTIVES, CORE_DIRECTIVES],
 })
-export class UsersList extends MeteorComponent implements OnInit {
+export class UsersList extends AdmirMessagingBaseList implements OnInit {
   @ViewChildren(UsersItem) usersList: QueryList<UsersItem>;
 
   users: Mongo.Cursor<Object>;
@@ -37,6 +43,59 @@ export class UsersList extends MeteorComponent implements OnInit {
   constructor() {
     super();
 
+    this.autorun(() => {
+      let options = {
+        limit: this.itemsPerPage,
+        skip: (this.curPage.get() - 1) * this.itemsPerPage,
+        sort: { problem: 1 }
+      };
+
+      this.searchString = "";
+
+      // this.subscribe('parties', options, this.location.get(), () => {
+      //   this.parties = Parties.find({}, { sort: { name: this.nameOrder.get() } });
+      // }, true);
+
+      this.subscribe('users', options, this.searchString, () => {
+        var self = this;
+
+
+        var query = Meteor.users.find({});
+        
+        var handle = query.observeChanges({
+          added: function (id) {
+            console.log("subscribe Added: " + id)
+            console.dir(id)
+
+
+          },
+          removed: function (id) {
+            console.log("subscribe Removed: " + id)
+          },
+          changed: function (id, o) {
+            console.log("subscribe Changed: " + id)
+            console.dir(o)
+
+            var genericRecord = o;
+            if (genericRecord.editColor == 'red') {
+
+
+            };
+
+          },
+        });
+
+      this.users = query;
+
+
+      }, true);
+    });
+
+
+    this.autorun(() => {
+      this.totalItems = Counts.get('numberOfRecords');
+      this.maxPagesCalc = Math.ceil(this.totalItems / this.itemsPerPage);
+    }, true);
     console.log("hello from users-list.ts")
     // this.selfConnectionId.set("Test1 !!!")
 
@@ -47,40 +106,6 @@ export class UsersList extends MeteorComponent implements OnInit {
 
     console.log("I'm being called when component is initalized after constructor method from users-list.ts");
 
-    this.subscribe('users', () => {
-      var self = this;
-
-      // this.users = Users.find({});
-
-
-      var query = Meteor.users.find({});
-      var handle = query.observeChanges({
-        added: function (id) {
-          console.log("subscribe Added: " + id)
-          console.dir(id)
-
-
-        },
-        removed: function (id) {
-          console.log("subscribe Removed: " + id)
-        },
-        changed: function (id, o) {
-          console.log("subscribe Changed: " + id)
-          console.dir(o)
-
-          var user = o;
-          if (user.editColor == 'red') {
-
-            console.log("not interested in sending this to self!")
-
-
-          };
-
-        },
-      });
-
-      this.users = query;
-    }, true);
 
   }
 
