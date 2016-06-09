@@ -4,7 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import {Mongo} from 'meteor/mongo';
 
 // Angular
-import {Component, EventEmitter, OnInit, provide} from '@angular/core';
+import {Component, EventEmitter, OnInit, provide, ViewContainerRef} from '@angular/core';
 import {MeteorComponent} from 'angular2-meteor';
 import {bootstrap} from 'angular2-meteor-auto-bootstrap';
 import {ANGULAR2_GOOGLE_MAPS_PROVIDERS} from 'angular2-google-maps/core';
@@ -64,7 +64,7 @@ class AdmirYouWatchers extends AdmirMessagingWatchCore implements OnInit {
   public user: Meteor.User;
   public role: string;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, viewContainerRef:ViewContainerRef) {
     super();
 
 

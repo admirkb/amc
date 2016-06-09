@@ -21,7 +21,13 @@
 <button><Click here/button>
   
 </p-modal>-->
-<!--<input type="text" [(ngModel)]="n" />-->
+
+
+    <form class="form-inline">
+      <input type="text" class="form-control" #searchString placeholder="Search" />
+      <button type="button" class="btn btn-primary" (click)="search(searchString.value)">Search</button>
+    </form>
+
 <pagination [boundaryLinks]="true" [totalItems]="totalItems" [itemsPerPage]="itemsPerPage" [(ngModel)]="currentPage" class="pagination-sm"
     (pageChanged)="pageChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"></pagination>
 
@@ -29,10 +35,9 @@
 
 <div class="container">
     <div class="row">
-
-
-        <roles-item *ngFor="let role of roles; let i = index" [roleModel]="role" [theIndex]="i"></roles-item>
-
+        <div class="col-md-4" *ngFor="let role of roles; let i = index">
+            <roles-item [roleModel]="role" [theIndex]="i"></roles-item>
+        </div>
 
     </div>
     <div style="text-align:right;width:100%;">

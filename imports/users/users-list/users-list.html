@@ -32,6 +32,8 @@
     <div class="row">
 
         <users-item *ngFor="let user of users; let i = index" [userModel]="user" [theIndex]="i" ></users-item>
+
+
     </div>
     <div style="text-align:right;width:100%;">
         <button (click)="showDialog(0)" class="btn btn-primary btn-sm">Add User!</button>

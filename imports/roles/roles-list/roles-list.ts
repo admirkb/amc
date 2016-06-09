@@ -40,23 +40,7 @@ export class RolesList extends AdmirMessagingBaseList implements OnInit {
   n: number = 0;
   data: any = new Object();
   action: string;
-  //   searchString: string;
-  // public totalItems: number = 64;
-  // public currentPage: number = 1;
-  // public curPage: ReactiveVar<number> = new ReactiveVar<number>(1);
-  // public itemsPerPage: number = 5;
 
-  // public maxSize: number = 5;
-  // public bigTotalItems: number = 175;
-  // public bigCurrentPage: number = 1;
-  // public maxPagesCalc = Math.ceil(this.totalItems / this.itemsPerPage);
-
-  // public pageChanged(event: any): void {
-  //   console.log('Page changed to: ' + event.page);
-  //   console.log('Number items per page: ' + event.itemsPerPage);
-  //   this.currentPage = event.page;
-  //      this.curPage.set(event.page);
-  // };
 
   constructor() {
     super();
@@ -68,42 +52,38 @@ export class RolesList extends AdmirMessagingBaseList implements OnInit {
         sort: { problem: 1 }
       };
 
-      this.searchString = "";
 
-      // this.subscribe('parties', options, this.location.get(), () => {
-      //   this.parties = Parties.find({}, { sort: { name: this.nameOrder.get() } });
-      // }, true);
-
-      this.subscribe('roles', options, this.searchString, () => {
+      this.subscribe('roles', options, this.searchString.get(), () => {
         var self = this;
 
+console.log("running this.roles= Meteor.roles.find({});")
+        this.roles= Meteor.roles.find({});
 
-        var query = Meteor.roles.find({});
         
-        var handle = query.observeChanges({
-          added: function (id) {
-            console.log("subscribe Added: " + id)
-            console.dir(id)
+        // var handle = this.roles.observeChanges({
+        //   added: function (id) {
+        //     console.log("subscribe Added: " + id)
+        //     console.dir(id)
 
 
-          },
-          removed: function (id) {
-            console.log("subscribe Removed: " + id)
-          },
-          changed: function (id, o) {
-            console.log("subscribe Changed: " + id)
-            console.dir(o)
+        //   },
+        //   removed: function (id) {
+        //     console.log("subscribe Removed: " + id)
+        //   },
+        //   changed: function (id, o) {
+        //     console.log("subscribe Changed: " + id)
+        //     console.dir(o)
 
-            var genericRecord = o;
-            if (genericRecord.editColor == 'red') {
+        //     var genericRecord = o;
+        //     if (genericRecord.editColor == 'red') {
 
 
-            };
+        //     };
 
-          },
-        });
+        //   },
+        // });
 
-         this.roles = query;
+        //  this.roles = query;
 
 
       }, true);
@@ -157,6 +137,11 @@ export class RolesList extends AdmirMessagingBaseList implements OnInit {
 
   }
 
+ search(value: string) {
+    this.curPage.set(1);
+    this.searchString.set(value);
+    console.log(value)
+  }
   setRole(list) {
     console.log("in setRole()")
     list.setRole(list.roleModel);

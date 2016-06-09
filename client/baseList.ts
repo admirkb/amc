@@ -16,21 +16,21 @@ import {AdmirMessagingCore} from  '../client/core';
 @Component({
 })
 export class AdmirMessagingBaseList extends AdmirMessagingCore implements OnInit {
-  public searchString: string;
-  public totalItems: number = 64;
-  public currentPage: number = 1;
-  public curPage: ReactiveVar<number> = new ReactiveVar<number>(1);
-  public itemsPerPage: number = 5;
-  public maxSize: number = 5;
-  public bigTotalItems: number = 175;
-  public bigCurrentPage: number = 1;
-  public maxPagesCalc = Math.ceil(this.totalItems / this.itemsPerPage);
+  protected searchString: ReactiveVar<string> = new ReactiveVar<string>("");
+  protected totalItems: number = 0;
+  protected currentPage: number = 1;
+  protected curPage: ReactiveVar<number> = new ReactiveVar<number>(1);
+  protected itemsPerPage: number = 6;
+  // protected maxSize: number = 5;
+  protected bigTotalItems: number = 175;
+  protected bigCurrentPage: number = 1;
+  protected maxPagesCalc = Math.ceil(this.totalItems / this.itemsPerPage);
 
-  public pageChanged(event: any): void {
+  protected pageChanged(event: any): void {
     console.log('Page changed to: ' + event.page);
     console.log('Number items per page: ' + event.itemsPerPage);
     this.currentPage = event.page;
-       this.curPage.set(event.page);
+    this.curPage.set(event.page);
   };
   constructor() {
     super();

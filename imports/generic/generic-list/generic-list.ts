@@ -18,13 +18,14 @@ import { PAGINATION_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
 
 import {Counts} from 'meteor/tmeasday:publish-counts';
 
+
 // Admir
 // import {UsersForm} from '../../users/users-form/users-form.ts';
 // import {UsersItem} from '../../users/users-item/users-item.ts';
 // import {Users} from '../../imports/api/users';
 import {AdmirMessagingBaseList} from '../../../client/baseList';
 
-import {GenericCollection, genericCollection} from '../../../imports/api/generic';
+import {GenericCollection, genericCollection, DynamicProperties} from '../../../imports/api/generic';
 import {Modal} from '../../directives/modal/modal';
 
 @Component({
@@ -57,27 +58,28 @@ export class GenericList extends AdmirMessagingBaseList implements OnInit {
         sort: { problem: 1 }
       };
 
-      this.searchString = "Gen";
 
-      // this.subscribe('parties', options, this.location.get(), () => {
-      //   this.parties = Parties.find({}, { sort: { name: this.nameOrder.get() } });
-      // }, true);
+      this.searchString = "Gen";
+      var collectionName = "customersGeneric";
+      Meteor.call('setMongoDynamicCollection', collectionName);
+//  DynamicProperties.setMongoDynamicCollection =  new Mongo.Collection("customersGeneric");
+
 
       this.subscribe(genericCollection, options, this.searchString, () => {
         var self = this;
 
-// var yyyy = GenericCollection.find().map( function(u) { return u; } ).forEach(function (obj) {
+        // var yyyy = GenericCollection.find().map( function(u) { return u; } ).forEach(function (obj) {
 
-//         });
-// this.genericRecords2 = yyyy;
+        //         });
+        // this.genericRecords2 = yyyy;
 
-//         var xxxx = GenericCollection.find({}).forEach(function (obj) {
-//           console.log("obj2")
-//           console.dir(obj)
-//         });
-        
+        //         var xxxx = GenericCollection.find({}).forEach(function (obj) {
+        //           console.log("obj2")
+        //           console.dir(obj)
+        //         });
+
         var query = GenericCollection.find({});
-        
+
         var handle = query.observeChanges({
           added: function (id) {
             console.log("subscribe Added: " + id)
@@ -125,25 +127,25 @@ export class GenericList extends AdmirMessagingBaseList implements OnInit {
         console.dir(this.arr)
 
       }, true);
-    });
+  });
 
 
     this.autorun(() => {
-      this.totalItems = Counts.get('numberOfRecords');
-      this.maxPagesCalc = Math.ceil(this.totalItems / this.itemsPerPage);
-    }, true);
-    
-    
-    console.log("hello from generic-list.ts")
+  this.totalItems = Counts.get('numberOfRecords');
+  this.maxPagesCalc = Math.ceil(this.totalItems / this.itemsPerPage);
+}, true);
 
-    console.log("hello from generic-list.ts")
+
+console.log("hello from generic-list.ts")
+
+console.log("hello from generic-list.ts")
   }
 
-  ngOnInit() {
+ngOnInit() {
 
-    console.log("I'm being called when component is initalized after constructor method from generic-list.ts");
+  console.log("I'm being called when component is initalized after constructor method from generic-list.ts");
 
-  }
+}
 
   // onPageChanged(page: number) {
   //   this.curPage.set(page);

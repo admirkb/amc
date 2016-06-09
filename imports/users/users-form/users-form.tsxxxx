@@ -43,7 +43,7 @@ export class UsersForm extends MeteorComponent implements OnInit {
   // public items: Array<string> = ['Butcher',
   //   'Candlestick maker', 'Baker'];
   public items: Array<string> = [];
-  private searchString: string = ""
+
 
   constructor() {
     super()
@@ -74,70 +74,56 @@ export class UsersForm extends MeteorComponent implements OnInit {
     // console.log("userModelItem");
     // console.dir(this.userModelItem);
 
-    this.autorun(() => {
-      let options = {
-        limit: 9999,
-        skip: 0,
-        sort: { problem: 1 }
-      };
 
-      this.searchString = "";
-
-
-      this.subscribe('roles',options , this.searchString,  () => {
-        var self = this;
-
-        console.log("the roles...");
-        var query = Meteor.roles.find().forEach(function (role) {
-          self.items.push(role.name)
-          console.log(role.name)
-
-        });
-
-
-        this.roles = query;
-
-
-      }, true);
-
-
-    // this.subscribe('users', () => {
-
-    //   if (this.userModelItem.roles != null) {
-    //     console.log("this.userModelItem.roles.default-group");
-    //     console.dir(this.userModelItem.roles['default-group']);
-
-    //     for (var i = 0; i < this.userModelItem.roles['default-group'].length; i++) {
-
-    //       this.savedRoles.push(this.userModelItem.roles['default-group'][i]);
-
-
-
-    //       // Remove new role from dropdown list, not available    
-    //       var dropDownindex = this.items.indexOf(this.userModelItem.roles['default-group'][i], 0);
-    //       if (dropDownindex > -1) {
-    //         this.items.splice(dropDownindex, 1);
-    //       }
-
-
-    //     }
-    //     // this.savedRoles = this.userModelItem.roles['default-group'];
-
-    //     console.log("this.savedRoles");
-    //     console.dir(this.savedRoles);
-
-    //   }
-
-
-
-
-    // }, true);
-
-    });
 
   }
 
   ngOnInit() {
+
+    var self = this;
+    this.subscribe('roles', () => {
+
+      this.roles = Meteor.roles.find({}, { sort: { name: 1 } });
+
+      console.log("roles")
+      this.roles.forEach(function (role) {
+        self.items.push(role.name)
+
+      })
+
+    }, true);
+
+    this.subscribe('users', () => {
+
+      if (this.userModelItem.roles != null) {
+        console.log("this.userModelItem.roles.default-group");
+        console.dir(this.userModelItem.roles['default-group']);
+
+        for (var i = 0; i < this.userModelItem.roles['default-group'].length; i++) {
+
+          this.savedRoles.push(this.userModelItem.roles['default-group'][i]);
+
+
+
+          // Remove new role from dropdown list, not available    
+          var dropDownindex = this.items.indexOf(this.userModelItem.roles['default-group'][i], 0);
+          if (dropDownindex > -1) {
+            this.items.splice(dropDownindex, 1);
+          }
+
+
+        }
+        // this.savedRoles = this.userModelItem.roles['default-group'];
+
+        console.log("this.savedRoles");
+        console.dir(this.savedRoles);
+
+      }
+
+
+
+
+    }, true);
 
 
 
@@ -292,7 +278,7 @@ export class UsersForm extends MeteorComponent implements OnInit {
       this.roles.forEach((role) => {
         this.items.push(role.name)
       });
-
+      
       // Remove new role from dropdown list, not available    
       for (var i = 0; i < this.userModelItem.roles['default-group'].length; i++) {
         var dropDownindex = this.items.indexOf(this.userModelItem.roles['default-group'][i], 0);

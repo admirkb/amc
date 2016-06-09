@@ -1,5 +1,5 @@
 <div style="background:black;">
-  <!--<h4 class="modal-title">{{userModelItem.name}}</h4>-->
+  <h4 class="modal-title">{{userModelItem.name}}</h4>
 
   <form [ngFormModel]="usersForm" #f="ngForm">
 
@@ -12,14 +12,9 @@
       <div style="display:none;">
         <label class="copy1">New User: </label>
         <input [(ngModel)]="userModelItem._id" ngControl="_id" placeholder="Name" style="color:black;" />
-        <!--<input [(ngModel)]="userModelItem.name" ngControl="name" placeholder="Name" style="color:black;" />-->
-        <!--<input [(ngModel)]="userModelItem.phone" ngControl="phone" placeholder="Phone" style="color:black;" />-->
-        <!--<input [(ngModel)]="userModelItem.email" ngControl="email" placeholder="Email" style="color:black;" />-->
         <input [(ngModel)]="userModelItem.imageAsData" ngControl="imageAsData" placeholder="imageAsData" />
-        <!--<input [(ngModel)]="userModelItem.width" ngControl="width" />-->
-        <!--<input [(ngModel)]="userModelItem.height" ngControl="height" />-->
-      </div>
 
+      </div>
 
 
       <div *ngIf="action == 'add' || action == 'update'">
@@ -60,7 +55,7 @@
                 <td style="text-align:left;color:red;">
 
 
-                  <!-- Split button -->
+
                   <div class="btn-group" dropdown>
                     <button id="split-button" type="button" class="btn btn-danger">Action</button>
                     <button type="button" class="btn btn-danger dropdown-toggle" dropdownToggle>
@@ -114,7 +109,7 @@
             </table>
           </p-tabPanel>
           <p-tabPanel header="Component Directive here.">
-            <!--<ng-include src="/imports/users-form/users-tab1.html"></ng-include>-->
+
           </p-tabPanel>
         </p-tabView>
 
@@ -149,3 +144,5 @@
 
 </div>
 <hr/>
+
+            <!--<ng-include src="/imports/users-form/users-tab1.html"></ng-include>-->
