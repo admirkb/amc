@@ -4,12 +4,14 @@ import {Counts} from 'meteor/tmeasday:publish-counts';
 
 Meteor.publish("users", function (options: Object, searchString: string) {
 
-    let selector = {
-        email: { '$regex': '.*' + searchString || '' + '.*', '$options': 'i' },
-    };
 
-    Counts.publish(this, 'numberOfRecords', Meteor.users.find(selector), { noReady: true });
-    return Meteor.users.find({}, { fields: { emails: 1, profile: 1, roles: 1, createdAt: 1, width: 1, height: 1, imageAsData: 1 } });
+
+    var search = new RegExp('.*' + searchString, 'i');
+    console.log(search)
+
+    Counts.publish(this, 'numberOfRecords', Meteor.users.find({ 'emails.address': search }), { noReady: true });
+    // return Meteor.users.find({selector}, { fields: { 'emails.address': 1, profile: 1, roles: 1, createdAt: 1, width: 1, height: 1, imageAsData: 1 } });
+    return Meteor.users.find({ 'emails.address': search }, options);
 });
 
 // Meteor.publish('users', function (options: Object, searchString: string) {

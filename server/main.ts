@@ -15,8 +15,8 @@ Meteor.startup(() => {
    loadBugs();
       loadStaffs();
             loadLocales();
-              console.log("Meteor is starting loadGenericCollection")
-            loadGenericCollection();
+              // console.log("Meteor is starting loadGenericCollection")
+            // loadGenericCollection();
 
        
 

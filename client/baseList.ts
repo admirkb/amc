@@ -18,7 +18,7 @@ import {AdmirMessagingCore} from  '../client/core';
 export class AdmirMessagingBaseList extends AdmirMessagingCore implements OnInit {
   protected searchString: ReactiveVar<string> = new ReactiveVar<string>("");
   protected totalItems: number = 0;
-  protected currentPage: number = 1;
+
   protected curPage: ReactiveVar<number> = new ReactiveVar<number>(1);
   protected itemsPerPage: number = 6;
   // protected maxSize: number = 5;
@@ -29,7 +29,6 @@ export class AdmirMessagingBaseList extends AdmirMessagingCore implements OnInit
   protected pageChanged(event: any): void {
     console.log('Page changed to: ' + event.page);
     console.log('Number items per page: ' + event.itemsPerPage);
-    this.currentPage = event.page;
     this.curPage.set(event.page);
   };
   constructor() {
@@ -40,5 +39,10 @@ export class AdmirMessagingBaseList extends AdmirMessagingCore implements OnInit
     console.log("I'm being called when component is initalized after constructor method in AdmirMessagingTrackCore in AdmirMessagingTrackCore.ts");
   }
 
+  protected search(value: string) {
+    this.curPage.set(1);
+    this.searchString.set(value);
+    console.log(value)
+  }
 }
 

@@ -35,7 +35,7 @@ export class UsersForm extends MeteorComponent implements OnInit {
   n: number = 0;
   data: any;
   email: any;
-  roles: Mongo.Cursor<Object>;
+  roles2: Mongo.Cursor<Object>;
   savedRoles: Array<string> = [];
 
   public disabled: boolean = false;
@@ -78,27 +78,25 @@ export class UsersForm extends MeteorComponent implements OnInit {
       let options = {
         limit: 9999,
         skip: 0,
-        sort: { problem: 1 }
+        sort: { name: 1 }
       };
 
-      this.searchString = "";
+
+      // this.subscribe('roles2', () => {
+      //   var self = this;
+
+      //   console.log("the roles2...");
+      //   var query = Meteor.roles.find().forEach(function (role) {
+      //     self.items.push(role.name)
+      //     console.log(role.name)
+
+      //   });
 
 
-      this.subscribe('roles',options , this.searchString,  () => {
-        var self = this;
-
-        console.log("the roles...");
-        var query = Meteor.roles.find().forEach(function (role) {
-          self.items.push(role.name)
-          console.log(role.name)
-
-        });
+      //   this.roles2 = query;
 
 
-        this.roles = query;
-
-
-      }, true);
+      // }, true);
 
 
     // this.subscribe('users', () => {

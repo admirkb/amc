@@ -49,17 +49,18 @@ export class RolesList extends AdmirMessagingBaseList implements OnInit {
       let options = {
         limit: this.itemsPerPage,
         skip: (this.curPage.get() - 1) * this.itemsPerPage,
-        sort: { problem: 1 }
+        sort: { name: 1 }
       };
 
 
       this.subscribe('roles', options, this.searchString.get(), () => {
         var self = this;
 
-console.log("running this.roles= Meteor.roles.find({});")
-        this.roles= Meteor.roles.find({});
+        console.log("running this.roles= Meteor.roles.find({});")
+        // this.roles = Meteor.roles.remove({});
+        this.roles = Meteor.roles.find({});
 
-        
+
         // var handle = this.roles.observeChanges({
         //   added: function (id) {
         //     console.log("subscribe Added: " + id)
@@ -97,7 +98,7 @@ console.log("running this.roles= Meteor.roles.find({});")
 
 
 
-      this.action = "add";
+    this.action = "add";
     this.helloEvent.subscribe((args) => {
       var self = this;
 
@@ -137,11 +138,7 @@ console.log("running this.roles= Meteor.roles.find({});")
 
   }
 
- search(value: string) {
-    this.curPage.set(1);
-    this.searchString.set(value);
-    console.log(value)
-  }
+
   setRole(list) {
     console.log("in setRole()")
     list.setRole(list.roleModel);

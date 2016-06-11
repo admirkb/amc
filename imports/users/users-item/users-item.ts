@@ -38,8 +38,6 @@ export class UsersItem extends MeteorComponent implements OnInit {
     this._element = elementRef.nativeElement;
 
 
-
-
   }
 
 

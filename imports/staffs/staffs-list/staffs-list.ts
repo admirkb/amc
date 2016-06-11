@@ -51,13 +51,12 @@ export class StaffsList extends AdmirMessagingBaseList implements OnInit {
         sort: { problem: 1 }
       };
 
-      this.searchString = "";
 
       // this.subscribe('parties', options, this.location.get(), () => {
       //   this.parties = Parties.find({}, { sort: { name: this.nameOrder.get() } });
       // }, true);
 
-      this.subscribe('staffs', options, this.searchString, () => {
+      this.subscribe('staffs', options, this.searchString.get(), () => {
         var self = this;
 
 

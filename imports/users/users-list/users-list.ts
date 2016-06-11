@@ -47,16 +47,11 @@ export class UsersList extends AdmirMessagingBaseList implements OnInit {
       let options = {
         limit: this.itemsPerPage,
         skip: (this.curPage.get() - 1) * this.itemsPerPage,
-        sort: { problem: 1 }
+        sort: { 'emails.address': 1 }
       };
 
-      this.searchString = "";
 
-      // this.subscribe('parties', options, this.location.get(), () => {
-      //   this.parties = Parties.find({}, { sort: { name: this.nameOrder.get() } });
-      // }, true);
-
-      this.subscribe('users', options, this.searchString, () => {
+      this.subscribe('users', options, this.searchString.get(), () => {
         var self = this;
 
 
@@ -107,6 +102,22 @@ export class UsersList extends AdmirMessagingBaseList implements OnInit {
     console.log("I'm being called when component is initalized after constructor method from users-list.ts");
 
 
+  }
+
+    showDialog(n, data) {
+    this.display = true;
+    // console.log(this.display);
+    //     console.log(n);
+    //     this.n = n;
+
+    //             this.data = data;
+    //                     console.dir(this.data);
+
+
+  }
+  hideDialog(e) {
+    console.dir(e)
+    this.display = false;
   }
 
 }
