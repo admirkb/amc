@@ -74,70 +74,55 @@ export class UsersForm extends MeteorComponent implements OnInit {
     // console.log("userModelItem");
     // console.dir(this.userModelItem);
 
-    this.autorun(() => {
-      let options = {
-        limit: 9999,
-        skip: 0,
-        sort: { name: 1 }
-      };
+    var self = this;
+    Meteor.call('roles.getRoleNames' , function (error, result) {
 
-
-      // this.subscribe('roles2', () => {
-      //   var self = this;
-
-      //   console.log("the roles2...");
-      //   var query = Meteor.roles.find().forEach(function (role) {
-      //     self.items.push(role.name)
-      //     console.log(role.name)
-
-      //   });
-
-
-      //   this.roles2 = query;
-
-
-      // }, true);
-
-
-    // this.subscribe('users', () => {
-
-    //   if (this.userModelItem.roles != null) {
-    //     console.log("this.userModelItem.roles.default-group");
-    //     console.dir(this.userModelItem.roles['default-group']);
-
-    //     for (var i = 0; i < this.userModelItem.roles['default-group'].length; i++) {
-
-    //       this.savedRoles.push(this.userModelItem.roles['default-group'][i]);
-
-
-
-    //       // Remove new role from dropdown list, not available    
-    //       var dropDownindex = this.items.indexOf(this.userModelItem.roles['default-group'][i], 0);
-    //       if (dropDownindex > -1) {
-    //         this.items.splice(dropDownindex, 1);
-    //       }
-
-
-    //     }
-    //     // this.savedRoles = this.userModelItem.roles['default-group'];
-
-    //     console.log("this.savedRoles");
-    //     console.dir(this.savedRoles);
-
-    //   }
-
-
-
-
-    // }, true);
-
+      result.forEach(function (role) {
+        self.items.push(role.name)
+        console.dir(role)
+      });
     });
+
+    // Meteor.call('getCurrentTime' , function (error, result) {
+
+    //   console.log("getCurrentTime callback")
+    //        console.log(result)
+    // });
+
+
+
+
+
 
   }
 
   ngOnInit() {
 
 
+        if (this.userModelItem.roles != null) {
+          console.log("this.userModelItem.roles.default-group");
+          console.dir(this.userModelItem.roles['default-group']);
+
+          for (var i = 0; i < this.userModelItem.roles['default-group'].length; i++) {
+
+            this.savedRoles.push(this.userModelItem.roles['default-group'][i]);
+
+
+
+            // Remove new role from dropdown list, not available    
+            var dropDownindex = this.items.indexOf(this.userModelItem.roles['default-group'][i], 0);
+            if (dropDownindex > -1) {
+              this.items.splice(dropDownindex, 1);
+            }
+
+
+          }
+          // this.savedRoles = this.userModelItem.roles['default-group'];
+
+          console.log("this.savedRoles");
+          console.dir(this.savedRoles);
+
+        }
 
     console.log("this.action")
     console.log(this.action)

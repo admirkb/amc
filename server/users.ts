@@ -41,6 +41,10 @@ Meteor.methods({
     'users.update'(userId, action) {
         Meteor.users.update(userId, action);
     },
+    'users.getUsers'() {
+        console.log('on server, Meteor.users.find({}) called');
+        return Meteor.users.find({}).fetch();
+    },
 
 });
 
