@@ -32,6 +32,7 @@ export class UsersForm extends MeteorComponent implements OnInit {
   usersForm: ControlGroup;
   @Output() HideDialogEvent: EventEmitter<any> = new EventEmitter();
   @Output() DeleteObjectEvent: EventEmitter<any> = new EventEmitter();
+  @Output() RolesItemsReadyEvent: EventEmitter<any> = new EventEmitter();
   n: number = 0;
   data: any;
   email: any;
@@ -48,6 +49,41 @@ export class UsersForm extends MeteorComponent implements OnInit {
   constructor() {
     super()
 
+    this.RolesItemsReadyEvent.subscribe((args) => {
+
+
+      console.log("hello from RolesItemsReadyEvent")
+
+      if (this.userModelItem.roles != null) {
+        console.log("this.userModelItem.roles.default-group");
+        console.dir(this.userModelItem.roles['default-group']);
+
+        for (var i = 0; i < this.userModelItem.roles['default-group'].length; i++) {
+
+          this.savedRoles.push(this.userModelItem.roles['default-group'][i]);
+
+
+
+          // Remove new role from dropdown list, not available    
+          var dropDownindex = this.items.indexOf(this.userModelItem.roles['default-group'][i], 0);
+          if (dropDownindex > -1) {
+            this.items.splice(dropDownindex, 1);
+          }
+
+
+        }
+        // this.savedRoles = this.userModelItem.roles['default-group'];
+
+        console.log("this.items");
+        console.dir(this.items);
+        console.log("this.savedRoles");
+        console.dir(this.savedRoles);
+
+
+      }
+
+
+    });
 
     // if (this.userModelItem == null){this.userModelItem = new Object()}
     let fb = new FormBuilder();
@@ -75,12 +111,17 @@ export class UsersForm extends MeteorComponent implements OnInit {
     // console.dir(this.userModelItem);
 
     var self = this;
-    Meteor.call('roles.getRoleNames' , function (error, result) {
+    Meteor.call('roles.getRoleNames', function (error, result) {
 
       result.forEach(function (role) {
         self.items.push(role.name)
-        console.dir(role)
+        // console.dir(role)
       });
+
+      var o = new Object();
+      o.time = new Date();
+      self.RolesItemsReadyEvent.emit(o)
+
     });
 
     // Meteor.call('getCurrentTime' , function (error, result) {
@@ -99,33 +140,7 @@ export class UsersForm extends MeteorComponent implements OnInit {
   ngOnInit() {
 
 
-        if (this.userModelItem.roles != null) {
-          console.log("this.userModelItem.roles.default-group");
-          console.dir(this.userModelItem.roles['default-group']);
 
-          for (var i = 0; i < this.userModelItem.roles['default-group'].length; i++) {
-
-            this.savedRoles.push(this.userModelItem.roles['default-group'][i]);
-
-
-
-            // Remove new role from dropdown list, not available    
-            var dropDownindex = this.items.indexOf(this.userModelItem.roles['default-group'][i], 0);
-            if (dropDownindex > -1) {
-              this.items.splice(dropDownindex, 1);
-            }
-
-
-          }
-          // this.savedRoles = this.userModelItem.roles['default-group'];
-
-          console.log("this.savedRoles");
-          console.dir(this.savedRoles);
-
-        }
-
-    console.log("this.action")
-    console.log(this.action)
   }
 
   addUser(user) {
@@ -271,19 +286,34 @@ export class UsersForm extends MeteorComponent implements OnInit {
       // console.dir(this.savedRoles);
 
       this.items = [];
-      this.roles = Meteor.roles.find({}, { sort: { name: 1 } });
-      this.roles.forEach((role) => {
-        this.items.push(role.name)
+      this.savedRoles = [];
+
+      var self = this;
+      Meteor.call('roles.getRoleNames', function (error, result) {
+
+        result.forEach(function (role) {
+          self.items.push(role.name)
+          // console.dir(role)
+        });
+
+        var o = new Object();
+        o.time = new Date();
+        self.RolesItemsReadyEvent.emit(o)
+
       });
+      // this.roles = Meteor.roles.find({}, { sort: { name: 1 } });
+      // this.roles.forEach((role) => {
+      //   this.items.push(role.name)
+      // });
 
       // Remove new role from dropdown list, not available    
-      for (var i = 0; i < this.userModelItem.roles['default-group'].length; i++) {
-        var dropDownindex = this.items.indexOf(this.userModelItem.roles['default-group'][i], 0);
-        if (dropDownindex > -1) {
-          this.items.splice(dropDownindex, 1);
-        }
+      // for (var i = 0; i < this.userModelItem.roles['default-group'].length; i++) {
+      //   var dropDownindex = this.items.indexOf(this.userModelItem.roles['default-group'][i], 0);
+      //   if (dropDownindex > -1) {
+      //     this.items.splice(dropDownindex, 1);
+      //   }
 
-      }
+      // }
 
 
       this.hideDialog();
