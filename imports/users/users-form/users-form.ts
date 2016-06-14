@@ -124,22 +124,9 @@ export class UsersForm extends MeteorComponent implements OnInit {
 
     });
 
-    // Meteor.call('getCurrentTime' , function (error, result) {
-
-    //   console.log("getCurrentTime callback")
-    //        console.log(result)
-    // });
-
-
-
-
-
-
   }
 
   ngOnInit() {
-
-
 
   }
 
@@ -281,9 +268,6 @@ export class UsersForm extends MeteorComponent implements OnInit {
         this.userModelItem.roles['default-group'].push(this.savedRoles[i]);
       }
 
-      // this.userModelItem.roles['default-group'] = this.savedRoles;
-      // console.dir(this.userModelItem.roles['default-group']);
-      // console.dir(this.savedRoles);
 
       this.items = [];
       this.savedRoles = [];
@@ -301,20 +285,6 @@ export class UsersForm extends MeteorComponent implements OnInit {
         self.RolesItemsReadyEvent.emit(o)
 
       });
-      // this.roles = Meteor.roles.find({}, { sort: { name: 1 } });
-      // this.roles.forEach((role) => {
-      //   this.items.push(role.name)
-      // });
-
-      // Remove new role from dropdown list, not available    
-      // for (var i = 0; i < this.userModelItem.roles['default-group'].length; i++) {
-      //   var dropDownindex = this.items.indexOf(this.userModelItem.roles['default-group'][i], 0);
-      //   if (dropDownindex > -1) {
-      //     this.items.splice(dropDownindex, 1);
-      //   }
-
-      // }
-
 
       this.hideDialog();
 
@@ -353,9 +323,6 @@ export class UsersForm extends MeteorComponent implements OnInit {
 
 
   }
-
-
-
   newRole() {
 
     console.dir(this.userModelItem.roles['default-group'])
@@ -364,7 +331,6 @@ export class UsersForm extends MeteorComponent implements OnInit {
     array.push('')
 
   }
-
 
   public toggled(open: boolean): void {
     console.log('Dropdown is now: ', open);
